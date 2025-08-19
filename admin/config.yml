@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: juancamilo492/Sitio_Innovacion   # tu repo exacto
+  repo: juancamilo492/Sitio_Innovacion
   branch: main
   base_url: https://auth-server-492.onrender.com
   auth_endpoint: auth
