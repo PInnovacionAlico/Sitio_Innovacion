@@ -1,0 +1,26 @@
+backend:
+  name: github
+  repo: juancamilo492/Sitio_Innovacion   # tu repo exacto
+  branch: main
+  base_url: https://auth-server-492.onrender.com
+  auth_endpoint: auth
+
+media_folder: "images/blog"
+public_folder: "/images/blog"
+
+collections:
+  - name: "posts"
+    label: "Posts"
+    folder: "blog/posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    format: "frontmatter"
+    fields:
+      - { name: "title", label: "Título", widget: "string" }
+      - { name: "date", label: "Fecha", widget: "datetime" }
+      - { name: "author", label: "Autor", widget: "string", default: "Innovación Alico" }
+      - { name: "tags", label: "Tags", widget: "list" }
+      - { name: "description", label: "Descripción SEO", widget: "text" }
+      - { name: "cover", label: "Imagen de portada", widget: "image" }
+      - { name: "draft", label: "Borrador", widget: "boolean", default: true }
+      - { name: "body", label: "Contenido", widget: "markdown" }
