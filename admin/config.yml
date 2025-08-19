@@ -1,17 +1,23 @@
 backend:
   name: git-gateway
-  branch: main   # o la rama que uses (ej: master)
+  branch: main
 
-media_folder: "static/images/uploads"
-public_folder: "/images/uploads"
+media_folder: "images/blog"
+public_folder: "/images/blog"
 
 collections:
   - name: "posts"
     label: "Posts"
-    folder: "content/posts"
+    folder: "blog/posts"
     create: true
-    slug: "{{slug}}"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    format: "frontmatter"
     fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Date", name: "date", widget: "datetime"}
-      - {label: "Body", name: "body", widget: "markdown"}
+      - { name: "title", label: "Título", widget: "string" }
+      - { name: "date", label: "Fecha", widget: "datetime" }
+      - { name: "author", label: "Autor", widget: "string", default: "Innovación Alico" }
+      - { name: "tags", label: "Tags", widget: "list" }
+      - { name: "description", label: "Descripción SEO", widget: "text" }
+      - { name: "cover", label: "Imagen de portada", widget: "image" }
+      - { name: "draft", label: "Borrador", widget: "boolean", default: true }
+      - { name: "body", label: "Contenido", widget: "markdown" }
