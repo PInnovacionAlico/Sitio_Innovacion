@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inteligencias Artificiales - Alico</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="images/Ali_head.png" type="image/png">
+    <link rel="apple-touch-icon" href="images/Ali_head.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+    
+    <!-- Estilos principales -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="accessibility.css">
+    <link rel="stylesheet" href="components/components.css">
+    
+    <!-- CSS crítico inline -->
+    <style>
+        /* === CRÍTICO: Anti-FOUC === */
+        body { opacity: 0; transition: opacity 0.3s ease; }
+        body.components-loaded { opacity: 1; }
+        
+        /* === CRÍTICO: Placeholder header === */
+        .header-placeholder {
+            height: 80px; background: var(--amarillo-oro); position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-family: 'Work Sans', sans-serif;
+        }
+        body.components-loaded .header-placeholder { display: none; }
+        
+        /* === CRÍTICO: Botón accesibilidad === */
+        .accessibility-toggle {
+            position: fixed; top: 160px; right: 20px; background: linear-gradient(135deg, var(--verde-natura) 0%, var(--verde-natura-80) 100%);
+            color: white; width: 60px; height: 60px; border-radius: 50%; border: none; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-size: 28px; box-shadow: 0 4px 20px rgba(113, 179, 56, 0.4); z-index: 999; transition: all 0.3s ease;
+        }
+        .accessibility-toggle:hover { transform: scale(1.1); }
+        
+        /* === GRID DE 3 COLUMNAS PARA IA === */
+        .ai-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columnas en desktop */
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-xxl);
+            margin-bottom: var(--spacing-xxl);
+            max-width: 1400px; /* Ancho máximo ajustado para 3 columnas */
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        /* CLAVE: Centrar elementos sobrantes cuando no son múltiplo de 3 */
+        /* Si el último elemento es el 4to (resto 1 al dividir por 3) */
+        .ai-grid .ai-card:last-child:nth-child(3n+1) {
+            grid-column: 2 / 3; /* Lo coloca en la columna del medio */
+        }
+
+        /* Si los últimos 2 elementos son 4to y 5to (restos 1 y 2 al dividir por 3) */
+        .ai-grid .ai-card:nth-last-child(2):nth-child(3n+1) {
+            grid-column: 1 / 2; /* Primer elemento de la fila incompleta */
+        }
+        .ai-grid .ai-card:last-child:nth-child(3n+2) {
+            grid-column: 3 / 4; /* Segundo elemento de la fila incompleta (columna 3) */
+        }
+
+        .ai-card {
+            border-radius: var(--border-radius-xl);
+            padding: var(--spacing-xl);
+            color: var(--blanco);
+            box-shadow: var(--shadow-lg);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            min-height: 340px; /* Altura mínima consistente */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ai-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Asegurar que el contenido se distribuya bien */
+        .ai-card > div:last-child {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        /* === RESPONSIVE === */
+        /* Tablet: 2 columnas */
+        @media (min-width: 769px) and (max-width: 1200px) {
+            .ai-grid {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 900px;
+                gap: var(--spacing-lg);
+            }
+            
+            /* Resetear reglas de 3 columnas y aplicar reglas de 2 columnas */
+            .ai-grid .ai-card:last-child:nth-child(3n+1),
+            .ai-grid .ai-card:nth-last-child(2):nth-child(3n+1),
+            .ai-grid .ai-card:last-child:nth-child(3n+2) {
+                grid-column: auto;
+            }
+            
+            /* Centrar último elemento impar en 2 columnas */
+            .ai-grid .ai-card:last-child:nth-child(odd) {
+                grid-column: 1 / -1;
+                max-width: 420px;
+                margin: 0 auto;
+            }
+        }
+
+        /* Móvil: 1 columna */
+        @media (max-width: 768px) {
+            .accessibility-toggle { top: 120px; right: 16px; width: 56px; height: 56px; font-size: 26px; }
+            .header-placeholder { height: 70px; font-size: 14px; }
+            
+            .ai-grid { 
+                grid-template-columns: 1fr; 
+                gap: var(--spacing-lg); 
+                padding: 0 var(--spacing-sm);
+            }
+            
+            /* Resetear todas las reglas de centrado en móvil */
+            .ai-grid .ai-card:last-child:nth-child(3n+1),
+            .ai-grid .ai-card:nth-last-child(2):nth-child(3n+1),
+            .ai-grid .ai-card:last-child:nth-child(3n+2),
+            .ai-grid .ai-card:last-child:nth-child(odd) {
+                grid-column: 1;
+                max-width: none;
+                margin: 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .accessibility-toggle { top: 100px; right: 12px; width: 52px; height: 52px; font-size: 24px; }
+            .header-placeholder { height: 65px; font-size: 13px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Placeholder temporal para header -->
+    <div class="header-placeholder">
+        🚀 Cargando Alico...
+    </div>
+
+    <!-- Los componentes se cargarán automáticamente aquí -->
+    <!-- Header, menú móvil, botón de accesibilidad, botón back-to-top y footer -->
+
+    <!-- Contenido principal de inteligencias artificiales -->
+    <main id="main-content">
+        <!-- Banner principal de la página -->
+        <section class="banner-section">
+            <div class="banner-content banner-ia">
+                INTELIGENCIAS ARTIFICIALES
+            </div>
+        </section>
+
+        <!-- Descripción principal -->
+        <section class="model-card">
+            <h2>Nuestros Asistentes de IA Especializados</h2>
+            <p>En Alico hemos desarrollado una suite de asistentes de inteligencia artificial especializados en diferentes áreas de nuestro negocio. Cada GPT personalizado está entrenado con conocimiento específico para brindarte la mejor asistencia en tu área de trabajo.</p>
+            <p>Selecciona el asistente que mejor se adapte a tus necesidades y experimenta el poder de la IA aplicada al mundo del empaque y la innovación.</p>
+        </section>
+
+        <!-- Grid de GPTs especializados - 3 COLUMNAS CON CENTRADO AUTOMÁTICO -->
+        <section class="ai-grid">
+            
+            <!-- GPT 1: Ali -->
+            <article class="ai-card" onclick="openGPT('ali')" style="background: linear-gradient(135deg, var(--azul-claro) 0%, var(--azul-claro-80) 100%);">
+                <div class="ai-card-glow" style="content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%); pointer-events: none; z-index: 1;"></div>
+                <div style="position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column;">
+                    <div class="ai-header" style="display: flex; align-items: center; gap: var(--spacing-md); margin-bottom: var(--spacing-lg);">
+                        <div class="ai-icon" style="width: 60px; height: 60px; background: rgba(255,255,255,0.2); border-radius: var(--border-radius-lg); display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px);">
+                            <span class="material-symbols-rounded" style="font-size: 32px; color: var(--blanco);">robot_2</span>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 1.3em; margin-bottom: var(--spacing-xs); font-family: 'Zilla Slab', serif; font-weight: 600;">Ali</h3>
+                            <div class="ai-status" style="background: rgba(113, 179, 56, 0.8); color: var(--blanco); padding: 4px 12px; border-radius: 12px; font-size: 0.75em; font-weight: 600; display: inline-block;">
+                                <span class="material-symbols-rounded" style="font-size: 12px; vertical-align: middle; margin-right: 4px;">check_circle</span>
+                                Disponible
+                            </div>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.6; margin-bottom: var(--spacing-lg); font-size: 0.9em; opacity: 0.95; flex: 1;">Ingeniero con doble titulación en diseño de producto y diseño interactivo, con maestría en gerencia de la innovación y gestión del conocimiento.</p>
+                    <div class="ai-features" style="background: rgba(255,255,255,0.15); padding: var(--spacing-md); border-radius: var(--border-radius-md); margin-bottom: var(--spacing-lg); backdrop-filter: blur(5px);">
+                        <div style="font-size: 0.8em; font-weight: 600; margin-bottom: var(--spacing-xs); text-transform: uppercase; letter-spacing: 0.5px;">Especialidades:</div>
+                        <div style="font-size: 0.85em; line-height: 1.4;">• Nuevos modelos de negocio<br>• Innovación<br>• Gestión del conocimiento</div>
+                    </div>
+                    <div class="ai-cta" style="display: flex; align-items: center; justify-content: space-between; margin-top: auto;">
+                        <span style="font-size: 0.85em; font-weight: 600; opacity: 0.9;">
+                            <span class="material-symbols-rounded" style="font-size: 16px; vertical-align: middle; margin-right: 4px;">chat</span>
+                            Iniciar conversación
+                        </span>
+                        <span class="material-symbols-rounded" style="font-size: 24px; transition: transform 0.3s ease;">arrow_forward</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- GPT 2: Alicontigo -->
+            <article class="ai-card" onclick="openGPT('alicontigo')" style="background: linear-gradient(135deg, var(--amarillo-oro) 0%, var(--amarillo-oro-80) 100%);">
+                <div class="ai-card-glow" style="content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%); pointer-events: none; z-index: 1;"></div>
+                <div style="position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column;">
+                    <div class="ai-header" style="display: flex; align-items: center; gap: var(--spacing-md); margin-bottom: var(--spacing-lg);">
+                        <div class="ai-icon" style="width: 60px; height: 60px; background: rgba(255,255,255,0.2); border-radius: var(--border-radius-lg); display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px);">
+                            <span class="material-symbols-rounded" style="font-size: 32px; color: var(--blanco);">diversity_3</span>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 1.3em; margin-bottom: var(--spacing-xs); font-family: 'Zilla Slab', serif; font-weight: 600;">AliContigo</h3>
+                            <div class="ai-status" style="background: rgba(113, 179, 56, 0.8); color: var(--blanco); padding: 4px 12px; border-radius: 12px; font-size: 0.75em; font-weight: 600; display: inline-block;">
+                                <span class="material-symbols-rounded" style="font-size: 12px; vertical-align: middle; margin-right: 4px;">check_circle</span>
+                                Disponible
+                            </div>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.6; margin-bottom: var(--spacing-lg); font-size: 0.9em; opacity: 0.95; flex: 1;">Experto en procesos de gestión humana que orienta a colaboradores y líderes sobre temas de bienestar, desarrollo y cultura organizacional.</p>
+                    <div class="ai-features" style="background: rgba(255,255,255,0.15); padding: var(--spacing-md); border-radius: var(--border-radius-md); margin-bottom: var(--spacing-lg); backdrop-filter: blur(5px);">
+                        <div style="font-size: 0.8em; font-weight: 600; margin-bottom: var(--spacing-xs); text-transform: uppercase; letter-spacing: 0.5px;">Especialidades:</div>
+                        <div style="font-size: 0.85em; line-height: 1.4;">• Gestión humana<br>• Bienestar<br>• Cultura organizacional</div>
+                    </div>
+                    <div class="ai-cta" style="display: flex; align-items: center; justify-content: space-between; margin-top: auto;">
+                        <span style="font-size: 0.85em; font-weight: 600; opacity: 0.9;">
+                            <span class="material-symbols-rounded" style="font-size: 16px; vertical-align: middle; margin-right: 4px;">chat</span>
+                            Iniciar conversación
+                        </span>
+                        <span class="material-symbols-rounded" style="font-size: 24px; transition: transform 0.3s ease;">arrow_forward</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- GPT 3: AliLacti -->
+            <article class="ai-card" onclick="openGPT('alilacti')" style="background: linear-gradient(135deg, var(--verde-natura) 0%, var(--verde-natura-80) 100%);">
+                <div class="ai-card-glow" style="content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%); pointer-events: none; z-index: 1;"></div>
+                <div style="position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column;">
+                    <div class="ai-header" style="display: flex; align-items: center; gap: var(--spacing-md); margin-bottom: var(--spacing-lg);">
+                        <div class="ai-icon" style="width: 60px; height: 60px; background: rgba(255,255,255,0.2); border-radius: var(--border-radius-lg); display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px);">
+                            <span class="material-symbols-rounded" style="font-size: 32px; color: var(--blanco);">pediatrics</span>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 1.3em; margin-bottom: var(--spacing-xs); font-family: 'Zilla Slab', serif; font-weight: 600;">AliLacti</h3>
+                            <div class="ai-status" style="background: rgba(113, 179, 56, 0.8); color: var(--blanco); padding: 4px 12px; border-radius: 12px; font-size: 0.75em; font-weight: 600; display: inline-block;">
+                                <span class="material-symbols-rounded" style="font-size: 12px; vertical-align: middle; margin-right: 4px;">check_circle</span>
+                                Disponible
+                            </div>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.6; margin-bottom: var(--spacing-lg); font-size: 0.9em; opacity: 0.95; flex: 1;">Especialista en el mercado lácteo colombiano y sus sectores complementarios como agroindustria, vinos, mermeladas y quesos.</p>
+                    <div class="ai-features" style="background: rgba(255,255,255,0.15); padding: var(--spacing-md); border-radius: var(--border-radius-md); margin-bottom: var(--spacing-lg); backdrop-filter: blur(5px);">
+                        <div style="font-size: 0.8em; font-weight: 600; margin-bottom: var(--spacing-xs); text-transform: uppercase; letter-spacing: 0.5px;">Especialidades:</div>
+                        <div style="font-size: 0.85em; line-height: 1.4;">• Mercado lácteo<br>• Análisis estratégico<br>• Negocios emergentes</div>
+                    </div>
+                    <div class="ai-cta" style="display: flex; align-items: center; justify-content: space-between; margin-top: auto;">
+                        <span style="font-size: 0.85em; font-weight: 600; opacity: 0.9;">
+                            <span class="material-symbols-rounded" style="font-size: 16px; vertical-align: middle; margin-right: 4px;">chat</span>
+                            Iniciar conversación
+                        </span>
+                        <span class="material-symbols-rounded" style="font-size: 24px; transition: transform 0.3s ease;">arrow_forward</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- GPT 4: AliNormas - ESTE SE CENTRARÁ AUTOMÁTICAMENTE -->
+            <article class="ai-card" onclick="openGPT('alinormas')" style="background: linear-gradient(135deg, var(--azul-novo) 0%, var(--azul-novo-80) 100%);">
+                <div class="ai-card-glow" style="content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%); pointer-events: none; z-index: 1;"></div>
+                <div style="position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column;">
+                    <div class="ai-header" style="display: flex; align-items: center; gap: var(--spacing-md); margin-bottom: var(--spacing-lg);">
+                        <div class="ai-icon" style="width: 60px; height: 60px; background: rgba(255,255,255,0.2); border-radius: var(--border-radius-lg); display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px);">
+                            <span class="material-symbols-rounded" style="font-size: 32px; color: var(--blanco);">rule</span>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 1.3em; margin-bottom: var(--spacing-xs); font-family: 'Zilla Slab', serif; font-weight: 600;">AliNormas</h3>
+                            <div class="ai-status" style="background: rgba(113, 179, 56, 0.8); color: var(--blanco); padding: 4px 12px; border-radius: 12px; font-size: 0.75em; font-weight: 600; display: inline-block;">
+                                <span class="material-symbols-rounded" style="font-size: 12px; vertical-align: middle; margin-right: 4px;">check_circle</span>
+                                Disponible
+                            </div>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.6; margin-bottom: var(--spacing-lg); font-size: 0.9em; opacity: 0.95; flex: 1;">Especialista en normas y regulaciones BRCGS para sistemas de gestión de calidad e inocuidad en la industria alimentaria.</p>
+                    <div class="ai-features" style="background: rgba(255,255,255,0.15); padding: var(--spacing-md); border-radius: var(--border-radius-md); margin-bottom: var(--spacing-lg); backdrop-filter: blur(5px);">
+                        <div style="font-size: 0.8em; font-weight: 600; margin-bottom: var(--spacing-xs); text-transform: uppercase; letter-spacing: 0.5px;">Especialidades:</div>
+                        <div style="font-size: 0.85em; line-height: 1.4;">• BRCGS<br>• Calidad<br>• Inocuidad alimentaria</div>
+                    </div>
+                    <div class="ai-cta" style="display: flex; align-items: center; justify-content: space-between; margin-top: auto;">
+                        <span style="font-size: 0.85em; font-weight: 600; opacity: 0.9;">
+                            <span class="material-symbols-rounded" style="font-size: 16px; vertical-align: middle; margin-right: 4px;">chat</span>
+                            Iniciar conversación
+                        </span>
+                        <span class="material-symbols-rounded" style="font-size: 24px; transition: transform 0.3s ease;">arrow_forward</span>
+                    </div>
+                </div>
+            </article>
+
+        </section>
+    </main>
+
+    <!-- Scripts esenciales -->
+    <script src="scripts.js"></script>
+    <script src="js/component-loader.js"></script>
+    <script src="accessibility.js"></script>
+    
+    <!-- JavaScript específico para inteligencias artificiales -->
+    <script>
+        // URLs de los GPTs
+        const gptUrls = {
+            'ali': 'https://chatgpt.com/g/g-67a4bec9d3f8819183a2509767ec10dd-ali',
+            'alicontigo': 'https://chatgpt.com/g/g-681a51d15fe48191b9c8178818c55e66-alicontigo',
+            'alilacti': 'https://chatgpt.com/g/g-68079ad15798819199f19111f73d49e3-alilacti',
+            'alinormas': 'https://chatgpt.com/g/g-680942092654819188f1617d4935b1c8-alinormas-brcgs'
+        };
+
+        // Función para abrir GPT específico
+        function openGPT(gptType) {
+            const url = gptUrls[gptType];
+            if (url && url.trim() !== '') {
+                window.open(url, '_blank', 'noopener,noreferrer');
+                console.log(`Abriendo GPT: ${gptType}`);
+                showFeedback(gptType);
+            } else {
+                console.log(`GPT ${gptType} no disponible aún`);
+                showComingSoon(gptType);
+            }
+        }
+
+        // Función para mostrar feedback al usuario
+        function showFeedback(gptType) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed; top: 100px; right: 20px; background: linear-gradient(135deg, var(--verde-natura) 0%, var(--verde-natura-80) 100%);
+                color: white; padding: 16px 24px; border-radius: 12px; box-shadow: var(--shadow-lg); z-index: 10000;
+                font-family: 'Work Sans', sans-serif; font-weight: 600; font-size: 14px; transform: translateX(400px);
+                transition: all 0.3s ease; max-width: 300px; backdrop-filter: blur(10px);
+            `;
+            
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="material-symbols-rounded" style="font-size: 20px;">check_circle</span>
+                    <span>Redirigiendo a tu asistente de IA...</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            setTimeout(() => notification.style.transform = 'translateX(0)', 100);
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Función para mostrar mensaje de "próximamente"
+        function showComingSoon(gptType) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed; top: 100px; right: 20px; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+                color: white; padding: 16px 24px; border-radius: 12px; box-shadow: var(--shadow-lg); z-index: 10000;
+                font-family: 'Work Sans', sans-serif; font-weight: 600; font-size: 14px; transform: translateX(400px);
+                transition: all 0.3s ease; max-width: 300px;
+            `;
+            
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="material-symbols-rounded" style="font-size: 20px;">schedule</span>
+                    <span>Este GPT estará disponible pronto.</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            setTimeout(() => notification.style.transform = 'translateX(0)', 100);
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Marcar componentes como cargados
+            setTimeout(() => {
+                document.body.classList.add('components-loaded');
+                console.log('✅ Página Inteligencias Artificiales inicializada con grid de 3 columnas');
+            }, 800);
+
+            // Efectos de hover y animaciones
+            const aiCards = document.querySelectorAll('.ai-card');
+            
+            aiCards.forEach((card, index) => {
+                // Animación de entrada
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100);
+
+                // Efectos de hover
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                    this.style.boxShadow = 'var(--shadow-xl)';
+                    
+                    const arrow = this.querySelector('.ai-cta .material-symbols-rounded:last-child');
+                    if (arrow) arrow.style.transform = 'translateX(5px)';
+                    
+                    const glow = this.querySelector('.ai-card-glow');
+                    if (glow) glow.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 100%)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.boxShadow = 'var(--shadow-lg)';
+                    
+                    const arrow = this.querySelector('.ai-cta .material-symbols-rounded:last-child');
+                    if (arrow) arrow.style.transform = 'translateX(0)';
+                    
+                    const glow = this.querySelector('.ai-card-glow');
+                    if (glow) glow.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%)';
+                });
+
+                // Efecto de click
+                card.addEventListener('click', function() {
+                    this.style.transform = 'translateY(-4px) scale(1.01)';
+                    setTimeout(() => {
+                        this.style.transform = 'translateY(-8px) scale(1.02)';
+                    }, 150);
+                });
+            });
+
+            console.log('🎨 Página IA con grid de 3 columnas cargada exitosamente');
+        });
+
+        // Listener para cuando los componentes estén cargados
+        window.addEventListener('components-loaded', function() {
+            console.log('🎉 Evento: Todos los componentes han sido cargados en IA');
+        });
+    </script>
+</body>
+</html>

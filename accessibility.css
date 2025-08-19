@@ -1,0 +1,1077 @@
+/* ==================================================
+   ALICO - ACCESSIBILITY USERWAY STYLE - CORREGIDO
+   Botón flotante tipo UserWay - Solo aparece cuando se necesita
+   ================================================== */
+
+/* ==================================================
+   BOTÓN DE ACCESIBILIDAD FLOTANTE - POSICIÓN SUPERIOR DERECHA
+   ================================================== */
+.accessibility-toggle {
+    position: fixed;
+    top: 160px;
+    right: 20px;
+    background: var(--verde-natura);
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 28px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    transition: all 0.15s ease;
+}
+
+.accessibility-toggle:hover {
+    transform: scale(1.05);
+    background: var(--verde-natura-80);
+}
+
+.accessibility-toggle:active {
+    transform: scale(0.98);
+}
+
+.accessibility-toggle.panel-open {
+    background: var(--amarillo-oro);
+}
+
+/* ==================================================
+   OVERLAY - COMPLETAMENTE OCULTO INICIALMENTE
+   ================================================== */
+.accessibility-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s ease;
+}
+
+.accessibility-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ==================================================
+   PANEL PRINCIPAL - INICIALMENTE OCULTO
+   ================================================== */
+.accessibility-panel {
+    position: fixed;
+    top: 50%;
+    right: -400px;
+    width: 350px;
+    max-height: 80vh;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    z-index: 1001;
+    transition: all 0.2s ease;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    transform: translateY(-50%);
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Modo oscuro para el panel de accesibilidad */
+.dark-mode .accessibility-panel {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 20px 60px var(--shadow-color);
+}
+
+.dark-mode .accessibility-panel h2,
+.dark-mode .accessibility-panel h3 {
+    color: var(--text-primary);
+}
+
+.dark-mode .accessibility-panel button {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.dark-mode .accessibility-panel button:hover {
+    background: var(--amarillo-oro);
+    color: var(--text-primary);
+}
+
+.dark-mode .accessibility-panel .accessibility-close {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.dark-mode .accessibility-panel .accessibility-close:hover {
+    background: #e74c3c;
+    color: var(--text-primary);
+}
+
+.accessibility-panel.show {
+    right: 20px;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ==================================================
+   HEADER DEL PANEL - MEJORADO
+   ================================================== */
+.accessibility-header {
+    background: #003DA6;
+    color: white;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.accessibility-header h3 {
+    font-family: 'Zilla Slab', serif;
+    font-weight: 600;
+    font-size: 1.2em;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.accessibility-close {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    transition: all 0.15s ease;
+}
+
+.accessibility-close:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.05);
+}
+
+/* ==================================================
+   CONTENIDO DEL PANEL - OPTIMIZADO
+   ================================================== */
+.accessibility-options {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    max-height: calc(85vh - 160px);
+}
+
+.accessibility-options::-webkit-scrollbar {
+    width: 6px;
+}
+
+.accessibility-options::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.accessibility-options::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.accessibility-options::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+.accessibility-group {
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.accessibility-group:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.accessibility-group h4 {
+    font-family: 'Zilla Slab', serif;
+    font-weight: 600;
+    font-size: 1.1em;
+    color: #003DA6;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ==================================================
+   CONTROLES DE TAMAÑO DE FUENTE - MEJORADOS
+   ================================================== */
+.font-size-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+}
+
+.font-size-controls button {
+    background: linear-gradient(135deg, #DB9500 0%, #DFA01A 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 8px;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-size: 0.9em;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.font-size-controls button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(219, 149, 0, 0.3);
+    background: linear-gradient(135deg, #DFA01A 0%, #E2AA33 100%);
+}
+
+.font-size-controls button:active {
+    transform: translateY(0);
+}
+
+/* ==================================================
+   TOGGLES - ESTILO USERWAY MEJORADO
+   ================================================== */
+.accessibility-toggles {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.accessibility-toggle-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 12px;
+    transition: all 0.15s ease;
+    background: transparent;
+}
+
+.accessibility-toggle-item:hover {
+    background: rgba(0, 61, 166, 0.05);
+}
+
+.accessibility-toggle-item input[type="checkbox"] {
+    display: none;
+}
+
+.toggle-slider {
+    position: relative;
+    width: 50px;
+    height: 26px;
+    background: #e0e0e0;
+    border-radius: 13px;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+    border: 2px solid transparent;
+}
+
+.toggle-slider::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 18px;
+    height: 18px;
+    background: white;
+    border-radius: 50%;
+    transition: all 0.15s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.accessibility-toggle-item input[type="checkbox"]:checked + .toggle-slider {
+    background: linear-gradient(135deg, #71B338 0%, #7FBB4C 100%);
+    border-color: rgba(113, 179, 56, 0.2);
+}
+
+.accessibility-toggle-item input[type="checkbox"]:checked + .toggle-slider::before {
+    transform: translateX(24px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.toggle-label {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    color: #333;
+    font-size: 0.95em;
+    flex: 1;
+    line-height: 1.4;
+}
+
+/* ==================================================
+   BOTONES DE ACCIÓN - MEJORADOS
+   ================================================== */
+.accessibility-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.accessibility-buttons button {
+    background: linear-gradient(135deg, #40B4E5 0%, #52BAEA 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-start;
+    font-size: 0.9em;
+    min-height: 48px;
+}
+
+.accessibility-buttons button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(64, 180, 229, 0.3);
+    background: linear-gradient(135deg, #52BAEA 0%, #66C2EC 100%);
+}
+
+.accessibility-buttons button.active {
+    background: linear-gradient(135deg, #71B338 0%, #7FBB4C 100%);
+    box-shadow: 0 4px 12px rgba(113, 179, 56, 0.3);
+}
+
+.accessibility-buttons button:active {
+    transform: translateY(0);
+}
+
+/* ==================================================
+   BOTÓN DE RESET - MEJORADO
+   ================================================== */
+.accessibility-reset {
+    margin: 20px;
+    margin-top: 0;
+    padding-top: 20px;
+    border-top: 2px solid #f0f0f0;
+}
+
+.reset-button {
+    width: 100%;
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 16px;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    font-size: 1em;
+    min-height: 52px;
+}
+
+.reset-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+    background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+}
+
+.reset-button:active {
+    transform: translateY(0);
+}
+
+/* ==================================================
+   RESPONSIVE - OPTIMIZADO PARA MÓVIL
+   ================================================== */
+@media (max-width: 768px) {
+    .accessibility-toggle {
+        top: 120px; /* Ajuste para móvil */
+        right: 16px;
+        width: 56px;
+        height: 56px;
+        font-size: 26px;
+    }
+    
+    .accessibility-panel {
+        top: 50%;
+        right: -100%;
+        left: 16px;
+        width: auto;
+        max-height: 80vh;
+        border-radius: 16px;
+    }
+    
+    .accessibility-panel.show {
+        right: 16px;
+    }
+    
+    .accessibility-header {
+        padding: 16px;
+    }
+    
+    .accessibility-header h3 {
+        font-size: 1.1em;
+    }
+    
+    .accessibility-options {
+        padding: 16px;
+        max-height: calc(80vh - 140px);
+    }
+    
+    .accessibility-reset {
+        margin: 16px;
+        margin-top: 0;
+    }
+    
+    .font-size-controls {
+        gap: 6px;
+    }
+    
+    .font-size-controls button {
+        padding: 10px 6px;
+        font-size: 0.85em;
+        min-height: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .accessibility-toggle {
+        top: 100px;
+        right: 12px;
+        width: 52px;
+        height: 52px;
+        font-size: 24px;
+    }
+    
+    .accessibility-panel {
+        left: 12px;
+        right: -100%;
+        max-height: 75vh;
+        border-radius: 14px;
+    }
+    
+    .accessibility-panel.show {
+        right: 12px;
+    }
+    
+    .accessibility-options {
+        padding: 12px;
+        max-height: calc(75vh - 120px);
+    }
+    
+    .accessibility-reset {
+        margin: 12px;
+        margin-top: 0;
+    }
+    
+    .accessibility-header {
+        padding: 12px 16px;
+    }
+}
+
+/* ==================================================
+   ESTADOS DE CARGA Y TRANSICIONES
+   ================================================== */
+.accessibility-panel-loading {
+    pointer-events: none;
+}
+
+.accessibility-panel-loading .accessibility-options {
+    opacity: 0.7;
+}
+
+/* Animación para cuando se aplican cambios */
+@keyframes setting-applied {
+    0% { background-color: rgba(113, 179, 56, 0.2); }
+    100% { background-color: transparent; }
+}
+
+.setting-changed {
+    animation: setting-applied 0.5s ease-out;
+}
+
+/* ==================================================
+   EFECTOS VISUALES ADICIONALES
+   ================================================== */
+.accessibility-panel {
+    /* Gradiente sutil en el fondo */
+    background: linear-gradient(145deg, #ffffff 0%, #fafafa 100%);
+}
+
+.accessibility-toggle::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    z-index: -1;
+}
+
+.accessibility-toggle:hover::before {
+    opacity: 1;
+}
+
+/* ==================================================
+   ESTILOS PARA FUNCIONALIDADES DE ACCESIBILIDAD - CORREGIDOS
+   ================================================== */
+
+/* Alto contraste - MÉTODO SUAVE */
+.high-contrast {
+    --contrast-multiplier: 1.3;
+}
+
+.high-contrast * {
+    filter: contrast(var(--contrast-multiplier)) !important;
+}
+
+.high-contrast .header {
+    background: linear-gradient(135deg, #000000 0%, #333333 100%) !important;
+}
+
+.high-contrast .nav-link {
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.high-contrast .btn-primary,
+.high-contrast .btn-secondary {
+    border: 2px solid #ffffff !important;
+    font-weight: bold !important;
+}
+
+/* Bajo contraste - CORREGIDO: Solo reduce opacidad, NO contraste */
+.low-contrast {
+    --opacity-multiplier: 0.7;
+}
+
+.low-contrast * {
+    opacity: var(--opacity-multiplier) !important;
+}
+
+.low-contrast .header,
+.low-contrast .intro-card,
+.low-contrast .model-card,
+.low-contrast .methodology-card,
+.low-contrast .bpi-section {
+    opacity: var(--opacity-multiplier) !important;
+}
+
+/* EXCEPCIÓN: Panel de accesibilidad mantiene opacidad normal */
+.low-contrast .accessibility-panel,
+.low-contrast .accessibility-toggle,
+.low-contrast .accessibility-overlay {
+    opacity: 1 !important;
+}
+
+.low-contrast .accessibility-panel *,
+.low-contrast .accessibility-toggle * {
+    opacity: 1 !important;
+}
+
+/* Modo oscuro - OPTIMIZADO PARA BLOG */
+.dark-mode {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+}
+
+.dark-mode * {
+    color: #ffffff !important;
+}
+
+.dark-mode .header {
+    background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%) !important;
+}
+
+.dark-mode .intro-card,
+.dark-mode .model-card,
+.dark-mode .methodology-card,
+.dark-mode .bpi-section {
+    background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%) !important;
+    border: 1px solid #444444 !important;
+}
+
+.dark-mode .btn-primary,
+.dark-mode .btn-secondary {
+    background: linear-gradient(135deg, #444444 0%, #2c2c2c 100%) !important;
+    color: #ffffff !important;
+}
+
+/* ==================================================
+   MODO OSCURO ESPECÍFICO PARA PÁGINAS DE BLOG/PROYECTO
+   ================================================== */
+
+/* Contenido del proyecto/blog en modo oscuro */
+.dark-mode .project-content {
+    background: #2c2c2c !important;
+    color: #e0e0e0 !important;
+    border: 1px solid #444444 !important;
+}
+
+.dark-mode .project-content h2,
+.dark-mode .project-content h3,
+.dark-mode .project-content h4 {
+    color: #40B4E5 !important; /* Azul claro para títulos */
+}
+
+.dark-mode .project-content p,
+.dark-mode .project-content li {
+    color: #e0e0e0 !important; /* Gris claro para texto */
+}
+
+/* Header del proyecto en modo oscuro */
+.dark-mode .project-header {
+    background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%) !important;
+    border: 1px solid #444444 !important;
+}
+
+.dark-mode .project-category {
+    background: rgba(64, 180, 229, 0.2) !important;
+    color: #40B4E5 !important;
+}
+
+.dark-mode .project-meta-item {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #e0e0e0 !important;
+}
+
+/* Breadcrumb en modo oscuro */
+.dark-mode .breadcrumb {
+    background: rgba(44, 44, 44, 0.8) !important;
+    border: 1px solid #444444 !important;
+}
+
+.dark-mode .breadcrumb-link {
+    color: #40B4E5 !important;
+}
+
+.dark-mode .breadcrumb-current {
+    color: #ffffff !important;
+}
+
+/* Imagen destacada en modo oscuro */
+.dark-mode .project-featured-image {
+    background: #2c2c2c !important;
+    border: 1px solid #444444 !important;
+    color: #e0e0e0 !important;
+}
+
+/* Cajas destacadas en modo oscuro */
+.dark-mode .highlight-box {
+    background: linear-gradient(135deg, #1a3a5c 0%, #1e4a6b 100%) !important;
+    border-left: 4px solid #40B4E5 !important;
+    color: #e0e0e0 !important;
+}
+
+/* Estadísticas en modo oscuro */
+.dark-mode .stat-item {
+    background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%) !important;
+    border: 1px solid #444444 !important;
+    color: #ffffff !important;
+}
+
+/* Botones de navegación en modo oscuro */
+.dark-mode .nav-button {
+    background: linear-gradient(135deg, #40B4E5 0%, #52BAEA 100%) !important;
+    color: #ffffff !important;
+    border: 1px solid #444444 !important;
+}
+
+.dark-mode .back-button {
+    background: linear-gradient(135deg, #DB9500 0%, #DFA01A 100%) !important;
+    color: #ffffff !important;
+}
+
+/* Enlaces en contenido de blog */
+.dark-mode .project-content a {
+    color: #40B4E5 !important;
+    text-decoration: underline;
+}
+
+.dark-mode .project-content a:hover {
+    color: #52BAEA !important;
+}
+
+/* Listas y elementos estructurales */
+.dark-mode .project-content ul,
+.dark-mode .project-content ol {
+    color: #e0e0e0 !important;
+}
+
+.dark-mode .project-content ul li::marker,
+.dark-mode .project-content ol li::marker {
+    color: #40B4E5 !important;
+}
+
+/* Tablas si las hubiera */
+.dark-mode .project-content table {
+    background: #2c2c2c !important;
+    border: 1px solid #444444 !important;
+}
+
+.dark-mode .project-content th,
+.dark-mode .project-content td {
+    border: 1px solid #444444 !important;
+    color: #e0e0e0 !important;
+}
+
+.dark-mode .project-content th {
+    background: #1a1a1a !important;
+    color: #40B4E5 !important;
+}
+
+/* Código si lo hubiera */
+.dark-mode .project-content code {
+    background: #1a1a1a !important;
+    color: #40B4E5 !important;
+    border: 1px solid #444444 !important;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.dark-mode .project-content pre {
+    background: #1a1a1a !important;
+    border: 1px solid #444444 !important;
+    color: #e0e0e0 !important;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+/* Citas/blockquotes */
+.dark-mode .project-content blockquote {
+    background: #2c2c2c !important;
+    border-left: 4px solid #40B4E5 !important;
+    color: #e0e0e0 !important;
+    padding: 16px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+}
+
+/* Panel de accesibilidad en modo oscuro - MANTIENE OPACIDAD NORMAL */
+.dark-mode .accessibility-panel {
+    background: linear-gradient(145deg, #2c2c2c 0%, #1a1a1a 100%) !important;
+    border: 1px solid #444444 !important;
+    opacity: 1 !important;
+}
+
+.dark-mode .accessibility-header {
+    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%) !important;
+}
+
+.dark-mode .accessibility-group {
+    border-bottom: 1px solid #444444 !important;
+}
+
+.dark-mode .accessibility-group h4 {
+    color: #ffffff !important;
+}
+
+.dark-mode .toggle-label {
+    color: #ffffff !important;
+}
+
+.dark-mode .accessibility-reset {
+    border-top: 2px solid #444444 !important;
+}
+
+/* Máscara de lectura - CORREGIDA: CONSERVA OPACIDAD BASE */
+.reading-mask-active {
+    position: relative;
+}
+
+.reading-mask-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    pointer-events: none;
+    z-index: 9998;
+    transition: opacity 0.15s ease;
+}
+
+.reading-mask-spotlight {
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    background: transparent;
+    border-radius: 50%;
+    /* CORREGIDO: El spotlight NO oscurece, conserva transparencia total */
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.75);
+    pointer-events: none;
+    z-index: 9999;
+    transition: all 0.1s ease-out;
+    transform: translate(-50%, -50%);
+}
+
+/* IMPORTANTE: El área del spotlight mantiene la opacidad original del sitio */
+.reading-mask-spotlight::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border-radius: 50%;
+    /* Sin filtros ni cambios de opacidad */
+}
+
+/* Ocultar máscara en móvil y tablet */
+@media (max-width: 1024px) {
+    .reading-mask-overlay,
+    .reading-mask-spotlight {
+        display: none !important;
+    }
+}
+
+/* ==================================================
+   CLASES DE TAMAÑO DE FUENTE
+   ================================================== */
+.font-small { font-size: 80% !important; }
+.font-normal { font-size: 100% !important; }
+.font-large { font-size: 120% !important; }
+.font-extra-large { font-size: 140% !important; }
+
+/* Focus mejorado */
+.enhanced-focus *:focus {
+    outline: 3px solid var(--amarillo-oro) !important;
+    outline-offset: 2px !important;
+}
+
+/* Reducir movimiento */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transform: none !important;
+}
+
+/* Pausar animaciones */
+.pause-animations *,
+.pause-animations *::before,
+.pause-animations *::after {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+}
+
+/* ==================================================
+   ALTO CONTRASTE - OPTIMIZADO
+   ================================================== */
+
+.high-contrast {
+    --text-primary: #000000 !important;
+    --text-secondary: #000000 !important;
+    --text-muted: #000000 !important;
+    --bg-primary: #ffffff !important;
+    --bg-secondary: #ffffff !important;
+    --bg-tertiary: #ffffff !important;
+    --border-color: #000000 !important;
+    --shadow-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Alto contraste para elementos principales */
+.high-contrast .accessibility-toggle {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+}
+
+.high-contrast .flip-card-front {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #000000 !important;
+}
+
+.high-contrast .flip-card-back {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #000000 !important;
+}
+
+.high-contrast .banner-section {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+}
+
+.high-contrast .model-card {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+}
+
+/* Alto contraste para panel de accesibilidad */
+.high-contrast .accessibility-panel {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+}
+
+.high-contrast .accessibility-panel button {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #000000 !important;
+}
+
+.high-contrast .accessibility-panel button:hover {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+}
+
+/* Alto contraste para blog */
+.high-contrast .blog-card {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+}
+
+.high-contrast .blog-title {
+    color: #000000 !important;
+}
+
+.high-contrast .blog-excerpt {
+    color: #000000 !important;
+}
+
+.high-contrast .blog-meta {
+    border-top: 1px solid #000000 !important;
+    color: #000000 !important;
+}
+
+.high-contrast .blog-date,
+.high-contrast .blog-read-time {
+    color: #000000 !important;
+}
+
+.high-contrast .blog-image {
+    background: #ffffff !important;
+    border: 2px solid #000000 !important;
+}
+
+.high-contrast .blog-image .material-symbols-rounded {
+    color: #000000 !important;
+}
+
+.high-contrast .blog-cta-button {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #000000 !important;
+}
+
+/* Alto contraste para videos */
+.high-contrast .video-title {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+}
+
+.high-contrast .video-embed-card {
+    background: #ffffff !important;
+    border: 2px solid #000000 !important;
+}
+
+/* Alto contraste para breadcrumbs */
+.high-contrast .breadcrumb {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+    box-shadow: none !important;
+}
+
+.high-contrast .breadcrumb-link {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+}
+
+.high-contrast .breadcrumb-link:hover {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border-color: #000000 !important;
+}
+
+.high-contrast .breadcrumb-current {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #000000 !important;
+}
+
+.high-contrast .breadcrumb-separator {
+    color: #000000 !important;
+}
+
+/* ==================================================
+   ANIMACIONES PARA SELECCIÓN DE TEXTO
+   ================================================== */
+
+@keyframes textHighlight {
+    0% { background: var(--amarillo-oro); }
+    50% { background: var(--verde-natura); }
+    100% { background: var(--amarillo-oro); }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Estilos para el indicador de selección de texto */
+#textSelectionIndicator {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+#textSelectionIndicator .material-symbols-rounded {
+    font-size: 18px;
+}
+
+/* Estilos para texto resaltado */
+.text-selection-highlight {
+    background: var(--amarillo-oro) !important;
+    color: var(--blanco) !important;
+    padding: 2px 4px !important;
+    border-radius: 3px !important;
+    animation: textHighlight 2s ease-out !important;
+}

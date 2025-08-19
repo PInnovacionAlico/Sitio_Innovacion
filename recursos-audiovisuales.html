@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursos Audiovisuales - Alico</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="images/Ali_head.png" type="image/png">
+    <link rel="apple-touch-icon" href="images/Ali_head.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+    
+    <!-- Estilos principales -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="accessibility.css">
+    <link rel="stylesheet" href="components/components.css">
+    
+    <!-- CSS crítico inline -->
+    <style>
+        /* === CRÍTICO: Anti-FOUC === */
+        body { opacity: 0; transition: opacity 0.3s ease; }
+        body.components-loaded { opacity: 1; }
+        
+        /* === CRÍTICO: Placeholder header === */
+        .header-placeholder {
+            height: 80px; background: var(--amarillo-oro); position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-family: 'Work Sans', sans-serif;
+        }
+        body.components-loaded .header-placeholder { display: none; }
+        
+        /* === CRÍTICO: Botón accesibilidad === */
+        .accessibility-toggle {
+            position: fixed; top: 160px; right: 20px; background: linear-gradient(135deg, var(--verde-natura) 0%, var(--verde-natura-80) 100%);
+            color: white; width: 60px; height: 60px; border-radius: 50%; border: none; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-size: 28px; box-shadow: 0 4px 20px rgba(113, 179, 56, 0.4); z-index: 999; transition: all 0.3s ease;
+        }
+        .accessibility-toggle:hover { transform: scale(1.1); }
+        
+        /* === ESPECÍFICO PARA PÁGINA ÍNDICE DE RECURSOS === */
+        .resource-index-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+            margin: var(--spacing-xxl) 0;
+        }
+
+        .resource-index-card {
+            background: white;
+            border-radius: var(--border-radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 350px;
+        }
+
+        .resource-index-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .resource-index-card::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(5px);
+            z-index: 2;
+        }
+
+        .resource-index-card:hover::after {
+            opacity: 1;
+        }
+
+        .resource-index-card::before {
+            content: '→';
+            position: absolute;
+            top: 23px;
+            right: 23px;
+            color: var(--azul-novo);
+            font-weight: bold;
+            font-size: 16px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .resource-index-card:hover::before {
+            opacity: 1;
+        }
+
+        .resource-card-header {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--gris-claro) 0%, var(--gris-medio) 100%);
+        }
+
+        .resource-card-icon {
+            font-size: 80px !important;
+            color: var(--azul-novo);
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        .resource-index-card:hover .resource-card-icon {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        .resource-card-content {
+            padding: var(--spacing-xl);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .resource-card-title {
+            font-family: 'Zilla Slab', serif;
+            font-size: 1.5em;
+            font-weight: 600;
+            color: var(--azul-novo);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .resource-card-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: var(--spacing-lg);
+            flex: 1;
+        }
+
+        .resource-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: var(--spacing-md);
+            border-top: 1px solid #f0f0f0;
+            font-size: 0.9em;
+            color: var(--azul-novo);
+            font-weight: 600;
+        }
+
+        .resource-card-type {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .resource-card-arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .resource-index-card:hover .resource-card-arrow {
+            transform: translateX(5px);
+        }
+
+        /* Colores específicos para cada tipo */
+        .resource-card-videos .resource-card-header {
+            background: linear-gradient(135deg, var(--azul-claro-20) 0%, var(--azul-claro-40) 100%);
+        }
+
+        .resource-card-videos .resource-card-icon {
+            color: var(--azul-claro);
+        }
+
+        .resource-card-embajador .resource-card-header {
+            background: linear-gradient(135deg, var(--verde-natura-20) 0%, var(--verde-natura-40) 100%);
+        }
+
+        .resource-card-embajador .resource-card-icon {
+            color: var(--verde-natura);
+        }
+
+        .resource-card-podcast .resource-card-header {
+            background: linear-gradient(135deg, var(--amarillo-oro-20) 0%, var(--amarillo-oro-40) 100%);
+        }
+
+        .resource-card-podcast .resource-card-icon {
+            color: var(--amarillo-oro);
+        }
+
+        .resource-card-plantillas .resource-card-header {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        }
+
+        .resource-card-plantillas .resource-card-icon {
+            color: #1976d2;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            .accessibility-toggle { top: 120px; right: 16px; width: 56px; height: 56px; font-size: 26px; }
+            .header-placeholder { height: 70px; font-size: 14px; }
+            
+            .resource-index-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+                margin: var(--spacing-xl) var(--spacing-md);
+            }
+            
+            .resource-card-content {
+                padding: var(--spacing-lg);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .accessibility-toggle { top: 100px; right: 12px; width: 52px; height: 52px; font-size: 24px; }
+            .header-placeholder { height: 65px; font-size: 13px; }
+            
+            .resource-index-grid {
+                margin: var(--spacing-lg) var(--spacing-sm);
+            }
+            
+            .resource-card-header {
+                height: 160px;
+            }
+            
+            .resource-card-icon {
+                font-size: 60px !important;
+            }
+        }
+
+        /* === ANIMACIONES === */
+        @keyframes cardAppear {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .resource-index-card {
+            animation: cardAppear 0.6s ease-out;
+        }
+
+        .resource-index-card:nth-child(1) { animation-delay: 0.1s; }
+        .resource-index-card:nth-child(2) { animation-delay: 0.2s; }
+        .resource-index-card:nth-child(3) { animation-delay: 0.3s; }
+        .resource-index-card:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <!-- Placeholder temporal para header -->
+    <div class="header-placeholder">
+        🚀 Cargando Alico...
+    </div>
+
+    <!-- Los componentes se cargarán automáticamente aquí -->
+
+    <!-- Contenido principal de recursos audiovisuales -->
+    <main id="main-content">
+        <!-- Banner principal de la página -->
+        <section class="banner-section">
+            <div class="banner-content banner-recursos">
+                RECURSOS AUDIOVISUALES
+            </div>
+        </section>
+
+        <!-- Descripción principal -->
+        <section class="model-card">
+            <h2>Explora Nuestros Recursos</h2>
+            <p>Descubre una amplia gama de contenido audiovisual diseñado para inspirar, educar y conectar. Desde videos educativos hasta experiencias interactivas, cada recurso está cuidadosamente creado para enriquecer tu conocimiento sobre innovación y sostenibilidad en el empaque.</p>
+        </section>
+
+        <!-- Grid de recursos con enlaces a páginas hijas -->
+        <section class="resource-index-grid">
+            
+            <!-- Videos y Fotos -->
+            <article class="resource-index-card resource-card-videos" onclick="navigateToResource('recursos-audiovisuales/videos-fotos.html')" tabindex="0" role="button" aria-label="Acceder a Videos y fotos">
+                <div class="resource-card-header">
+                    <div class="material-symbols-rounded resource-card-icon">photo_library</div>
+                </div>
+                <div class="resource-card-content">
+                    <h3 class="resource-card-title">Videos y Fotos</h3>
+                    <p class="resource-card-description">
+                        Explora nuestra galería de contenido visual con videos educativos, documentales de proyectos 
+                        y una colección fotográfica que captura los momentos más importantes de nuestras iniciativas 
+                        de innovación.
+                    </p>
+                    <div class="resource-card-footer">
+                        <div class="resource-card-type">
+                            <span class="material-symbols-rounded">play_circle</span>
+                            <span>Multimedia</span>
+                        </div>
+                        <span class="material-symbols-rounded resource-card-arrow">arrow_forward</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Embajador Ali -->
+            <article class="resource-index-card resource-card-embajador" onclick="navigateToResource('recursos-audiovisuales/embajador-ali.html')" tabindex="0" role="button" aria-label="Conocer al Embajador Ali">
+                <div class="resource-card-header">
+                    <div class="material-symbols-rounded resource-card-icon">support_agent</div>
+                </div>
+                <div class="resource-card-content">
+                    <h3 class="resource-card-title">Embajador Ali</h3>
+                    <p class="resource-card-description">
+                        Conoce a Ali, nuestro embajador de innovación en 3D. Descubre su historia, su misión y 
+                        cómo representa los valores de creatividad y vanguardia que nos impulsan hacia el futuro 
+                        del empaque sostenible.
+                    </p>
+                    <div class="resource-card-footer">
+                        <div class="resource-card-type">
+                            <span class="material-symbols-rounded">view_in_ar</span>
+                            <span>Experiencia 3D</span>
+                        </div>
+                        <span class="material-symbols-rounded resource-card-arrow">arrow_forward</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Podcast -->
+            <article class="resource-index-card resource-card-podcast" onclick="navigateToResource('recursos-audiovisuales/podcast.html')" tabindex="0" role="button" aria-label="Escuchar nuestro Podcast">
+                <div class="resource-card-header">
+                    <div class="material-symbols-rounded resource-card-icon">podcasts</div>
+                </div>
+                <div class="resource-card-content">
+                    <h3 class="resource-card-title">Podcast</h3>
+                    <p class="resource-card-description">
+                        Sumérgete en conversaciones profundas sobre innovación y sostenibilidad. Escucha episodios 
+                        exclusivos con expertos del sector, entrevistas inspiradoras y análisis de las tendencias 
+                        que están transformando la industria.
+                    </p>
+                    <div class="resource-card-footer">
+                        <div class="resource-card-type">
+                            <span class="material-symbols-rounded">headphones</span>
+                            <span>Audio</span>
+                        </div>
+                        <span class="material-symbols-rounded resource-card-arrow">arrow_forward</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Plantillas PPTX -->
+            <article class="resource-index-card resource-card-plantillas" onclick="navigateToExternal('https://wikipedia.org')" tabindex="0" role="button" aria-label="Acceder a Plantillas PPTX">
+                <div class="resource-card-header">
+                    <div class="material-symbols-rounded resource-card-icon">description</div>
+                </div>
+                <div class="resource-card-content">
+                    <h3 class="resource-card-title">Plantillas PPTX</h3>
+                    <p class="resource-card-description">
+                        Descarga plantillas profesionales para presentaciones corporativas. Recursos diseñados 
+                        con la identidad visual de Alico, perfectos para comunicar tus proyectos e ideas de manera 
+                        impactante y coherente.
+                    </p>
+                    <div class="resource-card-footer">
+                        <div class="resource-card-type">
+                            <span class="material-symbols-rounded">download</span>
+                            <span>Recursos • Externo</span>
+                        </div>
+                        <span class="material-symbols-rounded resource-card-arrow">open_in_new</span>
+                    </div>
+                </div>
+            </article>
+
+        </section>
+    </main>
+
+    <!-- Scripts esenciales -->
+    <script src="scripts.js"></script>
+    <script src="js/component-loader.js"></script>
+    <script src="accessibility.js"></script>
+    
+    <!-- JavaScript específico para página índice de recursos -->
+    <script>
+        // Función para navegar a recursos internos
+        function navigateToResource(url) {
+            window.location.href = url;
+            showResourceFeedback('interno');
+        }
+
+        // Función para navegar a recursos externos
+        function navigateToExternal(url) {
+            window.open(url, '_blank', 'noopener,noreferrer');
+            showResourceFeedback('externo');
+        }
+
+        // Función para mostrar feedback
+        function showResourceFeedback(type) {
+            const message = type === 'externo' 
+                ? 'Abriendo recurso externo...' 
+                : 'Cargando recurso...';
+                
+            showNotification(message, 'info', 1500);
+        }
+
+        // Función de notificación
+        function showNotification(message, type = 'info', duration = 3000) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed; top: 100px; right: 20px; z-index: 10000; max-width: 300px;
+                background: ${type === 'error' ? 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)' : 'linear-gradient(135deg, var(--azul-novo) 0%, var(--azul-novo-80) 100%)'};
+                color: white; padding: 16px 24px; border-radius: 12px; box-shadow: var(--shadow-lg);
+                font-family: 'Work Sans', sans-serif; font-weight: 600; font-size: 14px;
+                transform: translateX(400px); transition: all 0.3s ease; backdrop-filter: blur(10px);
+            `;
+            
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="material-symbols-rounded" style="font-size: 20px;">${type === 'error' ? 'error' : 'info'}</span>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.style.transform = 'translateX(0)', 100);
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => notification.remove(), 300);
+            }, duration);
+        }
+
+        // Inicialización de la página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Marcar componentes como cargados
+            setTimeout(() => {
+                document.body.classList.add('components-loaded');
+                console.log('✅ Página índice Recursos Audiovisuales inicializada');
+            }, 800);
+
+            // Animaciones para las tarjetas
+            const resourceCards = document.querySelectorAll('.resource-index-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            resourceCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+                observer.observe(card);
+
+                // Navegación por teclado
+                card.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+
+                // Efectos de hover mejorados
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                    this.style.boxShadow = 'var(--shadow-xl)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.boxShadow = 'var(--shadow-lg)';
+                });
+            });
+
+            console.log('🎨 Página índice Recursos Audiovisuales cargada exitosamente');
+        });
+
+        // Listener para cuando los componentes estén cargados
+        window.addEventListener('components-loaded', function() {
+            console.log('🎉 Evento: Todos los componentes han sido cargados en Recursos Audiovisuales');
+        });
+    </script>
+</body>
+</html>

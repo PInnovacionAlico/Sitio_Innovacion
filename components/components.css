@@ -1,0 +1,378 @@
+/* ==================================================
+   ALICO - COMPONENTS.CSS
+   Estilos específicos para los componentes modulares
+   ================================================== */
+
+/* ==================================================
+   ESTILOS PARA COMPONENTES CARGADOS DINÁMICAMENTE
+   ================================================== */
+
+/* Animaciones de entrada para componentes */
+.component-fade-in {
+    animation: componentFadeIn 0.3s ease-out;
+}
+
+@keyframes componentFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Placeholder temporal para header */
+.header-placeholder {
+    height: 80px;
+    background: var(--amarillo-oro);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-family: 'Work Sans', sans-serif;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Ocultar placeholder cuando componentes están cargados */
+.components-loaded .header-placeholder {
+    display: none !important;
+}
+
+/* Estados de carga para componentes */
+.component-loading {
+    opacity: 0.7;
+    pointer-events: none;
+    position: relative;
+}
+
+.component-loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 1000;
+}
+
+/* ==================================================
+   NAVEGACIÓN ACTIVA ESPECÍFICA PARA COMPONENTES
+   ================================================== */
+
+/* Estilo para enlace de navegación activo */
+.nav-link.active,
+.mobile-nav-item.active {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform: none !important;
+}
+
+.nav-link.active::before {
+    left: 100% !important;
+}
+
+/* ==================================================
+   RESPONSIVE PARA COMPONENTES
+   ================================================== */
+
+/* Header responsive cuando es cargado como componente */
+@media (max-width: 768px) {
+    .header-placeholder {
+        height: 70px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-placeholder {
+        height: 65px;
+        font-size: 13px;
+        padding: 0 var(--spacing-md);
+    }
+}
+
+/* ==================================================
+   MODO OSCURO PARA COMPONENTES
+   ================================================== */
+
+/* Modo oscuro para header placeholder */
+.dark-mode .header-placeholder {
+    background: var(--amarillo-oro);
+    color: var(--text-primary);
+}
+
+/* Modo oscuro para navegación activa */
+.dark-mode .nav-link.active,
+.dark-mode .mobile-nav-item.active {
+    background-color: rgba(219, 149, 0, 0.3) !important;
+    color: var(--text-primary);
+}
+
+/* Modo oscuro para estados de carga */
+.dark-mode .component-loading::after {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Modo oscuro para animaciones */
+.dark-mode .component-fade-in {
+    background: var(--bg-secondary);
+}
+}
+
+/* ==================================================
+   FALLBACKS MEJORADOS
+   ================================================== */
+
+/* Estilo para componentes fallback */
+.component-fallback {
+    background: linear-gradient(135deg, var(--gris-medio) 0%, var(--gris-claro) 100%);
+    border: 2px dashed var(--gris-oscuro);
+    padding: var(--spacing-lg);
+    text-align: center;
+    color: var(--gris-oscuro);
+    font-family: 'Work Sans', sans-serif;
+    border-radius: var(--border-radius-md);
+    margin: var(--spacing-md) 0;
+}
+
+.component-fallback::before {
+    content: '⚠️ ';
+    font-size: 1.2em;
+    margin-right: var(--spacing-sm);
+}
+
+/* ==================================================
+   OPTIMIZACIONES DE RENDIMIENTO
+   ================================================== */
+
+/* Optimizar imágenes en componentes */
+.component-image {
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+/* Reducir reflow durante la carga */
+.component-container {
+    contain: layout style paint;
+}
+
+/* ==================================================
+   ESTADOS DE ERROR PARA COMPONENTES
+   ================================================== */
+
+.component-error {
+    background: linear-gradient(135deg, #ffe6e6 0%, #ffcccc 100%);
+    border: 1px solid #ff9999;
+    color: #cc0000;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    margin: var(--spacing-sm) 0;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+}
+
+.component-error::before {
+    content: '❌ ';
+    margin-right: var(--spacing-sm);
+}
+
+/* ==================================================
+   LAZY LOADING INDICATORS
+   ================================================== */
+
+.component-lazy-loading {
+    min-height: 60px;
+    background: linear-gradient(
+        90deg,
+        var(--gris-claro) 25%,
+        var(--blanco) 50%,
+        var(--gris-claro) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmerLoading 1.5s infinite;
+    border-radius: var(--border-radius-md);
+}
+
+@keyframes shimmerLoading {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* ==================================================
+   DEBUGGING STYLES (solo en desarrollo)
+   ================================================== */
+
+/* Mostrar solo en localhost para debugging */
+@media screen {
+    body[data-env="development"] .component-debug {
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: var(--spacing-sm);
+        border-radius: var(--border-radius-sm);
+        font-family: monospace;
+        font-size: 12px;
+        z-index: 10000;
+        max-width: 200px;
+    }
+}
+
+/* ==================================================
+   ACCESIBILIDAD PARA COMPONENTES
+   ================================================== */
+
+/* Focus visible para componentes cargados dinámicamente */
+.component-loaded *:focus-visible {
+    outline: 2px solid var(--amarillo-oro);
+    outline-offset: 2px;
+}
+
+/* Skip links para componentes */
+.component-skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--azul-novo);
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    z-index: 10001;
+    border-radius: var(--border-radius-sm);
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+    transition: top 0.3s ease;
+}
+
+.component-skip-link:focus {
+    top: 6px;
+}
+
+/* ==================================================
+   MODO OSCURO PARA COMPONENTES
+   ================================================== */
+
+.dark-mode .header-placeholder {
+    background: var(--azul-novo) !important;
+    color: white !important;
+}
+
+.dark-mode .component-fallback {
+    background: linear-gradient(135deg, #444444 0%, #2c2c2c 100%) !important;
+    border-color: #666666 !important;
+    color: #e0e0e0 !important;
+}
+
+.dark-mode .component-error {
+    background: linear-gradient(135deg, #4a1a1a 0%, #331111 100%) !important;
+    border-color: #cc0000 !important;
+    color: #ffaaaa !important;
+}
+
+.dark-mode .component-lazy-loading {
+    background: linear-gradient(
+        90deg,
+        #444444 25%,
+        #555555 50%,
+        #444444 75%
+    ) !important;
+}
+
+/* ==================================================
+   MICRO-INTERACCIONES PARA COMPONENTES
+   ================================================== */
+
+/* Efecto de aparición suave para componentes */
+.component-appear {
+    animation: componentAppear 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes componentAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translateY(-2px) scale(1.01);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Efecto de actualización de componente */
+.component-updating {
+    animation: componentUpdate 0.6s ease-in-out;
+}
+
+@keyframes componentUpdate {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.98);
+        opacity: 0.9;
+    }
+}
+
+/* ==================================================
+   COMPONENTES PERSONALIZADOS ESPECÍFICOS
+   ================================================== */
+
+/* Indicador de estado de conexión */
+.component-status {
+    position: fixed;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--verde-natura);
+    z-index: 999;
+    animation: pulse 2s infinite;
+}
+
+.component-status.error {
+    background: #e74c3c;
+}
+
+.component-status.loading {
+    background: var(--amarillo-oro);
+}
+
+/* ==================================================
+   PRINT STYLES PARA COMPONENTES
+   ================================================== */
+
+@media print {
+    .header-placeholder,
+    .component-status,
+    .component-debug,
+    .accessibility-toggle,
+    .back-to-top {
+        display: none !important;
+    }
+    
+    .component-fallback::before,
+    .component-error::before {
+        content: none;
+    }
+}

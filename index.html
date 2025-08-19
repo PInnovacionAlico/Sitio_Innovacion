@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alico - Innovación</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+    
+    <!-- Estilos principales -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="accessibility.css">
+    <link rel="stylesheet" href="components/components.css">
+    
+    <!-- CSS crítico específico para esta página -->
+    <style>
+        /* === ESPECÍFICO PARA INDEX === */
+        body {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        body.components-loaded {
+            opacity: 1;
+        }
+
+        /* === HEADER PLACEHOLDER === */
+        .header-placeholder {
+            height: 80px;
+            background: var(--amarillo-oro);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        body.components-loaded .header-placeholder {
+            display: none;
+        }
+
+        /* === BOTÓN DE ACCESIBILIDAD === */
+        .accessibility-toggle {
+            position: fixed;
+            top: 160px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--verde-natura) 0%, var(--verde-natura-80) 100%);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 28px;
+            box-shadow: 0 4px 20px rgba(113, 179, 56, 0.4);
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+
+        .accessibility-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* === INTRO CARD RESPONSIVE === */
+        .intro-card {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-xl);
+            text-align: center;
+            align-items: center;
+        }
+
+        .intro-content h1 {
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .intro-content h2 {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .ali-character {
+            width: 150px;
+            height: 180px;
+            background-image: url('images/Ali_1.png');
+            background-size: cover;
+            background-position: center;
+            border-radius: var(--border-radius-lg);
+            margin: 0 auto;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease;
+        }
+
+        .ali-character:hover {
+            transform: scale(1.05);
+        }
+
+        /* === SECCIÓN BLOG === */
+        .blog-section {
+            background: linear-gradient(135deg, var(--azul-claro) 0%, var(--azul-claro-80) 100%);
+            border-radius: var(--border-radius-xl);
+            padding: var(--spacing-xxl);
+            margin: var(--spacing-xxl) 0;
+            color: var(--blanco);
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .blog-section h2 {
+            font-family: 'Zilla Slab', serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 600;
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            z-index: 2;
+        }
+
+        .blog-section p {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-xl);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.95;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* === SECCIÓN RECURSOS ADICIONALES === */
+        .recursos-section {
+            background: linear-gradient(135deg, var(--verde-natura) 0%, var(--verde-natura-80) 100%);
+            border-radius: var(--border-radius-xl);
+            padding: var(--spacing-xxl);
+            margin: var(--spacing-xxl) 0;
+            color: var(--blanco);
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .recursos-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .recursos-section h2 {
+            font-family: 'Zilla Slab', serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 600;
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            z-index: 2;
+        }
+
+        .recursos-section p {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-xl);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.95;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* === RESPONSIVE DESIGN === */
+        
+        /* Desktop (≥1024px) */
+        @media (min-width: 1024px) {
+            .intro-card {
+                grid-template-columns: 1fr auto;
+                text-align: left;
+            }
+
+            .ali-character {
+                width: 200px;
+                height: 250px;
+            }
+        }
+
+        /* Tablet (769px-1023px) */
+        @media (max-width: 1023px) and (min-width: 769px) {
+            .accessibility-toggle {
+                top: 140px;
+                right: 18px;
+                width: 58px;
+                height: 58px;
+                font-size: 26px;
+            }
+
+            .blog-section, .recursos-section {
+                padding: var(--spacing-xl);
+            }
+        }
+
+        /* Móvil (≤768px) */
+        @media (max-width: 768px) {
+            .accessibility-toggle {
+                top: 120px;
+                right: 16px;
+                width: 56px;
+                height: 56px;
+                font-size: 26px;
+            }
+
+            .header-placeholder {
+                height: 70px;
+                font-size: 14px;
+            }
+
+            .blog-section, .recursos-section {
+                padding: var(--spacing-xl) var(--spacing-lg);
+                margin: var(--spacing-xl) var(--spacing-md);
+            }
+
+            .ali-character {
+                width: 120px;
+                height: 150px;
+            }
+        }
+
+        /* Móvil pequeño (≤480px) */
+        @media (max-width: 480px) {
+            .accessibility-toggle {
+                top: 100px;
+                right: 12px;
+                width: 52px;
+                height: 52px;
+                font-size: 24px;
+            }
+
+            .header-placeholder {
+                height: 65px;
+                font-size: 13px;
+            }
+
+            .blog-section, .recursos-section {
+                padding: var(--spacing-lg);
+                margin: var(--spacing-lg) var(--spacing-sm);
+            }
+
+            .ali-character {
+                width: 100px;
+                height: 130px;
+            }
+        }
+
+        /* === ANIMACIONES === */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .blog-section, .recursos-section {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Placeholder temporal para header -->
+    <div class="header-placeholder">
+        🚀 Cargando Alico...
+    </div>
+
+    <!-- Los componentes se cargarán automáticamente aquí -->
+    <!-- Header, menú móvil, botón de accesibilidad, botón back-to-top y footer -->
+
+    <!-- Contenido principal de la página home -->
+    <main id="main-content">
+        <!-- Tarjeta de introducción con Ali -->
+        <section class="intro-card">
+            <div class="intro-content">
+                <h1>¡Hola! Soy Ali, el explorador de</h1>
+                <h2>NUEVAS IDEAS</h2>
+                <p style="font-size: 1.5em; margin-bottom: 10px;">en <em>Alico</em></p>
+                <p>Estoy diseñado para cuestionar lo establecido, buscar respuestas más allá de lo evidente y atreverme a innovar.</p>
+                <a href="recursos-audiovisuales/embajador-ali.html" class="btn-primary">¡Conóceme!</a>
+            </div>
+            <div class="ali-character" aria-label="Imagen de Ali, embajador de innovación de Alico"></div>
+        </section>
+
+        <!-- Nueva sección: Descripción del Blog -->
+        <section class="blog-section">
+            <div class="material-symbols-rounded" style="font-size: 60px; margin-bottom: var(--spacing-lg); color: var(--blanco); opacity: 0.9;">article</div>
+            <h2>Descubre Nuestro Blog</h2>
+            <p>Explora las últimas noticias, innovaciones y proyectos que están transformando el futuro del empaque sostenible. En nuestro blog encontrarás contenido exclusivo sobre tendencias, tecnologías emergentes y casos de éxito que están marcando la diferencia en la industria.</p>
+            <a href="blog.html" class="btn-primary">Explorar Blog</a>
+        </section>
+
+        <!-- Nueva sección: Recursos Adicionales -->
+        <section class="recursos-section">
+            <div class="material-symbols-rounded" style="font-size: 60px; margin-bottom: var(--spacing-lg); color: var(--blanco); opacity: 0.9;">folder_shared</div>
+            <h2>Recursos Adicionales</h2>
+            <p>Accede a nuestra biblioteca digital con contenido exclusivo del área de innovación. Encuentra templates, guías, presentaciones y recursos especializados que te ayudarán a impulsar tus proyectos de innovación y mantenerte al día con las mejores prácticas del sector.</p>
+            <a href="https://drive.google.com" class="btn-primary" target="_blank" rel="noopener noreferrer">
+                <span>Acceder a Recursos</span>
+                <span class="material-symbols-rounded" style="font-size: 18px; margin-left: 8px;">open_in_new</span>
+            </a>
+        </section>
+    </main>
+
+    <!-- Scripts esenciales -->
+    <script src="scripts.js"></script>
+    <script src="js/component-loader.js"></script>
+    <script src="accessibility.js"></script>
+    
+    <!-- JavaScript de la página -->
+    <script>
+        // Inicialización de la página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Marcar componentes como cargados
+            setTimeout(() => {
+                document.body.classList.add('components-loaded');
+                console.log('✅ Página home inicializada con nuevo diseño');
+            }, 800);
+
+            // Manejar imagen de Ali
+            const aliCharacter = document.querySelector('.ali-character');
+            if (aliCharacter) {
+                const testImg = new Image();
+                testImg.onload = function() {
+                    console.log('✅ Imagen de Ali cargada exitosamente');
+                    aliCharacter.style.opacity = '1';
+                };
+                testImg.onerror = function() {
+                    console.warn('⚠️ Error al cargar imagen de Ali, usando fallback');
+                    aliCharacter.style.backgroundColor = 'rgba(255,255,255,0.2)';
+                    aliCharacter.innerHTML = '<span style="color: var(--blanco); font-size: 14px; text-align: center; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">Ali</span>';
+                };
+                testImg.src = 'images/Ali_1.png';
+            }
+
+            // Animaciones de entrada para las secciones
+            const sections = document.querySelectorAll('.blog-section, .recursos-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(section);
+            });
+
+            console.log('🎨 Nueva página home cargada exitosamente');
+        });
+
+        // Listener para cuando los componentes estén cargados
+        window.addEventListener('components-loaded', function() {
+            console.log('🎉 Evento: Todos los componentes han sido cargados en el nuevo index');
+        });
+
+        // Para debugging
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            window.debugIndex = {
+                sections: document.querySelectorAll('.blog-section, .recursos-section'),
+                aliCharacter: document.querySelector('.ali-character')
+            };
+            console.log('🚀 Debug mode activado para nueva página home');
+        }
+    </script>
+</body>
+</html>

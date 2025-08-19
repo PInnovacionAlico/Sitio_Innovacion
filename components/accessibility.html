@@ -1,0 +1,82 @@
+<!-- Sistema de Accesibilidad -->
+<!-- Botón flotante de accesibilidad -->
+<button class="accessibility-toggle" id="accessibilityToggle" onclick="toggleAccessibilityPanel()" aria-label="Abrir opciones de accesibilidad" title="Accesibilidad (Alt+A)">
+    <span class="material-symbols-rounded">accessibility</span>
+</button>
+
+<!-- Overlay -->
+<div class="accessibility-overlay" id="accessibilityOverlay" onclick="toggleAccessibilityPanel()"></div>
+
+<!-- Panel de accesibilidad -->
+<div class="accessibility-panel" id="accessibilityPanel" role="dialog" aria-labelledby="accessibility-title" aria-hidden="true">
+    <!-- Header del panel -->
+    <div class="accessibility-header">
+        <h3 id="accessibility-title">
+            <span class="material-symbols-rounded">accessibility</span>
+            Accesibilidad
+        </h3>
+        <button class="accessibility-close" onclick="toggleAccessibilityPanel()" aria-label="Cerrar panel">
+            <span class="material-symbols-rounded">close</span>
+        </button>
+    </div>
+
+    <!-- Contenido del panel -->
+    <div class="accessibility-options">
+        <!-- Tamaño de fuente -->
+        <div class="accessibility-group">
+            <h4>
+                <span class="material-symbols-rounded">format_size</span>
+                Tamaño de texto
+            </h4>
+            <div class="font-size-controls">
+                <button onclick="adjustFontSize('decrease')" aria-label="Disminuir texto">A-</button>
+                <button onclick="resetFontSize()" aria-label="Texto normal">A</button>
+                <button onclick="adjustFontSize('increase')" aria-label="Aumentar texto">A+</button>
+            </div>
+        </div>
+
+        <!-- Opciones visuales -->
+        <div class="accessibility-group">
+            <h4>
+                <span class="material-symbols-rounded">visibility</span>
+                Opciones visuales
+            </h4>
+            <div class="accessibility-toggles">
+                <!-- Alto contraste eliminado -->
+                
+                <label class="accessibility-toggle-item">
+                    <input type="checkbox" id="darkMode" onchange="toggleDarkMode()">
+                    <div class="toggle-slider"></div>
+                    <span class="toggle-label">Modo oscuro</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Funciones adicionales -->
+        <div class="accessibility-group">
+            <h4>
+                <span class="material-symbols-rounded">settings</span>
+                Funciones
+            </h4>
+            <div class="accessibility-buttons">
+                <button id="ttsButton" onclick="toggleTextToSpeech()">
+                    <span class="material-symbols-rounded">volume_up</span>
+                    Lectura de texto
+                </button>
+                
+                <button onclick="showKeyboardShortcuts()">
+                    <span class="material-symbols-rounded">keyboard</span>
+                    Atajos de teclado
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón de reset -->
+    <div class="accessibility-reset">
+        <button class="reset-button" onclick="resetAllSettings()">
+            <span class="material-symbols-rounded">refresh</span>
+            Restaurar configuración
+        </button>
+    </div>
+</div>
