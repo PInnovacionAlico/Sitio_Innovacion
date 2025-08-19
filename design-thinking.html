@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Thinking - Alico</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="images/Ali_head.png" type="image/png">
+    <link rel="apple-touch-icon" href="images/Ali_head.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+    
+    <!-- Estilos principales -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="accessibility.css">
+    <link rel="stylesheet" href="components/components.css">
+    
+    <!-- CSS crítico inline -->
+    <style>
+        /* === CRÍTICO: Anti-FOUC === */
+        body { opacity: 0; transition: opacity 0.3s ease; }
+        body.components-loaded { opacity: 1; }
+        
+        /* === CRÍTICO: Placeholder header === */
+        .header-placeholder {
+            height: 80px; background: var(--amarillo-oro); position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-family: 'Work Sans', sans-serif;
+        }
+        body.components-loaded .header-placeholder { display: none; }
+        
+        /* === CRÍTICO: Botón accesibilidad === */
+        .accessibility-toggle {
+            position: fixed; top: 160px; right: 20px; background: linear-gradient(135deg, var(--verde-natura) 0%, var(--verde-natura-80) 100%);
+            color: white; width: 60px; height: 60px; border-radius: 50%; border: none; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-size: 28px; box-shadow: 0 4px 20px rgba(113, 179, 56, 0.4); z-index: 999; transition: all 0.3s ease;
+        }
+        .accessibility-toggle:hover { transform: scale(1.1); }
+        
+        /* === GRID DE 3 COLUMNAS PARA DESIGN THINKING === */
+        .dt-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-xxl);
+            margin-bottom: var(--spacing-xxl);
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        /* CLAVE: Centrar elementos sobrantes cuando no son múltiplo de 3 */
+        .dt-grid .dt-card:last-child:nth-child(3n+1) {
+            grid-column: 2 / 3;
+        }
+
+        .dt-grid .dt-card:nth-last-child(2):nth-child(3n+1) {
+            grid-column: 1 / 2;
+        }
+        .dt-grid .dt-card:last-child:nth-child(3n+2) {
+            grid-column: 3 / 4;
+        }
+
+        .dt-card {
+            border-radius: var(--border-radius-xl);
+            padding: var(--spacing-xl);
+            color: var(--blanco);
+            box-shadow: var(--shadow-lg);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            min-height: 340px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dt-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .dt-card > div:last-child {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        /* === RESPONSIVE === */
+        @media (max-width: 1024px) {
+            .dt-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--spacing-lg);
+            }
+            
+            .dt-grid .dt-card:last-child:nth-child(2n+1) {
+                grid-column: 1 / 2;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .dt-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-md);
+                padding: 0 var(--spacing-sm);
+            }
+            
+            .dt-card {
+                min-height: 280px;
+                padding: var(--spacing-lg);
+            }
+        }
+        
+        /* === ESTILOS ESPECÍFICOS PARA DESIGN THINKING === */
+        .dt-hero {
+            background: linear-gradient(135deg, var(--azul-claro) 0%, var(--azul-claro-80) 100%);
+            padding: var(--spacing-xxl) var(--spacing-md);
+            text-align: center;
+            color: var(--blanco);
+            margin-bottom: var(--spacing-xxl);
+        }
+        
+        .dt-hero h1 {
+            font-family: 'Zilla Slab', serif;
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-bottom: var(--spacing-lg);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .dt-hero p {
+            font-size: 1.3em;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+        
+        .dt-process {
+            background: linear-gradient(135deg, var(--verde-natura) 0%, var(--verde-natura-80) 100%);
+            padding: var(--spacing-xxl) var(--spacing-md);
+            margin: var(--spacing-xxl) 0;
+            color: var(--blanco);
+        }
+        
+        .dt-process h2 {
+            text-align: center;
+            font-family: 'Zilla Slab', serif;
+            font-size: 2.5em;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .dt-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .dt-step {
+            background: rgba(255,255,255,0.1);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .dt-step-number {
+            background: var(--amarillo-oro);
+            color: var(--blanco);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-md);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .dt-step h3 {
+            font-family: 'Zilla Slab', serif;
+            margin-bottom: var(--spacing-md);
+            font-size: 1.3em;
+        }
+        
+        .dt-step p {
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+        
+        .dt-benefits {
+            background: linear-gradient(135deg, var(--amarillo-oro) 0%, var(--amarillo-oro-80) 100%);
+            padding: var(--spacing-xxl) var(--spacing-md);
+            margin: var(--spacing-xxl) 0;
+            color: var(--blanco);
+        }
+        
+        .dt-benefits h2 {
+            text-align: center;
+            font-family: 'Zilla Slab', serif;
+            font-size: 2.5em;
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .dt-benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .dt-benefit {
+            background: rgba(255,255,255,0.1);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius-lg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .dt-benefit h3 {
+            font-family: 'Zilla Slab', serif;
+            margin-bottom: var(--spacing-md);
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .dt-benefit .material-symbols-rounded {
+            font-size: 1.5em;
+            color: var(--azul-claro);
+        }
+        
+        .dt-benefit p {
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+        
+        .dt-cta {
+            background: linear-gradient(135deg, var(--azul-oscuro) 0%, var(--azul-oscuro-80) 100%);
+            padding: var(--spacing-xxl) var(--spacing-md);
+            text-align: center;
+            color: var(--blanco);
+            margin-top: var(--spacing-xxl);
+        }
+        
+        .dt-cta h2 {
+            font-family: 'Zilla Slab', serif;
+            font-size: 2.5em;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .dt-cta p {
+            font-size: 1.2em;
+            margin-bottom: var(--spacing-xl);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        
+        .dt-cta-button {
+            background: linear-gradient(135deg, var(--amarillo-oro) 0%, var(--amarillo-oro-80) 100%);
+            color: var(--blanco);
+            padding: var(--spacing-lg) var(--spacing-xl);
+            border: none;
+            border-radius: var(--border-radius-lg);
+            font-family: 'Work Sans', sans-serif;
+            font-weight: 600;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .dt-cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+    </style>
+</head>
+<body>
+    <!-- Placeholder header para evitar FOUC -->
+    <div class="header-placeholder">
+        <span class="material-symbols-rounded">design_services</span>
+        Design Thinking
+    </div>
+
+    <!-- Botón de accesibilidad -->
+    <button id="accessibilityToggle" class="accessibility-toggle" aria-label="Abrir panel de accesibilidad">
+        <span class="material-symbols-rounded">accessibility</span>
+    </button>
+
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+        <a href="index.html" class="breadcrumb-link">
+            <span class="material-symbols-rounded">home</span>
+            Inicio
+        </a>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">Design Thinking</span>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="dt-hero">
+        <h1>Design Thinking</h1>
+        <p>Metodología centrada en el usuario para resolver problemas complejos de manera creativa e innovadora</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Introducción -->
+        <section class="content-section">
+            <div class="container">
+                <h2>¿Qué es Design Thinking?</h2>
+                <p>Design Thinking es una metodología de innovación que se centra en las personas para resolver problemas complejos. En Alico, utilizamos este enfoque para crear soluciones que no solo sean funcionales, sino que también generen un impacto positivo en la vida de las personas.</p>
+                
+                <p>Esta metodología nos permite explorar múltiples perspectivas, experimentar con diferentes soluciones y iterar constantemente hasta encontrar la mejor respuesta a los desafíos que enfrentamos.</p>
+            </div>
+        </section>
+
+        <!-- Proceso de Design Thinking -->
+        <section class="dt-process">
+            <h2>Nuestro Proceso</h2>
+            <div class="dt-steps">
+                <div class="dt-step">
+                    <div class="dt-step-number">1</div>
+                    <h3>Empatizar</h3>
+                    <p>Nos sumergimos en el mundo de nuestros usuarios para entender profundamente sus necesidades, deseos y desafíos.</p>
+                </div>
+                
+                <div class="dt-step">
+                    <div class="dt-step-number">2</div>
+                    <h3>Definir</h3>
+                    <p>Sintetizamos la información recopilada para identificar el problema central que debemos resolver.</p>
+                </div>
+                
+                <div class="dt-step">
+                    <div class="dt-step-number">3</div>
+                    <h3>Idear</h3>
+                    <p>Generamos múltiples soluciones creativas, sin limitaciones, para abordar el problema identificado.</p>
+                </div>
+                
+                <div class="dt-step">
+                    <div class="dt-step-number">4</div>
+                    <h3>Prototipar</h3>
+                    <p>Construimos versiones rápidas y simples de nuestras ideas para visualizar las soluciones.</p>
+                </div>
+                
+                <div class="dt-step">
+                    <div class="dt-step-number">5</div>
+                    <h3>Testear</h3>
+                    <p>Probamos nuestros prototipos con usuarios reales para obtener feedback y mejorar las soluciones.</p>
+                </div>
+                
+                <div class="dt-step">
+                    <div class="dt-step-number">6</div>
+                    <h3>Iterar</h3>
+                    <p>Refinamos continuamente nuestras soluciones basándonos en el feedback y los aprendizajes obtenidos.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Beneficios -->
+        <section class="dt-benefits">
+            <h2>¿Por qué Design Thinking?</h2>
+            <div class="dt-benefits-grid">
+                <div class="dt-benefit">
+                    <h3>
+                        <span class="material-symbols-rounded">psychology</span>
+                        Enfoque Centrado en el Usuario
+                    </h3>
+                    <p>Colocamos a las personas en el centro de todo el proceso, asegurando que nuestras soluciones respondan a necesidades reales.</p>
+                </div>
+                
+                <div class="dt-benefit">
+                    <h3>
+                        <span class="material-symbols-rounded">lightbulb</span>
+                        Creatividad e Innovación
+                    </h3>
+                    <p>Fomentamos el pensamiento divergente y la exploración de múltiples posibilidades para encontrar soluciones únicas.</p>
+                </div>
+                
+                <div class="dt-benefit">
+                    <h3>
+                        <span class="material-symbols-rounded">sync</span>
+                        Iteración Continua
+                    </h3>
+                    <p>Mejoramos constantemente nuestras soluciones a través de ciclos de prueba y refinamiento.</p>
+                </div>
+                
+                <div class="dt-benefit">
+                    <h3>
+                        <span class="material-symbols-rounded">groups</span>
+                        Colaboración Multidisciplinaria
+                    </h3>
+                    <p>Integramos diferentes perspectivas y habilidades para crear soluciones más robustas y completas.</p>
+                </div>
+                
+                <div class="dt-benefit">
+                    <h3>
+                        <span class="material-symbols-rounded">speed</span>
+                        Prototipado Rápido
+                    </h3>
+                    <p>Validamos ideas rápidamente antes de invertir recursos significativos en el desarrollo completo.</p>
+                </div>
+                
+                <div class="dt-benefit">
+                    <h3>
+                        <span class="material-symbols-rounded">trending_up</span>
+                        Resultados Medibles
+                    </h3>
+                    <p>Evaluamos el impacto de nuestras soluciones de manera objetiva para asegurar la efectividad.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Casos de Uso -->
+        <section class="content-section">
+            <div class="container">
+                <h2>Casos de Uso en Alico</h2>
+                <p>Hemos aplicado Design Thinking en diversos proyectos para resolver desafíos complejos:</p>
+                
+                <div class="highlight-box">
+                    <h3>Diseño de Experiencias de Usuario</h3>
+                    <p>Utilizamos Design Thinking para crear interfaces intuitivas y experiencias memorables que conecten emocionalmente con nuestros usuarios.</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>Innovación en Productos</h3>
+                    <p>Aplicamos esta metodología para desarrollar nuevos productos y servicios que resuelvan problemas reales de manera innovadora.</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>Optimización de Procesos</h3>
+                    <p>Rediseñamos procesos internos y externos para mejorar la eficiencia y la satisfacción de todos los involucrados.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Metodologías Complementarias -->
+        <section class="content-section">
+            <div class="container">
+                <h2>Metodologías Complementarias</h2>
+                <p>Design Thinking se integra perfectamente con otras metodologías que utilizamos en Alico:</p>
+                
+                <div class="methodology-grid">
+                    <div class="methodology-card">
+                        <div class="methodology-icon">
+                            <span class="material-symbols-rounded">scatter_plot</span>
+                        </div>
+                        <h3>Lean Startup</h3>
+                        <p>Para validar rápidamente hipótesis de negocio y minimizar el desperdicio de recursos.</p>
+                    </div>
+                    
+                    <div class="methodology-card">
+                        <div class="methodology-icon">
+                            <span class="material-symbols-rounded">view_timeline</span>
+                        </div>
+                        <h3>Agile</h3>
+                        <p>Para desarrollar soluciones de manera iterativa y responder rápidamente a los cambios.</p>
+                    </div>
+                    
+                    <div class="methodology-card">
+                        <div class="methodology-icon">
+                            <span class="material-symbols-rounded">analytics</span>
+                        </div>
+                        <h3>Data-Driven Design</h3>
+                        <p>Para tomar decisiones informadas basadas en datos y comportamiento del usuario.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="dt-cta">
+            <h2>¿Listo para Innovar?</h2>
+            <p>Descubre cómo Design Thinking puede transformar tu proyecto y crear soluciones que marquen la diferencia.</p>
+            <a href="iniciativas.html" class="dt-cta-button">
+                <span class="material-symbols-rounded">rocket_launch</span>
+                Explorar Nuestros Proyectos
+            </a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Overlay de accesibilidad -->
+    <div id="accessibilityOverlay" class="accessibility-overlay"></div>
+
+    <!-- Panel de accesibilidad -->
+    <div id="accessibilityPanel" class="accessibility-panel" aria-hidden="true">
+        <div class="accessibility-header">
+            <h3>
+                <span class="material-symbols-rounded">accessibility</span>
+                Accesibilidad
+            </h3>
+            <button class="accessibility-close" onclick="toggleAccessibilityPanel()" aria-label="Cerrar panel de accesibilidad">
+                <span class="material-symbols-rounded">close</span>
+            </button>
+        </div>
+        
+        <div class="accessibility-options">
+            <div class="accessibility-group">
+                <h4>
+                    <span class="material-symbols-rounded">text_fields</span>
+                    Tamaño de Fuente
+                </h4>
+                <div class="font-size-controls">
+                    <button onclick="adjustFontSize('decrease')" aria-label="Disminuir tamaño de fuente">A-</button>
+                    <button onclick="adjustFontSize('reset')" aria-label="Tamaño de fuente normal">A</button>
+                    <button onclick="adjustFontSize('increase')" aria-label="Aumentar tamaño de fuente">A+</button>
+                </div>
+                <p>Tamaño actual: <span id="fontSizeDisplay">100%</span></p>
+            </div>
+            
+            <div class="accessibility-group">
+                <h4>
+                    <span class="material-symbols-rounded">dark_mode</span>
+                    Apariencia
+                </h4>
+                <div class="accessibility-toggles">
+                    <label class="accessibility-toggle-item">
+                        <input type="checkbox" id="darkMode" onchange="toggleDarkMode()">
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-label">Modo Oscuro</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="accessibility-group">
+                <h4>
+                    <span class="material-symbols-rounded">volume_up</span>
+                    Lectura en Voz Alta
+                </h4>
+                <div class="accessibility-buttons">
+                    <button id="ttsButton" onclick="toggleTextToSpeech()">
+                        <span class="material-symbols-rounded">volume_up</span>
+                        Lectura de texto
+                    </button>
+                </div>
+                <p>Haz doble clic en cualquier texto para que se lea en voz alta</p>
+            </div>
+        </div>
+        
+        <div class="accessibility-reset">
+            <button class="reset-button" onclick="resetAllSettings()">
+                <span class="material-symbols-rounded">restart_alt</span>
+                Restablecer Configuración
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/component-loader.js"></script>
+    <script src="accessibility.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>

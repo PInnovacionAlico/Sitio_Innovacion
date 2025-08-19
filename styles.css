@@ -766,9 +766,6 @@ main {
     -ms-user-select: none;
     -webkit-perspective: 1000px;
     -moz-perspective: 1000px;
-    will-change: transform;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
 }
@@ -778,7 +775,7 @@ main {
     width: 100%;
     height: 100%;
     text-align: center;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.4s ease-out;
     transform-style: preserve-3d;
 }
 
@@ -797,12 +794,12 @@ main {
     background: var(--amarillo-oro);
     border-radius: 50%;
     z-index: 10;
-    animation: pulse 2s infinite;
+    animation: pulse 1.5s ease-in-out infinite;
 }
 
 @keyframes pulse {
     0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.2); opacity: 0.7; }
+    50% { transform: scale(1.1); opacity: 0.8; }
     100% { transform: scale(1); opacity: 1; }
 }
 
@@ -821,10 +818,7 @@ main {
     padding: var(--spacing-lg);
     cursor: pointer;
     box-shadow: var(--shadow-lg);
-    transition: all 0.2s ease;
-    will-change: transform, opacity;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
+    transition: box-shadow 0.2s ease;
 }
 
 .flip-card-front {
@@ -849,34 +843,33 @@ main {
     outline-offset: 2px;
 }
 
-/* Efecto de presión al hacer clic */
+/* Efecto de presión al hacer clic - OPTIMIZADO */
 .flip-card:active .flip-card-inner {
-    transform: scale(0.98);
-    transition: transform 0.1s ease;
+    transition: transform 0.05s ease;
 }
 
-/* Transición suave para el estado activo */
+/* Transición suave para el estado activo - OPTIMIZADO */
 .flip-card.flipped:active .flip-card-inner {
-    transform: rotateY(180deg) scale(0.98);
-    transition: transform 0.1s ease;
+    transform: rotateY(180deg);
+    transition: transform 0.05s ease;
 }
 
-/* Optimizaciones para móvil */
+/* Optimizaciones para móvil - MEJORADAS */
 @media (max-width: 768px) {
     .flip-card-inner {
-        transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transition: transform 0.25s ease-out;
     }
     
     .flip-card-front, .flip-card-back {
-        transition: all 0.15s ease;
+        transition: box-shadow 0.1s ease;
     }
     
     .flip-card:active .flip-card-inner {
-        transition: transform 0.05s ease;
+        transition: none;
     }
     
     .flip-card.flipped:active .flip-card-inner {
-        transition: transform 0.05s ease;
+        transition: none;
     }
     
     /* Ajustes para menú móvil */
@@ -898,11 +891,6 @@ main {
     
     .mobile-nav-header .mobile-nav-title {
         font-size: 0.95em;
-    }
-    
-    .mobile-nav-header .mobile-nav-icon {
-        font-size: 24px !important;
-        margin-right: var(--spacing-sm);
     }
 }
 

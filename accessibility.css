@@ -1,5 +1,5 @@
 /* ==================================================
-   ALICO - ACCESSIBILITY USERWAY STYLE - CORREGIDO
+   ALICO - ACCESSIBILITY USERWAY STYLE - OPTIMIZADO PARA MÓVIL
    Botón flotante tipo UserWay - Solo aparece cuando se necesita
    ================================================== */
 
@@ -23,16 +23,16 @@
     font-size: 28px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     z-index: 999;
-    transition: all 0.15s ease;
+    /* ELIMINADO: transition: all 0.15s ease; - Optimización para móvil */
 }
 
 .accessibility-toggle:hover {
-    transform: scale(1.05);
+    /* ELIMINADO: transform: scale(1.05); - Optimización para móvil */
     background: var(--verde-natura-80);
 }
 
 .accessibility-toggle:active {
-    transform: scale(0.98);
+    /* ELIMINADO: transform: scale(0.98); - Optimización para móvil */
 }
 
 .accessibility-toggle.panel-open {
@@ -52,7 +52,7 @@
     z-index: 1000;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.15s ease;
+    /* ELIMINADO: transition: opacity 0.15s ease; - Optimización para móvil */
 }
 
 .accessibility-overlay.show {
@@ -73,7 +73,8 @@
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     z-index: 1001;
-    transition: all 0.2s ease;
+    /* OPTIMIZADO: Transición más rápida para móvil */
+    transition: right 0.15s ease, opacity 0.1s ease, visibility 0.1s ease;
     overflow: hidden;
     border: 1px solid rgba(0, 0, 0, 0.1);
     display: flex;
@@ -159,12 +160,12 @@
     justify-content: center;
     cursor: pointer;
     color: white;
-    transition: all 0.15s ease;
+    /* ELIMINADO: transition: all 0.15s ease; - Optimización para móvil */
 }
 
 .accessibility-close:hover {
     background: rgba(255, 255, 255, 0.25);
-    transform: scale(1.05);
+    /* ELIMINADO: transform: scale(1.05); - Optimización para móvil */
 }
 
 /* ==================================================
@@ -235,7 +236,8 @@
     font-family: 'Work Sans', sans-serif;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.15s ease;
+    /* OPTIMIZADO: Transición más rápida para móvil */
+    transition: background 0.1s ease;
     font-size: 0.9em;
     min-height: 44px;
     display: flex;
@@ -244,13 +246,13 @@
 }
 
 .font-size-controls button:hover {
-    transform: translateY(-2px);
+    /* ELIMINADO: transform: translateY(-2px); - Optimización para móvil */
     box-shadow: 0 4px 12px rgba(219, 149, 0, 0.3);
     background: linear-gradient(135deg, #DFA01A 0%, #E2AA33 100%);
 }
 
 .font-size-controls button:active {
-    transform: translateY(0);
+    /* ELIMINADO: transform: translateY(0); - Optimización para móvil */
 }
 
 /* ==================================================
@@ -269,7 +271,8 @@
     cursor: pointer;
     padding: 12px;
     border-radius: 12px;
-    transition: all 0.15s ease;
+    /* OPTIMIZADO: Transición más rápida para móvil */
+    transition: background 0.1s ease;
     background: transparent;
 }
 
@@ -287,7 +290,8 @@
     height: 26px;
     background: #e0e0e0;
     border-radius: 13px;
-    transition: all 0.15s ease;
+    /* OPTIMIZADO: Transición más rápida para móvil */
+    transition: background 0.1s ease;
     flex-shrink: 0;
     border: 2px solid transparent;
 }
@@ -301,7 +305,8 @@
     height: 18px;
     background: white;
     border-radius: 50%;
-    transition: all 0.15s ease;
+    /* OPTIMIZADO: Transición más rápida para móvil */
+    transition: transform 0.1s ease;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
@@ -342,7 +347,8 @@
     font-family: 'Work Sans', sans-serif;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.15s ease;
+    /* OPTIMIZADO: Transición más rápida para móvil */
+    transition: background 0.1s ease;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -352,7 +358,7 @@
 }
 
 .accessibility-buttons button:hover {
-    transform: translateY(-2px);
+    /* ELIMINADO: transform: translateY(-2px); - Optimización para móvil */
     box-shadow: 0 4px 12px rgba(64, 180, 229, 0.3);
     background: linear-gradient(135deg, #52BAEA 0%, #66C2EC 100%);
 }
@@ -363,7 +369,7 @@
 }
 
 .accessibility-buttons button:active {
-    transform: translateY(0);
+    /* ELIMINADO: transform: translateY(0); - Optimización para móvil */
 }
 
 /* ==================================================
@@ -386,7 +392,8 @@
     font-family: 'Work Sans', sans-serif;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.15s ease;
+    /* OPTIMIZADO: Transición más rápida para móvil */
+    transition: background 0.1s ease;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -396,13 +403,13 @@
 }
 
 .reset-button:hover {
-    transform: translateY(-2px);
+    /* ELIMINADO: transform: translateY(-2px); - Optimización para móvil */
     box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
     background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
 }
 
 .reset-button:active {
-    transform: translateY(0);
+    /* ELIMINADO: transform: translateY(0); - Optimización para móvil */
 }
 
 /* ==================================================
@@ -516,7 +523,7 @@
 }
 
 /* ==================================================
-   EFECTOS VISUALES ADICIONALES
+   EFECTOS VISUALES ADICIONALES - OPTIMIZADOS
    ================================================== */
 .accessibility-panel {
     /* Gradiente sutil en el fondo */
@@ -524,21 +531,13 @@
 }
 
 .accessibility-toggle::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
-    border-radius: 50%;
-    opacity: 0;
-    transition: opacity 0.15s ease;
-    z-index: -1;
+    /* ELIMINADO: Efecto de brillo innecesario - Optimización para móvil */
+    display: none;
 }
 
 .accessibility-toggle:hover::before {
-    opacity: 1;
+    /* ELIMINADO: Efecto de brillo innecesario - Optimización para móvil */
+    display: none;
 }
 
 /* ==================================================
