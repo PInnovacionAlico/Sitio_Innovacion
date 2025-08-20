@@ -167,17 +167,17 @@ function updatePanelButtons() {
         const icon = ttsBtn.querySelector('.material-symbols-rounded');
         if (accessibilitySettings.textToSpeech) {
             ttsBtn.classList.add('active');
-            if (icon) icon.textContent = 'volume_off';
+            if (icon) icon.textContent = 'record_voice_over';
             ttsBtn.innerHTML = `
-                <span class="material-symbols-rounded">volume_off</span>
-                Desactivar lectura
+                <span class="material-symbols-rounded">record_voice_over</span>
+                Desactivar lectura por párrafos
             `;
         } else {
             ttsBtn.classList.remove('active');
             if (icon) icon.textContent = 'volume_up';
             ttsBtn.innerHTML = `
                 <span class="material-symbols-rounded">volume_up</span>
-                Lectura de texto
+                Lectura por párrafos
             `;
         }
         console.log(`✅ Botón TTS actualizado: ${accessibilitySettings.textToSpeech}`);
@@ -226,35 +226,41 @@ function resetFontSize() {
 
 // 4. FUNCIÓN MEJORADA PARA APLICAR TAMAÑO DE FUENTE A TODOS LOS TEXTOS
 function applyFontSizeToAllTexts() {
-    const rootFontSize = accessibilitySettings.fontSize / 100;
+    const scaleFactor = accessibilitySettings.fontSize / 100;
     
-    // Aplicar al elemento root para herencia general
-    document.documentElement.style.fontSize = `${rootFontSize * 16}px`;
+    // Usar CSS custom property para escalar todo el contenido
+    document.documentElement.style.setProperty('--font-scale-factor', scaleFactor);
     
-    // Aplicar a elementos específicos que pueden no heredar correctamente
-    const textElements = document.querySelectorAll(`
-        h1, h2, h3, h4, h5, h6, 
-        p, span, div, 
-        button, a, input, textarea, label,
-        .flip-card-front, .flip-card-back,
-        .model-card, .banner-content,
-        .video-title, .photo-caption,
-        .blog-title, .blog-excerpt,
-        .project-title, .project-description
+    // Aplicar escala mediante CSS transform en lugar de modificar fontSize directamente
+    const body = document.body;
+    if (scaleFactor !== 1) {
+        body.style.setProperty('--accessibility-font-scale', scaleFactor);
+        body.classList.add('accessibility-font-scaled');
+    } else {
+        body.style.removeProperty('--accessibility-font-scale');
+        body.classList.remove('accessibility-font-scaled');
+    }
+    
+    // Asegurar que elementos específicos respeten la escala
+    ensureFontScaling();
+    
+    console.log(`📏 Tamaño de fuente aplicado con escala: ${accessibilitySettings.fontSize}%`);
+}
+
+// Función auxiliar para asegurar que todos los elementos respeten la escala
+function ensureFontScaling() {
+    const importantElements = document.querySelectorAll(`
+        .header, .nav-link, .dropdown-item, .mobile-nav-item,
+        .banner-content, .flip-card, .model-card,
+        .video-title, .photo-caption, .blog-content,
+        .accessibility-panel, .quick-link-card
     `);
     
-    textElements.forEach(element => {
-        const computedStyle = getComputedStyle(element);
-        const originalSize = parseFloat(computedStyle.fontSize);
-        
-        if (originalSize && originalSize > 0) {
-            // Calcular el nuevo tamaño basado en el tamaño original
-            const newSize = originalSize * rootFontSize;
-            element.style.fontSize = `${newSize}px`;
+    importantElements.forEach(element => {
+        if (!element.classList.contains('font-scale-applied')) {
+            element.classList.add('font-scale-applied');
         }
     });
-    
-    console.log(`📏 Tamaño de fuente aplicado a todos los textos: ${accessibilitySettings.fontSize}%`);
 }
 
 // FUNCIONES PARA LOS BOTONES DE FUENTE EN EL HTML
@@ -293,7 +299,7 @@ function toggleDarkMode() {
     console.log(`🌙 Modo oscuro ${status}: ${accessibilitySettings.darkMode}`);
 }
 
-// 6. TOGGLE LECTURA EN VOZ ALTA - CON SELECCIÓN DE TEXTO
+// 6. TOGGLE LECTURA EN VOZ ALTA - POR PÁRRAFOS
 function toggleTextToSpeech() {
     accessibilitySettings.textToSpeech = !accessibilitySettings.textToSpeech;
     
@@ -306,12 +312,12 @@ function toggleTextToSpeech() {
     const status = accessibilitySettings.textToSpeech ? 'activada' : 'desactivada';
     showAccessibilityFeedback(`Lectura en voz alta ${status}`);
     
-    // Si se activa, habilitar selección de texto
+    // Si se activa, habilitar modo párrafos
     if (accessibilitySettings.textToSpeech) {
-        enableTextSelection();
-        showAccessibilityFeedback('Selecciona el texto que quieres que se lea en voz alta');
+        enableParagraphMode();
+        showAccessibilityFeedback('Haz clic en cualquier párrafo para escucharlo');
     } else {
-        disableTextSelection();
+        disableParagraphMode();
         stopSpeaking();
     }
     
@@ -388,57 +394,75 @@ function stopSpeaking() {
     }
 }
 
-// Función para habilitar selección de texto
-function enableTextSelection() {
-    // Agregar event listener para doble clic en texto
-    document.addEventListener('dblclick', handleTextSelection);
+// Función para habilitar modo párrafos
+function enableParagraphMode() {
+    // Agregar clase al body para activar estilos TTS
+    document.body.classList.add('tts-paragraph-mode');
     
-    // Agregar estilos visuales para indicar que la selección está activa
-    document.body.style.cursor = 'text';
+    // Agregar event listener para clic en párrafos
+    document.addEventListener('click', handleParagraphClick);
     
     // Agregar indicador visual
-    showTextSelectionIndicator();
+    showParagraphModeIndicator();
     
-    console.log('✅ Selección de texto habilitada');
+    console.log('✅ Modo párrafos habilitado');
 }
 
-// Función para deshabilitar selección de texto
-function disableTextSelection() {
-    // Remover event listener
-    document.removeEventListener('dblclick', handleTextSelection);
+// Función para deshabilitar modo párrafos
+function disableParagraphMode() {
+    // Remover clase del body
+    document.body.classList.remove('tts-paragraph-mode');
     
-    // Restaurar cursor
-    document.body.style.cursor = '';
+    // Remover event listener
+    document.removeEventListener('click', handleParagraphClick);
     
     // Remover indicador visual
-    hideTextSelectionIndicator();
+    hideParagraphModeIndicator();
     
-    console.log('❌ Selección de texto deshabilitada');
+    // Remover resaltado de párrafos que se estén leyendo
+    const readingParagraphs = document.querySelectorAll('.tts-reading');
+    readingParagraphs.forEach(p => p.classList.remove('tts-reading'));
+    
+    console.log('❌ Modo párrafos deshabilitado');
 }
 
-// Función para manejar la selección de texto
-function handleTextSelection(event) {
-    const selection = window.getSelection();
-    const selectedText = selection.toString().trim();
+// Función para manejar clic en párrafos
+function handleParagraphClick(event) {
+    // Verificar si el clic fue en un párrafo
+    const clickedElement = event.target;
+    const paragraph = clickedElement.closest('p');
     
-    if (selectedText) {
-        console.log('📖 Texto seleccionado:', selectedText);
+    if (paragraph) {
+        // Evitar que se propague el evento
+        event.preventDefault();
+        event.stopPropagation();
         
-        // Leer el texto seleccionado
-        speakSelectedText(selectedText);
+        const paragraphText = paragraph.textContent.trim();
         
-        // Mostrar feedback
-        showAccessibilityFeedback(`Leyendo: "${selectedText.substring(0, 50)}${selectedText.length > 50 ? '...' : ''}"`);
-        
-        // Resaltar brevemente el texto seleccionado
-        highlightSelectedText(selection);
-    } else {
-        showAccessibilityFeedback('No hay texto seleccionado. Haz doble clic en el texto que quieres leer');
+        if (paragraphText) {
+            console.log('📖 Párrafo seleccionado:', paragraphText);
+            
+            // Remover resaltado anterior
+            const previousReading = document.querySelector('.tts-reading');
+            if (previousReading) {
+                previousReading.classList.remove('tts-reading');
+            }
+            
+            // Resaltar párrafo actual
+            paragraph.classList.add('tts-reading');
+            
+            // Leer el párrafo
+            speakParagraph(paragraphText, paragraph);
+            
+            // Mostrar feedback
+            const preview = paragraphText.substring(0, 50);
+            showAccessibilityFeedback(`Leyendo párrafo: "${preview}${paragraphText.length > 50 ? '...' : ''}"`);
+        }
     }
 }
 
-// Función para leer texto seleccionado
-function speakSelectedText(text) {
+// Función para leer párrafo
+function speakParagraph(text, paragraphElement) {
     if ('speechSynthesis' in window) {
         // Detener cualquier lectura anterior
         window.speechSynthesis.cancel();
@@ -449,20 +473,32 @@ function speakSelectedText(text) {
         utterance.pitch = 1;
         
         utterance.onstart = () => {
-            console.log('🔊 Iniciando lectura del texto seleccionado');
+            console.log('🔊 Iniciando lectura del párrafo');
         };
         
         utterance.onend = () => {
-            console.log('🔇 Lectura del texto seleccionado completada');
+            console.log('🔇 Lectura del párrafo completada');
+            // Remover resaltado cuando termine la lectura
+            if (paragraphElement) {
+                paragraphElement.classList.remove('tts-reading');
+            }
         };
         
         utterance.onerror = (event) => {
-            console.error('❌ Error en lectura del texto seleccionado:', event.error);
+            console.error('❌ Error en lectura del párrafo:', event.error);
+            // Remover resaltado en caso de error
+            if (paragraphElement) {
+                paragraphElement.classList.remove('tts-reading');
+            }
         };
         
         window.speechSynthesis.speak(utterance);
     } else {
         showAccessibilityFeedback('Lectura en voz alta no disponible en este navegador');
+        // Remover resaltado si no se puede leer
+        if (paragraphElement) {
+            paragraphElement.classList.remove('tts-reading');
+        }
     }
 }
 
@@ -497,14 +533,14 @@ function highlightSelectedText(selection) {
     }
 }
 
-// Función para mostrar indicador de selección activa
-function showTextSelectionIndicator() {
+// Función para mostrar indicador de modo párrafos
+function showParagraphModeIndicator() {
     // Crear indicador visual
     const indicator = document.createElement('div');
-    indicator.id = 'textSelectionIndicator';
+    indicator.id = 'paragraphModeIndicator';
     indicator.innerHTML = `
-        <span class="material-symbols-rounded">text_fields</span>
-        Selección de texto activa - Haz doble clic en el texto
+        <span class="material-symbols-rounded">record_voice_over</span>
+        Modo párrafos activo - Haz clic en cualquier párrafo
     `;
     indicator.style.cssText = `
         position: fixed;
@@ -528,9 +564,9 @@ function showTextSelectionIndicator() {
     document.body.appendChild(indicator);
 }
 
-// Función para ocultar indicador de selección
-function hideTextSelectionIndicator() {
-    const indicator = document.getElementById('textSelectionIndicator');
+// Función para ocultar indicador de modo párrafos
+function hideParagraphModeIndicator() {
+    const indicator = document.getElementById('paragraphModeIndicator');
     if (indicator) {
         indicator.remove();
     }
