@@ -20,12 +20,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
     
     <!-- Estilos principales -->
-    <link rel="stylesheet" href="../assets/css/styles.css">
-    <link rel="stylesheet" href="../assets/css/accessibility.css">
-    <link rel="stylesheet" href="../components/components.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/accessibility.css">
+    <link rel="stylesheet" href="components/components.css">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" href="assets/images/Ali_head.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/images/Ali_head.png">
     
     <!-- CSS específico para página 404 -->
     <style>
@@ -93,6 +94,28 @@
             pointer-events: none;
         }
 
+        .ali-404-image {
+            width: 120px;
+            height: 120px;
+            margin-bottom: var(--spacing-md);
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--blanco);
+            box-shadow: var(--shadow-md);
+            animation: float 3s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .ali-404-image:hover {
+            transform: scale(1.1);
+            border-color: var(--amarillo-oro);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Fallback para cuando la imagen no carga */
         .ali-404-face {
             font-size: 80px;
             margin-bottom: var(--spacing-md);
@@ -117,14 +140,14 @@
         .ali-404-speech::before {
             content: '';
             position: absolute;
-            bottom: -8px;
+            top: -8px;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
             height: 0;
             border-left: 8px solid transparent;
             border-right: 8px solid transparent;
-            border-top: 8px solid var(--blanco);
+            border-bottom: 8px solid var(--blanco);
         }
 
         .error-404-text h1 {
@@ -216,8 +239,6 @@
             align-items: center;
             min-height: 180px;
             justify-content: center;
-            transform: translateZ(0); /* Fix para comportamiento extraño */
-            backface-visibility: hidden; /* Fix para comportamiento extraño */
         }
 
         .quick-link-card::before {
@@ -304,6 +325,11 @@
             86%, 100% { content: '🤔'; }
         }
 
+        /* Animación para el fallback del emoji */
+        .ali-404-face {
+            animation: aliExpression 4s ease-in-out infinite;
+        }
+
         /* === RESPONSIVE ESPECÍFICO PARA 404 === */
         @media (min-width: 1024px) {
             .ali-404-content {
@@ -316,8 +342,9 @@
                 height: 280px;
             }
 
-            .ali-404-face {
-                font-size: 90px;
+            .ali-404-image {
+                width: 140px;
+                height: 140px;
             }
 
             .quick-links-grid {
@@ -352,8 +379,9 @@
                 height: 200px;
             }
 
-            .ali-404-face {
-                font-size: 60px;
+            .ali-404-image {
+                width: 100px;
+                height: 100px;
             }
 
             .ali-404-speech {
@@ -403,8 +431,9 @@
                 height: 180px;
             }
 
-            .ali-404-face {
-                font-size: 50px;
+            .ali-404-image {
+                width: 80px;
+                height: 80px;
             }
 
             .quick-nav-section {
@@ -571,12 +600,12 @@
                         Volver al Inicio
                     </a>
                 </div>
-                <div class="ali-404-character" role="img" aria-label="Ali, el embajador de innovación de Alico, confundido">
-                    <div class="ali-404-face" aria-hidden="true">🤔</div>
-                    <div class="ali-404-speech">
-                        ¡Ups! Esta página se escapó
-                    </div>
-                </div>
+                                 <div class="ali-404-character" role="img" aria-label="Ali, el embajador de innovación de Alico, confundido">
+                     <img src="assets/images/Ali_1.png" alt="Ali confundido" class="ali-404-image">
+                     <div class="ali-404-speech">
+                         ¡Ups! Esta página se escapó
+                     </div>
+                 </div>
             </div>
         </section>
 
@@ -584,56 +613,62 @@
         <section class="quick-nav-section">
             <h2>¿Qué estabas buscando?</h2>
             <div class="quick-links-grid">
-                <a href="generalidades-sgi.html" class="quick-link-card">
-                    <span class="material-symbols-rounded quick-link-icon">settings</span>
-                    <h3>Sistema de Gestión</h3>
-                    <p>Conoce nuestro modelo de innovación y las generalidades del SGI</p>
-                </a>
-                
-                <a href="proyectos.html" class="quick-link-card">
-                    <span class="material-symbols-rounded quick-link-icon">engineering</span>
-                    <h3>Proyectos de Innovación</h3>
-                    <p>Descubre los últimos proyectos y desarrollos innovadores</p>
-                </a>
-                
-                <a href="embajador-ali.html" class="quick-link-card">
-                    <span class="material-symbols-rounded quick-link-icon">person</span>
-                    <h3>Conoce a Ali</h3>
-                    <p>Tu embajador de innovación y guía en el mundo de las nuevas ideas</p>
-                </a>
-                
-                <a href="recursos-audiovisuales.html" class="quick-link-card">
-                    <span class="material-symbols-rounded quick-link-icon">video_library</span>
-                    <h3>Recursos Audiovisuales</h3>
-                    <p>Videos, presentaciones y contenido multimedia sobre innovación</p>
-                </a>
+                                 <a href="pages/generalidades-sgi.html" class="quick-link-card">
+                     <span class="material-symbols-rounded quick-link-icon">settings</span>
+                     <h3>Sistema de Gestión</h3>
+                     <p>Conoce nuestro modelo de innovación y las generalidades del SGI</p>
+                 </a>
+                 
+                 <a href="pages/iniciativas.html" class="quick-link-card">
+                     <span class="material-symbols-rounded quick-link-icon">engineering</span>
+                     <h3>Iniciativas de Innovación</h3>
+                     <p>Descubre los últimos proyectos y desarrollos innovadores</p>
+                 </a>
+                 
+                 <a href="pages/recursos-audiovisuales/embajador-ali.html" class="quick-link-card">
+                     <span class="material-symbols-rounded quick-link-icon">person</span>
+                     <h3>Conoce a Ali</h3>
+                     <p>Tu embajador de innovación y guía en el mundo de las nuevas ideas</p>
+                 </a>
+                 
+                 <a href="pages/recursos-audiovisuales.html" class="quick-link-card">
+                     <span class="material-symbols-rounded quick-link-icon">video_library</span>
+                     <h3>Recursos Audiovisuales</h3>
+                     <p>Videos, presentaciones y contenido multimedia sobre innovación</p>
+                 </a>
             </div>
         </section>
     </main>
 
     <!-- Scripts esenciales -->
-    <script src="../assets/js/scripts.js"></script>
-    <script src="../assets/js/accessibility.js"></script>
-    <script src="../assets/js/component-loader.js"></script>
+    <script src="assets/js/scripts.js"></script>
+    <script src="assets/js/accessibility.js"></script>
+    <script src="assets/js/component-loader.js"></script>
     
     <!-- JavaScript específico para página 404 -->
     <script>
         // Cambiar expresión de Ali cada cierto tiempo
-        const aliFace = document.querySelector('.ali-404-face');
+        const aliImage = document.querySelector('.ali-404-image');
         const aliSpeech = document.querySelector('.ali-404-speech');
+        const aliImages = [
+            'assets/images/Ali_1.png',
+            'assets/images/Ali_2.png',
+            'assets/images/Ali_3.png',
+            'assets/images/Ali_4.png'
+        ];
         const expressions = [
-            { face: '🤔', text: '¡Ups! Esta página se escapó' },
-            { face: '😅', text: '¿Te ayudo a encontrar algo?' },
-            { face: '🤷‍♂️', text: 'Esta página está explorando' },
-            { face: '💡', text: '¡Tengo una idea mejor!' },
-            { face: '😊', text: '¡Vamos a encontrar tu página!' }
+            { text: '¡Ups! Esta página se escapó' },
+            { text: '¿Te ayudo a encontrar algo?' },
+            { text: 'Esta página está explorando' },
+            { text: '¡Tengo una idea mejor!' }
         ];
         let currentExpression = 0;
 
         function changeAliExpression() {
             currentExpression = (currentExpression + 1) % expressions.length;
             const expression = expressions[currentExpression];
-            aliFace.textContent = expression.face;
+            const imageIndex = currentExpression % aliImages.length;
+            aliImage.src = aliImages[imageIndex];
             aliSpeech.textContent = expression.text;
         }
 
@@ -689,6 +724,24 @@
 
         // Inicialización de la página 404
         document.addEventListener('DOMContentLoaded', function() {
+            // Verificar que la imagen de Ali se cargó correctamente
+            if (aliImage) {
+                aliImage.addEventListener('load', function() {
+                    console.log('✅ Imagen de Ali cargada correctamente en 404');
+                });
+                
+                aliImage.addEventListener('error', function() {
+                    console.warn('⚠️ Error al cargar imagen de Ali en 404, usando fallback');
+                    this.style.display = 'none';
+                    // Crear un fallback con emoji
+                    const fallback = document.createElement('div');
+                    fallback.className = 'ali-404-face';
+                    fallback.textContent = '🤔';
+                    fallback.style.cssText = 'font-size: 80px; margin-bottom: var(--spacing-md);';
+                    this.parentNode.insertBefore(fallback, this.nextSibling);
+                });
+            }
+
             // Marcar componentes como cargados
             setTimeout(() => {
                 document.body.classList.add('components-loaded');
@@ -699,6 +752,8 @@
             setTimeout(() => {
                 const timeMessage = getTimeBasedMessage();
                 aliSpeech.textContent = timeMessage;
+                // Cambiar a una imagen más amigable para el mensaje de bienvenida
+                aliImage.src = 'assets/images/Ali_2.png';
             }, 8000);
 
             // Analytics simple para páginas 404
@@ -727,27 +782,16 @@
             }
         });
 
-        // Efecto de parallax sutil solo en desktop
-        if (window.innerWidth > 768) {
-            document.addEventListener('mousemove', function(e) {
-                const cards = document.querySelectorAll('.quick-link-card');
-                const x = (e.clientX / window.innerWidth - 0.5) * 20;
-                const y = (e.clientY / window.innerHeight - 0.5) * 20;
-                
-                cards.forEach((card, index) => {
-                    const intensity = (index + 1) * 0.5;
-                    card.style.transform = `translate(${x * intensity}px, ${y * intensity}px)`;
-                });
-            });
-        }
+        // Efecto de parallax eliminado para estabilidad visual
 
         // Funciones para debugging en desarrollo
         if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-            window.debug404 = {
-                changeExpression: changeAliExpression,
-                createParticles: createInnovationParticles,
-                getTimeMessage: getTimeBasedMessage
-            };
+                    window.debug404 = {
+            changeExpression: changeAliExpression,
+            createParticles: createInnovationParticles,
+            getTimeMessage: getTimeBasedMessage,
+            aliImages: aliImages
+        };
             
             console.log('🚀 Debug mode 404 activado - funciones disponibles en window.debug404');
         }
