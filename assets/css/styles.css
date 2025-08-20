@@ -1277,35 +1277,35 @@ footer::before {
 .banner-sgi {
     background-image: 
         linear-gradient(rgba(0,61,166,0.6), rgba(0,61,166,0.6)),
-        url('banners/sgi.jpeg');
+        url('../images/sgi.jpeg');
 }
 
 /* Banner Recursos Audiovisuales */
 .banner-recursos {
     background-image: 
         linear-gradient(rgba(0,61,166,0.6), rgba(0,61,166,0.6)),
-        url('banners/audiovisual.JPG');
+        url('../images/audiovisual.JPG');
 }
 
 /* Banner Embajador Ali */
 .banner-ali {
     background-image: 
         linear-gradient(rgba(0,61,166,0.6), rgba(0,61,166,0.6)),
-        url('banners/embajador-ali.png');
+        url('../images/embajador-ali.png');
 }
 
 /* Banner Inteligencias Artificiales */
 .banner-ia {
     background-image: 
         linear-gradient(rgba(0,61,166,0.6), rgba(0,61,166,0.6)),
-        url('banners/ia.jpg');
+        url('../images/ia.jpg');
 }
 
 /* Banner Proyectos */
 .banner-proyectos {
     background-image: 
         linear-gradient(rgba(0,61,166,0.6), rgba(0,61,166,0.6)),
-        url('banners/projects.png');
+        url('../images/projects.png');
 }
 
 /* ==================================================
