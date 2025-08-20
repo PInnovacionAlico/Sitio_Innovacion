@@ -18,9 +18,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
     
     <!-- Estilos principales -->
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="accessibility.css">
-    <link rel="stylesheet" href="components/components.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/accessibility.css">
+    <link rel="stylesheet" href="../components/components.css">
     
     <!-- CSS crítico inline -->
     <style>
@@ -47,7 +47,7 @@
         .ali-sgi-container {
             width: 150px;
             height: 200px;
-            background-image: url('images/Ali_2.png');
+                            background-image: url('../assets/images/Ali_2.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -239,9 +239,9 @@
     </main>
 
     <!-- Scripts esenciales -->
-    <script src="scripts.js"></script>
-    <script src="js/component-loader.js"></script>
-    <script src="accessibility.js"></script>
+    <script src="../assets/js/scripts.js"></script>
+    <script src="../assets/js/component-loader.js"></script>
+    <script src="../assets/js/accessibility.js"></script>
     
     <!-- JavaScript específico para página SGI -->
     <script>
@@ -327,14 +327,14 @@
                     aliContainer.style.backgroundImage = 'none';
                     aliFallback.style.display = 'flex';
                 };
-                testImg.src = 'images/Ali_2.png';
+                testImg.src = '../assets/images/Ali_2.png';
                 
                 // Inicializar con transición suave
                 aliContainer.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
                 
                 // Precargar la imagen
                 const preloadImg = new Image();
-                preloadImg.src = 'images/Ali_2.png';
+                preloadImg.src = '../assets/images/Ali_2.png';
             }
 
             // Agregar event listeners adicionales para las tarjetas flip

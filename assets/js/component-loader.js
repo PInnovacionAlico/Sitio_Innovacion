@@ -75,7 +75,7 @@ class ComponentLoader {
     _initHeader() {
         const logoImg = document.querySelector('.logo-image');
         if (logoImg) {
-            logoImg.src = this._getCorrectPath('images/Ali_head.png');
+            logoImg.src = this._getCorrectPath('assets/images/Ali_head.png');
         }
 
         const logoLink = document.querySelector('.logo');
