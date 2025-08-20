@@ -3,6 +3,11 @@
    Sistema de accesibilidad con persistencia entre páginas
    ================================================== */
 
+// Detener inmediatamente cualquier TTS al cargar este script
+if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+}
+
 // Estado global
 let isPanelOpen = false;
 let isInitialized = false;
@@ -120,12 +125,12 @@ function applyAccessibilitySettings() {
     // 4. TEXT-TO-SPEECH - APLICAR ESTADO GUARDADO
     if (accessibilitySettings.textToSpeech) {
         body.classList.add('tts-paragraph-mode');
-        // Habilitar modo párrafos si estaba activo
-        enableParagraphMode();
+        // Habilitar modo párrafos si estaba activo (sin mostrar indicador)
+        enableParagraphModeQuietly();
     } else {
         body.classList.remove('tts-paragraph-mode');
         // Deshabilitar modo párrafos si estaba inactivo
-        disableParagraphMode();
+        disableParagraphModeQuietly();
     }
     
     // 5. Actualizar botones en el panel si existe (deferido para mejor rendimiento)
@@ -414,6 +419,21 @@ function stopSpeaking() {
     }
 }
 
+// Función global para forzar detención de TTS
+function forceStopTTS() {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        console.log('🔇 TTS forzado a detenerse');
+    }
+    
+    // Limpiar resaltado visual
+    const readingParagraphs = document.querySelectorAll('.tts-reading');
+    readingParagraphs.forEach(p => p.classList.remove('tts-reading'));
+}
+
+// Hacer la función disponible globalmente
+window.forceStopTTS = forceStopTTS;
+
 // Función para habilitar modo párrafos
 function enableParagraphMode() {
     // Agregar clase al body para activar estilos TTS
@@ -426,6 +446,17 @@ function enableParagraphMode() {
     showParagraphModeIndicator();
     
     console.log('✅ Modo párrafos habilitado');
+}
+
+// Función para habilitar modo párrafos sin indicador (para carga de página)
+function enableParagraphModeQuietly() {
+    // Agregar clase al body para activar estilos TTS
+    document.body.classList.add('tts-paragraph-mode');
+    
+    // Agregar event listener para clic en párrafos
+    document.addEventListener('click', handleParagraphClick);
+    
+    console.log('✅ Modo párrafos habilitado (silencioso)');
 }
 
 // Función para deshabilitar modo párrafos
@@ -444,6 +475,21 @@ function disableParagraphMode() {
     readingParagraphs.forEach(p => p.classList.remove('tts-reading'));
     
     console.log('❌ Modo párrafos deshabilitado');
+}
+
+// Función para deshabilitar modo párrafos sin indicador (para carga de página)
+function disableParagraphModeQuietly() {
+    // Remover clase del body
+    document.body.classList.remove('tts-paragraph-mode');
+    
+    // Remover event listener
+    document.removeEventListener('click', handleParagraphClick);
+    
+    // Remover resaltado de párrafos que se estén leyendo
+    const readingParagraphs = document.querySelectorAll('.tts-reading');
+    readingParagraphs.forEach(p => p.classList.remove('tts-reading'));
+    
+    console.log('❌ Modo párrafos deshabilitado (silencioso)');
 }
 
 // Función para manejar clic en párrafos
@@ -801,16 +847,26 @@ function setupPageNavigationListeners() {
         }
     });
     
-    // Detener TTS cuando se hace clic en enlaces internos
+    // Detener TTS cuando se hace clic en enlaces
     document.addEventListener('click', function(e) {
         const link = e.target.closest('a');
-        if (link && link.href && !link.href.includes('#') && !link.href.includes('javascript:')) {
-            // Es un enlace que navega a otra página
-            if (accessibilitySettings.textToSpeech) {
+        if (link && link.href) {
+            const currentOrigin = window.location.origin;
+            const linkURL = new URL(link.href, window.location.href);
+            
+            // Verificar si es navegación a otra página (no anclas)
+            const isNavigation = !link.href.includes('#') && 
+                                !link.href.includes('javascript:') && 
+                                !link.href.includes('mailto:') && 
+                                !link.href.includes('tel:') &&
+                                (linkURL.pathname !== window.location.pathname || 
+                                 linkURL.origin !== currentOrigin);
+            
+            if (isNavigation && accessibilitySettings.textToSpeech) {
                 // Marcar que se está navegando para evitar feedback innecesario
                 window.isNavigating = true;
                 stopSpeaking();
-                console.log('🔇 TTS detenido por clic en enlace de navegación');
+                console.log('🔇 TTS detenido por clic en enlace de navegación:', link.href);
                 
                 // Resetear la bandera después de un tiempo
                 setTimeout(() => {
@@ -852,7 +908,20 @@ function setupPageNavigationListeners() {
         return originalReplaceState.apply(this, arguments);
     };
     
+    // Listener adicional más agresivo para unload
+    window.addEventListener('unload', function() {
+        forceStopTTS();
+        console.log('🔇 TTS detenido por unload');
+    });
+    
     console.log('✅ Listeners de navegación configurados para detener TTS');
+}
+
+// Función para ejecutar inmediatamente al cargar la página
+function stopTTSOnPageLoad() {
+    // Detener cualquier TTS que pueda estar ejecutándose desde la página anterior
+    forceStopTTS();
+    console.log('🔇 TTS detenido preventivamente al cargar nueva página');
 }
 
 /* ==================================================
@@ -865,6 +934,9 @@ function initAccessibility() {
     }
     
     console.log('🔧 Inicializando sistema de accesibilidad...');
+    
+    // Detener cualquier TTS al cargar nueva página
+    stopTTSOnPageLoad();
     
     // Cargar configuraciones guardadas
     loadAccessibilitySettings();
