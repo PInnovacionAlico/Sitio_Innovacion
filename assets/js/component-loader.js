@@ -308,7 +308,7 @@ class ComponentLoader {
     _initFooter() {
         const footerImg = document.querySelector('.footer-logo-image');
         if (footerImg) {
-            footerImg.src = this._getCorrectPath('images/logo-blanco.png');
+            footerImg.src = this._getCorrectPath('assets/images/logo-blanco.png');
         }
         
         // Inicializar botón back-to-top

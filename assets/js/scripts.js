@@ -334,10 +334,10 @@ function initImageFallbacks() {
  */
 function preloadImages() {
     const imagesToPreload = [
-        'images/Ali_head.png',
-        'images/logo-blanco.png',
-        'images/cocrea.png',
-        'images/versatil.png'
+        'assets/images/Ali_head.png',
+        'assets/images/logo-blanco.png',
+        'assets/images/cocrea.png',
+        'assets/images/versatil.png'
     ];
     
     imagesToPreload.forEach(src => {
