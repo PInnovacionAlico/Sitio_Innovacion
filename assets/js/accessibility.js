@@ -186,14 +186,14 @@ function updatePanelButtons() {
             if (icon) icon.textContent = 'record_voice_over';
             ttsBtn.innerHTML = `
                 <span class="material-symbols-rounded">record_voice_over</span>
-                Desactivar lectura por párrafos
+                Desactivar lectura por párrafos y títulos
             `;
         } else {
             ttsBtn.classList.remove('active');
             if (icon) icon.textContent = 'volume_up';
             ttsBtn.innerHTML = `
                 <span class="material-symbols-rounded">volume_up</span>
-                Lectura por párrafos
+                Lectura por párrafos y títulos
             `;
         }
         console.log(`✅ Botón TTS actualizado: ${accessibilitySettings.textToSpeech}`);
@@ -328,10 +328,10 @@ function toggleTextToSpeech() {
     const status = accessibilitySettings.textToSpeech ? 'activada' : 'desactivada';
     showAccessibilityFeedback(`Lectura en voz alta ${status}`);
     
-    // Si se activa, habilitar modo párrafos
+    // Si se activa, habilitar modo párrafos y títulos
     if (accessibilitySettings.textToSpeech) {
         enableParagraphMode();
-        showAccessibilityFeedback('Haz clic en cualquier párrafo para escucharlo');
+        showAccessibilityFeedback('Haz clic en cualquier párrafo o título para escucharlo');
     } else {
         disableParagraphMode();
         stopSpeaking();
@@ -409,13 +409,13 @@ function stopSpeaking() {
         console.log('🔇 Lectura detenida');
     }
     
-    // Limpiar resaltado visual de párrafos que se estén leyendo
-    const readingParagraphs = document.querySelectorAll('.tts-reading');
-    readingParagraphs.forEach(p => p.classList.remove('tts-reading'));
+    // Limpiar resaltado visual de párrafos y títulos que se estén leyendo
+    const readingElements = document.querySelectorAll('.tts-reading');
+    readingElements.forEach(el => el.classList.remove('tts-reading'));
     
     // Si el TTS está activo y no es por navegación, mostrar feedback
     if (accessibilitySettings.textToSpeech && !window.isNavigating) {
-        showAccessibilityFeedback('Lectura detenida - Haz clic en otro párrafo para continuar');
+        showAccessibilityFeedback('Lectura detenida - Haz clic en otro párrafo o título para continuar');
     }
 }
 
@@ -426,40 +426,40 @@ function forceStopTTS() {
         console.log('🔇 TTS forzado a detenerse');
     }
     
-    // Limpiar resaltado visual
-    const readingParagraphs = document.querySelectorAll('.tts-reading');
-    readingParagraphs.forEach(p => p.classList.remove('tts-reading'));
+    // Limpiar resaltado visual de párrafos y títulos
+    const readingElements = document.querySelectorAll('.tts-reading');
+    readingElements.forEach(el => el.classList.remove('tts-reading'));
 }
 
 // Hacer la función disponible globalmente
 window.forceStopTTS = forceStopTTS;
 
-// Función para habilitar modo párrafos
+// Función para habilitar modo párrafos y títulos
 function enableParagraphMode() {
     // Agregar clase al body para activar estilos TTS
     document.body.classList.add('tts-paragraph-mode');
     
-    // Agregar event listener para clic en párrafos
+    // Agregar event listener para clic en párrafos y títulos
     document.addEventListener('click', handleParagraphClick);
     
     // Agregar indicador visual
     showParagraphModeIndicator();
     
-    console.log('✅ Modo párrafos habilitado');
+    console.log('✅ Modo párrafos y títulos habilitado');
 }
 
-// Función para habilitar modo párrafos sin indicador (para carga de página)
+// Función para habilitar modo párrafos y títulos sin indicador (para carga de página)
 function enableParagraphModeQuietly() {
     // Agregar clase al body para activar estilos TTS
     document.body.classList.add('tts-paragraph-mode');
     
-    // Agregar event listener para clic en párrafos
+    // Agregar event listener para clic en párrafos y títulos
     document.addEventListener('click', handleParagraphClick);
     
-    console.log('✅ Modo párrafos habilitado (silencioso)');
+    console.log('✅ Modo párrafos y títulos habilitado (silencioso)');
 }
 
-// Función para deshabilitar modo párrafos
+// Función para deshabilitar modo párrafos y títulos
 function disableParagraphMode() {
     // Remover clase del body
     document.body.classList.remove('tts-paragraph-mode');
@@ -470,14 +470,14 @@ function disableParagraphMode() {
     // Remover indicador visual
     hideParagraphModeIndicator();
     
-    // Remover resaltado de párrafos que se estén leyendo
-    const readingParagraphs = document.querySelectorAll('.tts-reading');
-    readingParagraphs.forEach(p => p.classList.remove('tts-reading'));
+    // Remover resaltado de párrafos y títulos que se estén leyendo
+    const readingElements = document.querySelectorAll('.tts-reading');
+    readingElements.forEach(el => el.classList.remove('tts-reading'));
     
-    console.log('❌ Modo párrafos deshabilitado');
+    console.log('❌ Modo párrafos y títulos deshabilitado');
 }
 
-// Función para deshabilitar modo párrafos sin indicador (para carga de página)
+// Función para deshabilitar modo párrafos y títulos sin indicador (para carga de página)
 function disableParagraphModeQuietly() {
     // Remover clase del body
     document.body.classList.remove('tts-paragraph-mode');
@@ -485,28 +485,29 @@ function disableParagraphModeQuietly() {
     // Remover event listener
     document.removeEventListener('click', handleParagraphClick);
     
-    // Remover resaltado de párrafos que se estén leyendo
-    const readingParagraphs = document.querySelectorAll('.tts-reading');
-    readingParagraphs.forEach(p => p.classList.remove('tts-reading'));
+    // Remover resaltado de párrafos y títulos que se estén leyendo
+    const readingElements = document.querySelectorAll('.tts-reading');
+    readingElements.forEach(el => el.classList.remove('tts-reading'));
     
-    console.log('❌ Modo párrafos deshabilitado (silencioso)');
+    console.log('❌ Modo párrafos y títulos deshabilitado (silencioso)');
 }
 
-// Función para manejar clic en párrafos
+// Función para manejar clic en párrafos y títulos
 function handleParagraphClick(event) {
-    // Verificar si el clic fue en un párrafo
+    // Verificar si el clic fue en un párrafo o título
     const clickedElement = event.target;
-    const paragraph = clickedElement.closest('p');
+    const textElement = clickedElement.closest('p, h1, h2, h3, h4, h5, h6');
     
-    if (paragraph) {
+    if (textElement) {
         // Evitar que se propague el evento
         event.preventDefault();
         event.stopPropagation();
         
-        const paragraphText = paragraph.textContent.trim();
+        const elementText = textElement.textContent.trim();
         
-        if (paragraphText) {
-            console.log('📖 Párrafo seleccionado:', paragraphText);
+        if (elementText) {
+            const elementType = textElement.tagName.toLowerCase();
+            console.log(`📖 ${elementType.charAt(0).toUpperCase() + elementType.slice(1)} seleccionado:`, elementText);
             
             // Remover resaltado anterior
             const previousReading = document.querySelector('.tts-reading');
@@ -514,15 +515,16 @@ function handleParagraphClick(event) {
                 previousReading.classList.remove('tts-reading');
             }
             
-            // Resaltar párrafo actual
-            paragraph.classList.add('tts-reading');
+            // Resaltar elemento actual
+            textElement.classList.add('tts-reading');
             
-            // Leer el párrafo
-            speakParagraph(paragraphText, paragraph);
+            // Leer el texto
+            speakParagraph(elementText, textElement);
             
             // Mostrar feedback
-            const preview = paragraphText.substring(0, 50);
-            showAccessibilityFeedback(`Leyendo párrafo: "${preview}${paragraphText.length > 50 ? '...' : ''}"`);
+            const preview = elementText.substring(0, 50);
+            const elementName = elementType === 'p' ? 'párrafo' : 'título';
+            showAccessibilityFeedback(`Leyendo ${elementName}: "${preview}${elementText.length > 50 ? '...' : ''}"`);
         }
     }
 }
@@ -599,14 +601,14 @@ function highlightSelectedText(selection) {
     }
 }
 
-// Función para mostrar indicador de modo párrafos
+// Función para mostrar indicador de modo párrafos y títulos
 function showParagraphModeIndicator() {
     // Crear indicador visual
     const indicator = document.createElement('div');
     indicator.id = 'paragraphModeIndicator';
     indicator.innerHTML = `
         <span class="material-symbols-rounded">record_voice_over</span>
-        Modo párrafos activo - Haz clic en cualquier párrafo
+        Modo párrafos y títulos activo - Haz clic en cualquier párrafo o título
     `;
     indicator.style.cssText = `
         position: fixed;

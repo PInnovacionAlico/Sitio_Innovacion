@@ -1165,12 +1165,18 @@
    SISTEMA DE TTS POR PÁRRAFOS
    ================================================== */
 
-/* Indicador visual para párrafos clickeables en modo TTS */
+/* Indicador visual para párrafos y títulos clickeables en modo TTS */
 .tts-paragraph-mode p,
 .tts-paragraph-mode .blog-content p,
 .tts-paragraph-mode .banner-content p,
 .tts-paragraph-mode .flip-card-front p,
-.tts-paragraph-mode .flip-card-back p {
+.tts-paragraph-mode .flip-card-back p,
+.tts-paragraph-mode h1,
+.tts-paragraph-mode h2,
+.tts-paragraph-mode h3,
+.tts-paragraph-mode h4,
+.tts-paragraph-mode h5,
+.tts-paragraph-mode h6 {
     cursor: pointer;
     transition: background-color 0.2s ease;
     padding: 4px;
@@ -1182,7 +1188,13 @@
 .tts-paragraph-mode .blog-content p:hover,
 .tts-paragraph-mode .banner-content p:hover,
 .tts-paragraph-mode .flip-card-front p:hover,
-.tts-paragraph-mode .flip-card-back p:hover {
+.tts-paragraph-mode .flip-card-back p:hover,
+.tts-paragraph-mode h1:hover,
+.tts-paragraph-mode h2:hover,
+.tts-paragraph-mode h3:hover,
+.tts-paragraph-mode h4:hover,
+.tts-paragraph-mode h5:hover,
+.tts-paragraph-mode h6:hover {
     background-color: rgba(0, 166, 81, 0.1);
     box-shadow: 0 0 0 2px rgba(0, 166, 81, 0.2);
 }
@@ -1195,8 +1207,14 @@
     box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.3) !important;
 }
 
-/* Indicador visual para párrafos en modo TTS */
-.tts-paragraph-mode p::before {
+/* Indicador visual para párrafos y títulos en modo TTS */
+.tts-paragraph-mode p::before,
+.tts-paragraph-mode h1::before,
+.tts-paragraph-mode h2::before,
+.tts-paragraph-mode h3::before,
+.tts-paragraph-mode h4::before,
+.tts-paragraph-mode h5::before,
+.tts-paragraph-mode h6::before {
     content: '🔊';
     position: absolute;
     left: -20px;
@@ -1207,7 +1225,13 @@
     transition: opacity 0.2s ease;
 }
 
-.tts-paragraph-mode p:hover::before {
+.tts-paragraph-mode p:hover::before,
+.tts-paragraph-mode h1:hover::before,
+.tts-paragraph-mode h2:hover::before,
+.tts-paragraph-mode h3:hover::before,
+.tts-paragraph-mode h4:hover::before,
+.tts-paragraph-mode h5:hover::before,
+.tts-paragraph-mode h6:hover::before {
     opacity: 1;
 }
 

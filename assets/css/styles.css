@@ -142,7 +142,7 @@ h1, h2, h3, h4, h5, h6,
 .banner-content {
     font-weight: 700;
     letter-spacing: -0.02em;
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
 }
 
 .footer-logo {
@@ -1439,7 +1439,7 @@ footer::before {
     /* Banner más compacto en desktop */
     .banner-content {
         height: 280px; /* REDUCIDO DE 300px */
-        font-size: clamp(1.6rem, 3.5vw, 2.2rem); /* LIGERAMENTE MÁS PEQUEÑO */
+        font-size: clamp(2rem, 4.5vw, 2.8rem); /* AUMENTADO PARA MEJOR LEGIBILIDAD */
     }
 
     /* Grid ajustes */
@@ -1582,6 +1582,13 @@ footer::before {
         grid-template-columns: 1fr;
         gap: var(--spacing-md);
     }
+    
+    /* Banner en móvil con texto más grande */
+    .banner-content {
+        font-size: clamp(1.8rem, 6vw, 2.4rem);
+        padding: var(--spacing-lg);
+        height: 200px;
+    }
 }
 
 /* Móvil pequeño (≤480px) */
@@ -1607,8 +1614,13 @@ footer::before {
     .logo::before {
         width: 16px;
         height: 16px;
-        top: -3px;
-        right: -3px;
+    }
+    
+    /* Banner en móvil pequeño con texto aún más grande */
+    .banner-content {
+        font-size: clamp(1.6rem, 7vw, 2.2rem);
+        padding: var(--spacing-md);
+        height: 180px;
     }
     
     .logo-text-fallback {
