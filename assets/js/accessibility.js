@@ -117,7 +117,18 @@ function applyAccessibilitySettings() {
         removeDarkModeFromElements();
     }
     
-    // 4. Actualizar botones en el panel si existe (deferido para mejor rendimiento)
+    // 4. TEXT-TO-SPEECH - APLICAR ESTADO GUARDADO
+    if (accessibilitySettings.textToSpeech) {
+        body.classList.add('tts-paragraph-mode');
+        // Habilitar modo párrafos si estaba activo
+        enableParagraphMode();
+    } else {
+        body.classList.remove('tts-paragraph-mode');
+        // Deshabilitar modo párrafos si estaba inactivo
+        disableParagraphMode();
+    }
+    
+    // 5. Actualizar botones en el panel si existe (deferido para mejor rendimiento)
     requestIdleCallback(() => {
         updatePanelButtons();
     });
@@ -326,7 +337,7 @@ function toggleTextToSpeech() {
 
 // 7. FUNCIÓN PARA MOSTRAR ATAJOS DE TECLADO
 function showKeyboardShortcuts() {
-    showAccessibilityFeedback('Atajos: Ctrl/Cmd + (+) aumentar, (-) disminuir, (0) normal');
+    showAccessibilityFeedback('Atajos: Ctrl/Cmd + (+) aumentar, (-) disminuir, (0) normal, (S) parar TTS, (T) toggle TTS');
 }
 
 // 8. FUNCIÓN PARA RESETEAR TODAS LAS CONFIGURACIONES
@@ -391,6 +402,15 @@ function stopSpeaking() {
     if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
         console.log('🔇 Lectura detenida');
+    }
+    
+    // Limpiar resaltado visual de párrafos que se estén leyendo
+    const readingParagraphs = document.querySelectorAll('.tts-reading');
+    readingParagraphs.forEach(p => p.classList.remove('tts-reading'));
+    
+    // Si el TTS está activo y no es por navegación, mostrar feedback
+    if (accessibilitySettings.textToSpeech && !window.isNavigating) {
+        showAccessibilityFeedback('Lectura detenida - Haz clic en otro párrafo para continuar');
     }
 }
 
@@ -683,6 +703,21 @@ function setupAccessibilityEvents() {
                     break;
             }
         }
+        
+        // Shortcut para parar TTS (Ctrl/Cmd + S)
+        if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+            e.preventDefault();
+            if (accessibilitySettings.textToSpeech) {
+                stopSpeaking();
+                showAccessibilityFeedback('Lectura en voz alta detenida');
+            }
+        }
+        
+        // Shortcut para activar/desactivar TTS (Ctrl/Cmd + T)
+        if ((e.ctrlKey || e.metaKey) && e.key === 't') {
+            e.preventDefault();
+            toggleTextToSpeech();
+        }
     });
     
     // Cerrar panel al hacer clic en overlay
@@ -701,6 +736,9 @@ function setupAccessibilityEvents() {
             trapFocusInPanel(e);
         }
     });
+    
+    // Detener TTS al cambiar de página
+    setupPageNavigationListeners();
 }
 
 function trapFocusInPanel(e) {
@@ -725,6 +763,96 @@ function trapFocusInPanel(e) {
             firstElement.focus();
         }
     }
+}
+
+/* ==================================================
+   DETENER TTS AL CAMBIAR DE PÁGINA
+   ================================================== */
+function setupPageNavigationListeners() {
+    // Detener TTS antes de que se descargue la página
+    window.addEventListener('beforeunload', function() {
+        if (accessibilitySettings.textToSpeech) {
+            stopSpeaking();
+            console.log('🔇 TTS detenido por cambio de página (beforeunload)');
+        }
+    });
+    
+    // Detener TTS cuando la página se oculta (navegación)
+    window.addEventListener('pagehide', function() {
+        if (accessibilitySettings.textToSpeech) {
+            stopSpeaking();
+            console.log('🔇 TTS detenido por ocultación de página (pagehide)');
+        }
+    });
+    
+    // Detener TTS cuando se navega con el historial del navegador
+    window.addEventListener('popstate', function() {
+        if (accessibilitySettings.textToSpeech) {
+            stopSpeaking();
+            console.log('🔇 TTS detenido por navegación del historial (popstate)');
+        }
+    });
+    
+    // Detener TTS cuando la pestaña cambia de estado (oculta/visible)
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden && accessibilitySettings.textToSpeech) {
+            stopSpeaking();
+            console.log('🔇 TTS detenido por cambio de visibilidad de pestaña');
+        }
+    });
+    
+    // Detener TTS cuando se hace clic en enlaces internos
+    document.addEventListener('click', function(e) {
+        const link = e.target.closest('a');
+        if (link && link.href && !link.href.includes('#') && !link.href.includes('javascript:')) {
+            // Es un enlace que navega a otra página
+            if (accessibilitySettings.textToSpeech) {
+                // Marcar que se está navegando para evitar feedback innecesario
+                window.isNavigating = true;
+                stopSpeaking();
+                console.log('🔇 TTS detenido por clic en enlace de navegación');
+                
+                // Resetear la bandera después de un tiempo
+                setTimeout(() => {
+                    window.isNavigating = false;
+                }, 1000);
+            }
+        }
+    });
+    
+    // Detener TTS cuando se usa la API de History (pushState, replaceState)
+    const originalPushState = history.pushState;
+    const originalReplaceState = history.replaceState;
+    
+    history.pushState = function() {
+        if (accessibilitySettings.textToSpeech) {
+            window.isNavigating = true;
+            stopSpeaking();
+            console.log('🔇 TTS detenido por pushState');
+            
+            // Resetear la bandera después de un tiempo
+            setTimeout(() => {
+                window.isNavigating = false;
+            }, 1000);
+        }
+        return originalPushState.apply(this, arguments);
+    };
+    
+    history.replaceState = function() {
+        if (accessibilitySettings.textToSpeech) {
+            window.isNavigating = true;
+            stopSpeaking();
+            console.log('🔇 TTS detenido por replaceState');
+            
+            // Resetear la bandera después de un tiempo
+            setTimeout(() => {
+                window.isNavigating = false;
+            }, 1000);
+        }
+        return originalReplaceState.apply(this, arguments);
+    };
+    
+    console.log('✅ Listeners de navegación configurados para detener TTS');
 }
 
 /* ==================================================

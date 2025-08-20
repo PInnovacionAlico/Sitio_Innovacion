@@ -413,6 +413,44 @@
 }
 
 /* ==================================================
+   INFORMACIÓN DE ATAJOS DE TECLADO
+   ================================================== */
+.keyboard-shortcuts-info {
+    margin-top: 12px;
+    padding: 12px;
+    background: rgba(0, 166, 81, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(0, 166, 81, 0.1);
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.keyboard-shortcuts-info small {
+    color: var(--text-secondary, #666);
+}
+
+.keyboard-shortcuts-info kbd {
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    padding: 2px 4px;
+    font-family: monospace;
+    font-size: 11px;
+    color: var(--text-primary, #333);
+}
+
+.dark-mode .keyboard-shortcuts-info {
+    background: rgba(0, 166, 81, 0.1);
+    border-color: rgba(0, 166, 81, 0.2);
+}
+
+.dark-mode .keyboard-shortcuts-info kbd {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-primary, #fff);
+}
+
+/* ==================================================
    RESPONSIVE - OPTIMIZADO PARA MÓVIL
    ================================================== */
 @media (max-width: 768px) {
