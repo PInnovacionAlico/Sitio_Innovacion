@@ -3529,3 +3529,492 @@ footer::before {
     color: inherit !important;
     opacity: 0.9;
 }
+
+/* =====================================================
+   MODO OSCURO ESPECÍFICO PARA DESIGN THINKING
+   Agregando estas reglas al final de styles.css
+   ===================================================== */
+
+/* Variables adicionales para modo oscuro */
+.dark-mode {
+    --bg-primary: #121212;
+    --bg-secondary: #1e1e1e;
+    --bg-tertiary: #2a2a2a;
+    --bg-quaternary: #333333;
+    --text-primary: #ffffff;
+    --text-secondary: #e0e0e0;
+    --text-muted: #b0b0b0;
+    --border-color: #404040;
+    --shadow-color: rgba(0, 0, 0, 0.7);
+    --card-bg: #1a1a1a;
+    --card-hover-bg: #252525;
+    
+    /* Colores corporativos adaptados para modo oscuro */
+    --amarillo-oro-dark: #FFB347;
+    --azul-novo-dark: #4A90E2;
+    --azul-claro-dark: #64B5F6;
+    --verde-natura-dark: #81C784;
+}
+
+/* =====================================================
+   BODY Y ESTRUCTURA PRINCIPAL EN MODO OSCURO
+   ===================================================== */
+
+.dark-mode body {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+.dark-mode main {
+    background-color: var(--bg-primary) !important;
+}
+
+/* =====================================================
+   BANNER Y BREADCRUMBS EN MODO OSCURO
+   ===================================================== */
+
+.dark-mode .banner-section {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+.dark-mode .banner-content {
+    color: var(--text-primary) !important;
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)) !important;
+}
+
+.dark-mode .breadcrumb {
+    background: rgba(30, 30, 30, 0.95) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+.dark-mode .breadcrumb-link {
+    color: var(--azul-claro-dark) !important;
+    background: rgba(100, 181, 246, 0.1) !important;
+    border: 1px solid rgba(100, 181, 246, 0.2) !important;
+}
+
+.dark-mode .breadcrumb-link:hover {
+    background: rgba(100, 181, 246, 0.2) !important;
+    border-color: rgba(100, 181, 246, 0.4) !important;
+}
+
+.dark-mode .breadcrumb-current {
+    color: var(--amarillo-oro-dark) !important;
+    background: rgba(255, 179, 71, 0.1) !important;
+    border: 1px solid rgba(255, 179, 71, 0.3) !important;
+}
+
+.dark-mode .breadcrumb-separator {
+    color: var(--text-muted) !important;
+}
+
+/* =====================================================
+   MODEL CARD Y CONTENT SECTIONS EN MODO OSCURO
+   ===================================================== */
+
+.dark-mode .model-card {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+}
+
+.dark-mode .model-card h2 {
+    color: var(--azul-claro-dark) !important;
+}
+
+.dark-mode .model-card p {
+    color: var(--text-secondary) !important;
+}
+
+.dark-mode .content-section {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+}
+
+.dark-mode .content-section h2 {
+    color: var(--azul-claro-dark) !important;
+}
+
+.dark-mode .content-section p {
+    color: var(--text-secondary) !important;
+}
+
+/* =====================================================
+   HIGHLIGHT BOXES EN MODO OSCURO
+   ===================================================== */
+
+.dark-mode .highlight-box {
+    background: var(--bg-tertiary) !important;
+    border: 2px solid var(--azul-claro-dark) !important;
+    border-left: 6px solid var(--azul-claro-dark) !important;
+    color: var(--text-primary) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+.dark-mode .highlight-box h3 {
+    color: var(--azul-claro-dark) !important;
+}
+
+.dark-mode .highlight-box p {
+    color: var(--text-secondary) !important;
+}
+
+/* =====================================================
+   METHODOLOGY CARDS EN MODO OSCURO
+   ===================================================== */
+
+.dark-mode .methodology-card {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%) !important;
+    color: var(--text-primary) !important;
+    border: 2px solid var(--border-color) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+}
+
+.dark-mode .methodology-card:hover {
+    border-color: var(--azul-claro-dark) !important;
+    background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-quaternary) 100%) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6) !important;
+}
+
+.dark-mode .methodology-card h3 {
+    color: var(--azul-claro-dark) !important;
+}
+
+.dark-mode .methodology-card p {
+    color: var(--text-secondary) !important;
+}
+
+.dark-mode .methodology-icon .material-symbols-rounded {
+    color: var(--azul-claro-dark) !important;
+    background: rgba(100, 181, 246, 0.1) !important;
+}
+
+.dark-mode .methodology-card:hover .methodology-icon .material-symbols-rounded {
+    background: rgba(100, 181, 246, 0.2) !important;
+}
+
+/* =====================================================
+   PROCESO DE DESIGN THINKING EN MODO OSCURO
+   ===================================================== */
+
+.dark-mode .dt-process {
+    background: linear-gradient(135deg, var(--verde-natura-dark) 0%, #4a6741 100%) !important;
+    color: var(--text-primary) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6) !important;
+}
+
+.dark-mode .dt-process h2 {
+    color: var(--text-primary) !important;
+}
+
+.dark-mode .dt-step {
+    background: rgba(30, 30, 30, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 2px solid rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-primary) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+}
+
+.dark-mode .dt-step:hover {
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    background: rgba(40, 40, 40, 0.95) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6) !important;
+}
+
+.dark-mode .dt-step-number {
+    background: var(--amarillo-oro-dark) !important;
+    color: var(--bg-primary) !important;
+    box-shadow: 0 4px 20px rgba(255, 179, 71, 0.3) !important;
+}
+
+.dark-mode .dt-step:hover .dt-step-number {
+    box-shadow: 0 8px 32px rgba(255, 179, 71, 0.5) !important;
+}
+
+.dark-mode .dt-step h3 {
+    color: var(--azul-claro-dark) !important;
+}
+
+.dark-mode .dt-step p {
+    color: var(--text-secondary) !important;
+}
+
+/* =====================================================
+   BENEFICIOS EN MODO OSCURO
+   ===================================================== */
+
+.dark-mode .dt-benefits {
+    background: linear-gradient(135deg, var(--amarillo-oro-dark) 0%, #cc8a2e 100%) !important;
+    color: var(--text-primary) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6) !important;
+}
+
+.dark-mode .dt-benefits h2 {
+    color: var(--text-primary) !important;
+}
+
+.dark-mode .dt-benefit {
+    background: rgba(30, 30, 30, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 2px solid rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-primary) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+}
+
+.dark-mode .dt-benefit:hover {
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    background: rgba(40, 40, 40, 0.95) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6) !important;
+}
+
+.dark-mode .dt-benefit h3 {
+    color: var(--azul-claro-dark) !important;
+}
+
+.dark-mode .dt-benefit .material-symbols-rounded {
+    color: var(--azul-claro-dark) !important;
+    background: rgba(100, 181, 246, 0.2) !important;
+}
+
+.dark-mode .dt-benefit p {
+    color: var(--text-secondary) !important;
+}
+
+/* =====================================================
+   CALL TO ACTION EN MODO OSCURO
+   ===================================================== */
+
+.dark-mode .dt-cta {
+    background: linear-gradient(135deg, var(--azul-novo-dark) 0%, #2c5aa0 100%) !important;
+    color: var(--text-primary) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6) !important;
+}
+
+.dark-mode .dt-cta h2 {
+    color: var(--text-primary) !important;
+}
+
+.dark-mode .dt-cta p {
+    color: var(--text-primary) !important;
+}
+
+.dark-mode .dt-cta-button {
+    background: linear-gradient(135deg, var(--amarillo-oro-dark) 0%, #e6a347 100%) !important;
+    color: var(--bg-primary) !important;
+    border: none !important;
+    box-shadow: 0 8px 32px rgba(255, 179, 71, 0.3) !important;
+}
+
+.dark-mode .dt-cta-button:hover {
+    background: linear-gradient(135deg, #e6a347 0%, #d49636 100%) !important;
+    box-shadow: 0 12px 40px rgba(255, 179, 71, 0.5) !important;
+}
+
+/* =====================================================
+   BOTÓN DE ALTERNANCIA DE MODO OSCURO
+   ===================================================== */
+
+.theme-toggle {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    background: linear-gradient(135deg, var(--azul-novo) 0%, var(--azul-novo-80) 100%);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 999;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-lg);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: var(--shadow-xl);
+}
+
+.dark-mode .theme-toggle {
+    background: linear-gradient(135deg, var(--amarillo-oro-dark) 0%, #e6a347 100%) !important;
+    color: var(--bg-primary) !important;
+    box-shadow: 0 8px 32px rgba(255, 179, 71, 0.3) !important;
+}
+
+.dark-mode .theme-toggle:hover {
+    box-shadow: 0 12px 40px rgba(255, 179, 71, 0.5) !important;
+}
+
+/* Animación de rotación para el ícono */
+.theme-toggle .material-symbols-rounded {
+    transition: transform 0.3s ease;
+}
+
+.dark-mode .theme-toggle .material-symbols-rounded {
+    transform: rotate(180deg);
+}
+
+/* =====================================================
+   RESPONSIVE PARA MODO OSCURO
+   ===================================================== */
+
+@media (max-width: 768px) {
+    .theme-toggle {
+        top: 120px;
+        right: 16px;
+        width: 46px;
+        height: 46px;
+        font-size: 18px;
+    }
+    
+    .dark-mode .dt-process,
+    .dark-mode .dt-benefits,
+    .dark-mode .dt-cta {
+        margin: var(--spacing-xl) var(--spacing-md);
+    }
+    
+    .dark-mode .content-section {
+        margin: var(--spacing-xl) 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .theme-toggle {
+        top: 110px;
+        right: 12px;
+        width: 42px;
+        height: 42px;
+        font-size: 16px;
+    }
+    
+    .dark-mode .dt-process,
+    .dark-mode .dt-benefits,
+    .dark-mode .dt-cta {
+        padding: var(--spacing-lg) var(--spacing-sm);
+        margin: var(--spacing-lg) var(--spacing-sm);
+    }
+}
+
+/* =====================================================
+   TRANSICIONES SUAVES PARA CAMBIO DE TEMA
+   ===================================================== */
+
+body,
+.banner-section,
+.banner-content,
+.breadcrumb,
+.breadcrumb-link,
+.breadcrumb-current,
+.model-card,
+.content-section,
+.highlight-box,
+.methodology-card,
+.dt-process,
+.dt-step,
+.dt-benefits,
+.dt-benefit,
+.dt-cta,
+.dt-cta-button {
+    transition: 
+        background-color 0.3s ease,
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease !important;
+}
+
+/* =====================================================
+   ESTADOS DE ACCESIBILIDAD EN MODO OSCURO
+   ===================================================== */
+
+.dark-mode .dt-cta-button:focus {
+    outline: 3px solid rgba(255, 179, 71, 0.5) !important;
+    outline-offset: 2px;
+}
+
+.dark-mode .methodology-card:focus {
+    outline: 3px solid var(--azul-claro-dark) !important;
+    outline-offset: 2px;
+}
+
+.dark-mode .theme-toggle:focus {
+    outline: 3px solid rgba(255, 179, 71, 0.5) !important;
+    outline-offset: 2px;
+}
+
+/* =====================================================
+   OPTIMIZACIONES PARA RENDIMIENTO
+   ===================================================== */
+
+.dark-mode .dt-step,
+.dark-mode .dt-benefit,
+.dark-mode .methodology-card {
+    will-change: transform, box-shadow;
+}
+
+/* Mejora la legibilidad en modo oscuro */
+.dark-mode {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* =====================================================
+   MODO ALTO CONTRASTE EN OSCURO
+   ===================================================== */
+
+.dark-mode.high-contrast .model-card,
+.dark-mode.high-contrast .content-section,
+.dark-mode.high-contrast .highlight-box,
+.dark-mode.high-contrast .methodology-card,
+.dark-mode.high-contrast .dt-step,
+.dark-mode.high-contrast .dt-benefit {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+}
+
+.dark-mode.high-contrast .dt-process,
+.dark-mode.high-contrast .dt-benefits,
+.dark-mode.high-contrast .dt-cta {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+}
+
+.dark-mode.high-contrast .dt-step-number {
+    background: #ffffff !important;
+    color: #000000 !important;
+}
+
+.dark-mode.high-contrast .dt-cta-button {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #ffffff !important;
+}
+
+/* =====================================================
+   PRINT STYLES PARA MODO OSCURO
+   ===================================================== */
+
+@media print {
+    .dark-mode * {
+        background: white !important;
+        color: black !important;
+        box-shadow: none !important;
+    }
+    
+    .theme-toggle {
+        display: none !important;
+    }
+}
