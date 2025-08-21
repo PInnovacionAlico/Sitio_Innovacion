@@ -141,6 +141,20 @@
             min-width: 100%;
             position: relative;
             overflow: hidden;
+            height: 400px; /* Altura fija para consistencia */
+        }
+
+        /* Estilos para las imágenes del carrusel */
+        .carousel-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.3s ease;
+        }
+
+        .carousel-slide:hover .carousel-image {
+            transform: scale(1.05);
         }
 
         .photo-placeholder {
@@ -271,6 +285,7 @@
             .embed-container { padding-bottom: 56.25%; }
             
             .photo-placeholder { height: 300px; }
+            .carousel-slide { height: 300px; }
             .photo-icon { font-size: 60px !important; }
             
             .carousel-nav {
@@ -287,6 +302,7 @@
             .header-placeholder { height: 65px; font-size: 13px; }
             
             .photo-placeholder { height: 250px; }
+            .carousel-slide { height: 250px; }
             .photo-caption { padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md); }
         }
     </style>
@@ -361,58 +377,58 @@
             <div class="carousel-container">
                 <div class="carousel-track" id="carouselTrack">
                     
-                    <!-- Slide 1 -->
+                    <!-- Slide 1: Planta -->
                     <div class="carousel-slide">
-                        <div class="photo-placeholder">
-                            <div class="material-symbols-rounded photo-icon">factory</div>
-                            <div class="photo-caption">
-                                <h3>Innovación en Planta</h3>
-                                <p>Nuestras instalaciones de producción donde la innovación toma forma física, combinando tecnología avanzada con procesos sostenibles.</p>
-                            </div>
+                        <img src="../../assets/images/carrousel/planta.jpeg" 
+                             alt="Planta de producción de Alico - Instalaciones industriales" 
+                             class="carousel-image">
+                        <div class="photo-caption">
+                            <h3>Lorem Ipsum Dolor Sit</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
                         </div>
                     </div>
 
-                    <!-- Slide 2 -->
+                    <!-- Slide 2: Piso 8 -->
                     <div class="carousel-slide">
-                        <div class="photo-placeholder">
-                            <div class="material-symbols-rounded photo-icon">groups</div>
-                            <div class="photo-caption">
-                                <h3>Equipo de Innovación</h3>
-                                <p>Los protagonistas detrás de cada proyecto: nuestro talentoso equipo de investigadores, diseñadores e ingenieros trabajando en colaboración.</p>
-                            </div>
+                        <img src="../../assets/images/carrousel/piso_8.jpg" 
+                             alt="Piso 8 - Área administrativa y de innovación" 
+                             class="carousel-image">
+                        <div class="photo-caption">
+                            <h3>Consectetur Adipiscing Elit</h3>
+                            <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                         </div>
                     </div>
 
-                    <!-- Slide 3 -->
+                    <!-- Slide 3: 3Decko -->
                     <div class="carousel-slide">
-                        <div class="photo-placeholder">
-                            <div class="material-symbols-rounded photo-icon">science</div>
-                            <div class="photo-caption">
-                                <h3>Laboratorio de I+D</h3>
-                                <p>Espacios donde nacen las ideas más revolucionarias, equipados con tecnología de punta para el desarrollo de nuevos materiales.</p>
-                            </div>
+                        <img src="../../assets/images/carrousel/3decko.jpg" 
+                             alt="3Decko - Proyecto de innovación tecnológica" 
+                             class="carousel-image">
+                        <div class="photo-caption">
+                            <h3>Sed Do Eiusmod Tempor</h3>
+                            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
                         </div>
                     </div>
 
-                    <!-- Slide 4 -->
+                    <!-- Slide 4: Lego -->
                     <div class="carousel-slide">
-                        <div class="photo-placeholder">
-                            <div class="material-symbols-rounded photo-icon">eco</div>
-                            <div class="photo-caption">
-                                <h3>Sostenibilidad en Acción</h3>
-                                <p>Proyectos que demuestran nuestro compromiso con el medio ambiente, desde materiales biodegradables hasta procesos de economía circular.</p>
-                            </div>
+                        <img src="../../assets/images/carrousel/lego.jpg" 
+                             alt="Proyecto Lego - Innovación en materiales" 
+                             class="carousel-image">
+                        <div class="photo-caption">
+                            <h3>Ut Labore Et Dolore</h3>
+                            <p>Ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.</p>
                         </div>
                     </div>
 
-                    <!-- Slide 5 -->
+                    <!-- Slide 5: Proveedores -->
                     <div class="carousel-slide">
-                        <div class="photo-placeholder">
-                            <div class="material-symbols-rounded photo-icon">emoji_events</div>
-                            <div class="photo-caption">
-                                <h3>Logros y Reconocimientos</h3>
-                                <p>Momentos especiales que celebran nuestros éxitos, desde certificaciones hasta premios por innovación en la industria del packaging.</p>
-                            </div>
+                        <img src="../../assets/images/carrousel/proveedores.jpg" 
+                             alt="Proveedores - Colaboración empresarial" 
+                             class="carousel-image">
+                        <div class="photo-caption">
+                            <h3>Magna Aliqua Ut Enim</h3>
+                            <p>Magna aliqua ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</p>
                         </div>
                     </div>
 
