@@ -950,7 +950,7 @@ main {
 }
 
 .banner-content {
-    height: 320px; /* AUMENTADO PARA ACOMODAR TEXTO MÁS GRANDE */
+    height: 380px; /* AUMENTADO PARA ACOMODAR TEXTO MÁS GRANDE */
     background-color: #333;
     display: flex;
     align-items: center;
@@ -963,6 +963,7 @@ main {
     background-position: center;
     background-repeat: no-repeat;
     position: relative;
+    font-size: clamp(3.5rem, 8vw, 5.5rem); /* EXTREMADAMENTE GRANDE PARA MEJOR LEGIBILIDAD */
 }
 
 /* ==================================================
@@ -1438,8 +1439,8 @@ footer::before {
     
     /* Banner más compacto en desktop */
     .banner-content {
-        height: 300px; /* AUMENTADO PARA ACOMODAR TEXTO MÁS GRANDE */
-        font-size: clamp(2.6rem, 5.5vw, 3.8rem); /* MUCHO MÁS GRANDE PARA MEJOR LEGIBILIDAD */
+        height: 350px; /* AUMENTADO PARA ACOMODAR TEXTO MÁS GRANDE */
+        font-size: clamp(3.2rem, 7vw, 5rem); /* EXTREMADAMENTE GRANDE PARA MEJOR LEGIBILIDAD */
     }
 
     /* Grid ajustes */
@@ -1560,7 +1561,8 @@ footer::before {
         padding: var(--spacing-xl);
     }
     
-    .ali-character {
+    /* Solo ocultar ali-character en páginas específicas, no en el index */
+    .page-specific .ali-character {
         display: none;
     }
 
@@ -1585,9 +1587,9 @@ footer::before {
     
     /* Banner en móvil con texto mucho más grande */
     .banner-content {
-        font-size: clamp(2.4rem, 8vw, 3.2rem);
+        font-size: clamp(3rem, 10vw, 4.5rem);
         padding: var(--spacing-lg);
-        height: 220px;
+        height: 280px;
     }
 }
 
@@ -1618,9 +1620,9 @@ footer::before {
     
     /* Banner en móvil pequeño con texto muy grande */
     .banner-content {
-        font-size: clamp(2rem, 9vw, 2.8rem);
+        font-size: clamp(2.8rem, 12vw, 4rem);
         padding: var(--spacing-md);
-        height: 200px;
+        height: 250px;
     }
     
     .logo-text-fallback {
