@@ -50,6 +50,10 @@
             margin-left: auto;
             margin-right: auto;
             padding: 0 var(--spacing-lg);
+            background: var(--blanco);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-xl);
+            box-shadow: var(--shadow-sm);
         }
 
         .content-section h2 {
@@ -64,14 +68,15 @@
         .content-section p {
             font-size: clamp(1rem, 2.5vw, 1.2rem);
             line-height: 1.7;
-            color: var(--gris-oscuro);
+            color: #333333;
             margin-bottom: var(--spacing-lg);
-            text-align: justify;
+            text-align: left;
         }
 
         .highlight-box {
-            background: linear-gradient(135deg, var(--azul-claro-10) 0%, var(--azul-claro-20) 100%);
-            border-left: 4px solid var(--azul-claro);
+            background: var(--blanco);
+            border: 2px solid var(--azul-claro);
+            border-left: 6px solid var(--azul-claro);
             padding: var(--spacing-lg);
             border-radius: var(--border-radius-md);
             margin: var(--spacing-lg) 0;
@@ -89,6 +94,7 @@
         .highlight-box p {
             margin-bottom: 0;
             text-align: left;
+            color: #333333;
         }
 
         .methodology-grid {
@@ -103,37 +109,19 @@
         }
 
         .methodology-card {
-            background: linear-gradient(135deg, var(--gris-claro) 0%, var(--blanco) 100%);
+            background: var(--blanco);
+            border: 2px solid var(--gris-claro);
             border-radius: var(--border-radius-xl);
             padding: var(--spacing-xl);
             text-align: center;
-            box-shadow: var(--shadow-lg);
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
+            box-shadow: var(--shadow-md);
             position: relative;
-            overflow: hidden;
-        }
-
-        .methodology-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
         }
 
         .methodology-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: var(--shadow-xl);
             border-color: var(--azul-claro);
-        }
-
-        .methodology-card:hover::before {
-            opacity: 1;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
         }
 
         .methodology-icon {
@@ -146,11 +134,9 @@
             background: rgba(64, 180, 229, 0.1);
             padding: var(--spacing-md);
             border-radius: 50%;
-            transition: all 0.3s ease;
         }
 
         .methodology-card:hover .methodology-icon .material-symbols-rounded {
-            transform: scale(1.1);
             background: rgba(64, 180, 229, 0.2);
         }
 
@@ -163,7 +149,7 @@
         }
 
         .methodology-card p {
-            color: var(--gris-oscuro);
+            color: #333333;
             line-height: 1.6;
             text-align: center;
         }
@@ -212,19 +198,19 @@
         }
         
         .dt-step {
-            background: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.95);
             padding: var(--spacing-xl);
             border-radius: var(--border-radius-lg);
             text-align: center;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.3);
+            box-shadow: var(--shadow-md);
         }
 
         .dt-step:hover {
-            transform: translateY(-5px);
-            background: rgba(255,255,255,0.2);
-            border-color: rgba(255,255,255,0.4);
+            transform: translateY(-3px);
+            border-color: rgba(255,255,255,0.5);
+            box-shadow: var(--shadow-lg);
         }
         
         .dt-step-number {
@@ -253,12 +239,13 @@
             margin-bottom: var(--spacing-md);
             font-size: 1.4em;
             font-weight: 600;
+            color: var(--azul-novo);
         }
         
         .dt-step p {
             line-height: 1.6;
-            opacity: 0.95;
             text-align: center;
+            color: #333333;
         }
         
         /* === BENEFICIOS === */
@@ -305,18 +292,18 @@
         }
         
         .dt-benefit {
-            background: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.95);
             padding: var(--spacing-xl);
             border-radius: var(--border-radius-lg);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.3);
+            box-shadow: var(--shadow-md);
         }
 
         .dt-benefit:hover {
-            transform: translateY(-5px);
-            background: rgba(255,255,255,0.2);
-            border-color: rgba(255,255,255,0.4);
+            transform: translateY(-3px);
+            border-color: rgba(255,255,255,0.5);
+            box-shadow: var(--shadow-lg);
         }
         
         .dt-benefit h3 {
@@ -327,19 +314,20 @@
             display: flex;
             align-items: center;
             gap: var(--spacing-sm);
+            color: var(--azul-novo);
         }
         
         .dt-benefit .material-symbols-rounded {
             font-size: 1.8em !important;
             color: var(--azul-claro);
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.3);
             padding: 8px;
             border-radius: 50%;
         }
         
         .dt-benefit p {
             line-height: 1.6;
-            opacity: 0.95;
+            color: #333333;
         }
         
         /* === CALL TO ACTION === */
@@ -382,9 +370,9 @@
             margin-left: auto;
             margin-right: auto;
             line-height: 1.6;
-            opacity: 0.95;
             position: relative;
             z-index: 2;
+            color: var(--blanco);
         }
         
         .dt-cta-button {
@@ -710,8 +698,8 @@
                 console.log('✅ Página Design Thinking inicializada como página hija');
             }, 800);
 
-            // Animaciones para elementos
-            const animatedElements = document.querySelectorAll('.dt-step, .dt-benefit, .methodology-card, .highlight-box');
+            // Animaciones simplificadas para elementos
+            const animatedElements = document.querySelectorAll('.content-section, .highlight-box');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -723,20 +711,20 @@
 
             animatedElements.forEach((element, index) => {
                 element.style.opacity = '0';
-                element.style.transform = 'translateY(30px)';
-                element.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = `opacity 0.4s ease ${index * 0.1}s, transform 0.4s ease ${index * 0.1}s`;
                 observer.observe(element);
             });
 
-            // Efectos de hover mejorados
-            const cards = document.querySelectorAll('.dt-step, .dt-benefit, .methodology-card');
+            // Efectos de hover simplificados
+            const cards = document.querySelectorAll('.methodology-card');
             cards.forEach(card => {
                 card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                    this.style.transform = 'translateY(-3px)';
                 });
                 
                 card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.transform = 'translateY(0)';
                 });
             });
 
