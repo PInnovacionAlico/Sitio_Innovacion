@@ -142,7 +142,7 @@ h1, h2, h3, h4, h5, h6,
 .banner-content {
     font-weight: 700;
     letter-spacing: -0.02em;
-    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-size: clamp(2.8rem, 6.5vw, 4.2rem);
 }
 
 .footer-logo {
@@ -950,14 +950,14 @@ main {
 }
 
 .banner-content {
-    height: 280px; /* REDUCIDO DE 300px PARA DESKTOP */
+    height: 320px; /* AUMENTADO PARA ACOMODAR TEXTO MÁS GRANDE */
     background-color: #333;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--blanco);
     text-align: center;
-    padding: var(--spacing-xl); /* REDUCIDO PADDING PARA DESKTOP */
+    padding: var(--spacing-xl);
     background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4));
     background-size: cover;
     background-position: center;
@@ -1438,8 +1438,8 @@ footer::before {
     
     /* Banner más compacto en desktop */
     .banner-content {
-        height: 280px; /* REDUCIDO DE 300px */
-        font-size: clamp(2rem, 4.5vw, 2.8rem); /* AUMENTADO PARA MEJOR LEGIBILIDAD */
+        height: 300px; /* AUMENTADO PARA ACOMODAR TEXTO MÁS GRANDE */
+        font-size: clamp(2.6rem, 5.5vw, 3.8rem); /* MUCHO MÁS GRANDE PARA MEJOR LEGIBILIDAD */
     }
 
     /* Grid ajustes */
@@ -1583,11 +1583,11 @@ footer::before {
         gap: var(--spacing-md);
     }
     
-    /* Banner en móvil con texto más grande */
+    /* Banner en móvil con texto mucho más grande */
     .banner-content {
-        font-size: clamp(1.8rem, 6vw, 2.4rem);
+        font-size: clamp(2.4rem, 8vw, 3.2rem);
         padding: var(--spacing-lg);
-        height: 200px;
+        height: 220px;
     }
 }
 
@@ -1616,11 +1616,11 @@ footer::before {
         height: 16px;
     }
     
-    /* Banner en móvil pequeño con texto aún más grande */
+    /* Banner en móvil pequeño con texto muy grande */
     .banner-content {
-        font-size: clamp(1.6rem, 7vw, 2.2rem);
+        font-size: clamp(2rem, 9vw, 2.8rem);
         padding: var(--spacing-md);
-        height: 180px;
+        height: 200px;
     }
     
     .logo-text-fallback {

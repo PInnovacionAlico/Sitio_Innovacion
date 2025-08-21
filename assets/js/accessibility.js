@@ -206,8 +206,8 @@ function updatePanelButtons() {
 
 // 1. AUMENTAR TAMAÑO DE FUENTE - OPTIMIZADO
 function increaseFontSize() {
-    if (accessibilitySettings.fontSize < 150) {
-        accessibilitySettings.fontSize += 10;
+    if (accessibilitySettings.fontSize < 140) {
+        accessibilitySettings.fontSize += 5;
         applyAccessibilitySettings();
         saveAccessibilitySettings();
         
@@ -220,8 +220,8 @@ function increaseFontSize() {
 
 // 2. DISMINUIR TAMAÑO DE FUENTE - OPTIMIZADO
 function decreaseFontSize() {
-    if (accessibilitySettings.fontSize > 80) {
-        accessibilitySettings.fontSize -= 10;
+    if (accessibilitySettings.fontSize > 85) {
+        accessibilitySettings.fontSize -= 5;
         applyAccessibilitySettings();
         saveAccessibilitySettings();
         
@@ -342,7 +342,7 @@ function toggleTextToSpeech() {
 
 // 7. FUNCIÓN PARA MOSTRAR ATAJOS DE TECLADO
 function showKeyboardShortcuts() {
-    showAccessibilityFeedback('Atajos: Ctrl/Cmd + (+) aumentar, (-) disminuir, (0) normal, (S) parar TTS, (T) toggle TTS');
+    showAccessibilityFeedback('Atajos: Ctrl/Cmd + (+) aumentar, (-) disminuir, (0) normal, Shift+(Q) parar TTS, Shift+(R) toggle TTS');
 }
 
 // 8. FUNCIÓN PARA RESETEAR TODAS LAS CONFIGURACIONES
@@ -752,8 +752,8 @@ function setupAccessibilityEvents() {
             }
         }
         
-        // Shortcut para parar TTS (Ctrl/Cmd + S)
-        if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        // Shortcut para parar TTS (Ctrl/Cmd + Shift + Q)
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'Q') {
             e.preventDefault();
             if (accessibilitySettings.textToSpeech) {
                 stopSpeaking();
@@ -761,8 +761,8 @@ function setupAccessibilityEvents() {
             }
         }
         
-        // Shortcut para activar/desactivar TTS (Ctrl/Cmd + T)
-        if ((e.ctrlKey || e.metaKey) && e.key === 't') {
+        // Shortcut para activar/desactivar TTS (Ctrl/Cmd + Shift + R)
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'R') {
             e.preventDefault();
             toggleTextToSpeech();
         }
