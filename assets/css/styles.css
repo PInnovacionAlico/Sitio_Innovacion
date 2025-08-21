@@ -3265,3 +3265,267 @@ footer::before {
 .mobile-nav-dropdown.active .mobile-dropdown-content {
     animation: mobileAccordionExpand 0.3s ease;
 }
+
+/* ===================================================================
+   MODO OSCURO PARA PÁGINA DE RECURSOS AUDIOVISUALES
+   =================================================================== */
+
+/* Tarjetas de recursos principales */
+.dark-mode .resource-index-card {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%) !important;
+    border: 1px solid #444444 !important;
+    color: var(--text-primary) !important;
+}
+
+.dark-mode .resource-card-header {
+    background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%) !important;
+}
+
+.dark-mode .resource-card-title {
+    color: var(--azul-claro) !important;
+}
+
+.dark-mode .resource-card-description {
+    color: var(--text-secondary) !important;
+}
+
+.dark-mode .resource-card-footer {
+    border-top: 1px solid #444444 !important;
+    color: var(--azul-claro) !important;
+}
+
+.dark-mode .resource-card-type {
+    color: var(--text-muted) !important;
+}
+
+/* Headers de cada tipo de recurso en modo oscuro */
+.dark-mode .resource-card-videos .resource-card-header {
+    background: linear-gradient(135deg, #1e3a5c 0%, #0f1f2e 100%) !important;
+}
+
+.dark-mode .resource-card-videos .resource-card-icon {
+    color: var(--azul-claro) !important;
+}
+
+.dark-mode .resource-card-embajador .resource-card-header {
+    background: linear-gradient(135deg, #2d4a2d 0%, #1a2e1a 100%) !important;
+}
+
+.dark-mode .resource-card-embajador .resource-card-icon {
+    color: var(--verde-natura) !important;
+}
+
+.dark-mode .resource-card-podcast .resource-card-header {
+    background: linear-gradient(135deg, #4a3d1a 0%, #2e2510 100%) !important;
+}
+
+.dark-mode .resource-card-podcast .resource-card-icon {
+    color: var(--amarillo-oro) !important;
+}
+
+.dark-mode .resource-card-plantillas .resource-card-header {
+    background: linear-gradient(135d, #1e3a5c 0%, #0f1f2e 100%) !important;
+}
+
+.dark-mode .resource-card-plantillas .resource-card-icon {
+    color: var(--azul-claro) !important;
+}
+
+/* ===================================================================
+   MODO OSCURO PARA PÁGINA DE INICIATIVAS
+   =================================================================== */
+
+/* Banner de iniciativas */
+.dark-mode .initiatives-banner {
+    background: linear-gradient(135deg, var(--verde-natura) 0%, var(--verde-natura-80) 100%) !important;
+}
+
+/* Tarjetas de iniciativas */
+.dark-mode .initiative-card {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%) !important;
+    border: 1px solid #444444 !important;
+    color: var(--text-primary) !important;
+}
+
+.dark-mode .initiative-image {
+    background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%) !important;
+}
+
+.dark-mode .initiative-title {
+    color: var(--azul-claro) !important;
+}
+
+.dark-mode .initiative-description {
+    color: var(--text-secondary) !important;
+}
+
+.dark-mode .initiative-footer {
+    border-top: 1px solid #444444 !important;
+}
+
+.dark-mode .initiative-link {
+    color: var(--azul-claro) !important;
+}
+
+.dark-mode .initiative-link:hover {
+    color: var(--azul-claro-80) !important;
+}
+
+/* Tipos de iniciativas en modo oscuro */
+.dark-mode .initiative-type.external {
+    background: rgba(219, 149, 0, 0.2) !important;
+    color: var(--amarillo-oro) !important;
+}
+
+.dark-mode .initiative-type.internal {
+    background: rgba(64, 180, 229, 0.2) !important;
+    color: var(--azul-claro) !important;
+}
+
+/* Colores específicos para cada iniciativa en modo oscuro */
+.dark-mode .initiative-empaque .initiative-image {
+    background: linear-gradient(135deg, #1e3a5c 0%, #0f1f2e 100%) !important;
+}
+
+.dark-mode .initiative-banco .initiative-image {
+    background: linear-gradient(135deg, #4a3d1a 0%, #2e2510 100%) !important;
+}
+
+.dark-mode .initiative-noticias .initiative-image {
+    background: linear-gradient(135deg, #1e3a5c 0%, #0f1f2e 100%) !important;
+}
+
+.dark-mode .initiative-design .initiative-image {
+    background: linear-gradient(135deg, #2d4a2d 0%, #1a2e1a 100%) !important;
+}
+
+/* ===================================================================
+   VARIABLES DE MODO OSCURO (SI NO ESTÁN DEFINIDAS)
+   =================================================================== */
+
+.dark-mode {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2c2c2c;
+    --bg-tertiary: #3a3a3a;
+    --text-primary: #ffffff;
+    --text-secondary: #e0e0e0;
+    --text-muted: #b0b0b0;
+    --border-color: #444444;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+}
+
+/* ===================================================================
+   ESTILOS GLOBALES DE MODO OSCURO (APLICABLES A AMBAS PÁGINAS)
+   =================================================================== */
+
+/* Asegurar que el body tenga el fondo correcto */
+.dark-mode body {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Model cards en modo oscuro */
+.dark-mode .model-card {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+.dark-mode .model-card h2 {
+    color: var(--azul-claro) !important;
+}
+
+.dark-mode .model-card p {
+    color: var(--text-secondary) !important;
+}
+
+/* Breadcrumbs en modo oscuro */
+.dark-mode .breadcrumb {
+    background: rgba(44, 44, 44, 0.95) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+.dark-mode .breadcrumb-link {
+    color: var(--azul-claro) !important;
+    background: rgba(64, 180, 229, 0.1) !important;
+    border: 1px solid rgba(64, 180, 229, 0.2) !important;
+}
+
+.dark-mode .breadcrumb-link:hover {
+    background: rgba(64, 180, 229, 0.2) !important;
+    border-color: rgba(64, 180, 229, 0.4) !important;
+}
+
+.dark-mode .breadcrumb-current {
+    color: var(--amarillo-oro) !important;
+    background: rgba(219, 149, 0, 0.1) !important;
+    border: 1px solid rgba(219, 149, 0, 0.3) !important;
+}
+
+.dark-mode .breadcrumb-separator {
+    color: var(--text-muted) !important;
+}
+
+/* Banners en modo oscuro */
+.dark-mode .banner-section {
+    background: linear-gradient(135deg, #1e3a5a 0%, #152a45 100%) !important;
+}
+
+.dark-mode .banner-content {
+    color: var(--text-primary) !important;
+}
+
+/* ===================================================================
+   HOVER EFFECTS EN MODO OSCURO
+   =================================================================== */
+
+.dark-mode .resource-index-card:hover {
+    transform: translateY(-8px) scale(1.02) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6) !important;
+    border-color: var(--azul-claro) !important;
+}
+
+.dark-mode .initiative-card:hover {
+    transform: translateY(-8px) scale(1.02) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6) !important;
+    border-color: var(--azul-claro) !important;
+}
+
+/* ===================================================================
+   RESPONSIVE PARA MODO OSCURO
+   =================================================================== */
+
+@media (max-width: 768px) {
+    .dark-mode .resource-index-card,
+    .dark-mode .initiative-card {
+        background: var(--bg-secondary) !important;
+        border: 1px solid #333333 !important;
+    }
+    
+    .dark-mode .resource-card-content,
+    .dark-mode .initiative-content {
+        background: transparent !important;
+    }
+}
+
+/* ===================================================================
+   ICONOS Y ELEMENTOS DECORATIVOS EN MODO OSCURO
+   =================================================================== */
+
+.dark-mode .resource-index-card::after,
+.dark-mode .initiative-card::after {
+    background: rgba(64, 180, 229, 0.9) !important;
+}
+
+.dark-mode .resource-index-card::before,
+.dark-mode .initiative-card::before {
+    color: var(--text-primary) !important;
+}
+
+/* Material icons en modo oscuro */
+.dark-mode .initiative-icon,
+.dark-mode .resource-card-icon {
+    color: inherit !important;
+    opacity: 0.9;
+}
