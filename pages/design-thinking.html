@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Design Thinking - Alico</title>
+    <title>Design Thinking - Iniciativas | Alico</title>
 
     <!-- Favicon -->
     <link rel="icon" href="../assets/images/Ali_head.png" type="image/png">
@@ -43,15 +43,144 @@
         }
         .accessibility-toggle:hover { transform: scale(1.1); }
         
-        /* === BANNER PARA DESIGN THINKING === */
-        .design-thinking-banner {
-            background: linear-gradient(135deg, var(--azul-novo) 0%, var(--azul-novo-80) 100%);
-            color: var(--blanco); padding: var(--spacing-xxl); border-radius: var(--border-radius-xl);
-            text-align: center; margin-bottom: var(--spacing-xl); position: relative; overflow: hidden;
+        /* === ESPECÍFICO PARA DESIGN THINKING === */
+        .content-section {
+            margin: var(--spacing-xxl) 0;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        .content-section h2 {
+            font-family: 'Zilla Slab', serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 600;
+            color: var(--azul-novo);
+            margin-bottom: var(--spacing-lg);
+            text-align: center;
+        }
+
+        .content-section p {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            line-height: 1.7;
+            color: var(--gris-oscuro);
+            margin-bottom: var(--spacing-lg);
+            text-align: justify;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--azul-claro-10) 0%, var(--azul-claro-20) 100%);
+            border-left: 4px solid var(--azul-claro);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius-md);
+            margin: var(--spacing-lg) 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .highlight-box h3 {
+            font-family: 'Zilla Slab', serif;
+            font-size: 1.3em;
+            font-weight: 600;
+            color: var(--azul-novo);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            text-align: left;
+        }
+
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+            margin: var(--spacing-xxl) 0;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        .methodology-card {
+            background: linear-gradient(135deg, var(--gris-claro) 0%, var(--blanco) 100%);
+            border-radius: var(--border-radius-xl);
+            padding: var(--spacing-xl);
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .methodology-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .methodology-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--azul-claro);
+        }
+
+        .methodology-card:hover::before {
+            opacity: 1;
+        }
+
+        .methodology-icon {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .methodology-icon .material-symbols-rounded {
+            font-size: 60px !important;
+            color: var(--azul-novo);
+            background: rgba(64, 180, 229, 0.1);
+            padding: var(--spacing-md);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .methodology-card:hover .methodology-icon .material-symbols-rounded {
+            transform: scale(1.1);
+            background: rgba(64, 180, 229, 0.2);
+        }
+
+        .methodology-card h3 {
+            font-family: 'Zilla Slab', serif;
+            font-size: 1.4em;
+            font-weight: 600;
+            color: var(--azul-novo);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .methodology-card p {
+            color: var(--gris-oscuro);
+            line-height: 1.6;
+            text-align: center;
+        }
+        
+        /* === PROCESO DE DESIGN THINKING === */
+        .dt-process {
+            background: linear-gradient(135deg, var(--verde-natura) 0%, var(--verde-natura-80) 100%);
+            border-radius: var(--border-radius-xl);
+            padding: var(--spacing-xxl) var(--spacing-lg);
+            margin: var(--spacing-xxl) 0;
+            color: var(--blanco);
+            position: relative;
+            overflow: hidden;
             box-shadow: var(--shadow-lg);
         }
 
-        .design-thinking-banner::before {
+        .dt-process::before {
             content: '';
             position: absolute;
             top: 0;
@@ -61,8 +190,183 @@
             background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
             pointer-events: none;
         }
+        
+        .dt-process h2 {
+            text-align: center;
+            font-family: 'Zilla Slab', serif;
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            font-weight: 600;
+            margin-bottom: var(--spacing-xl);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .dt-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .dt-step {
+            background: rgba(255,255,255,0.15);
+            padding: var(--spacing-xl);
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
 
-        .design-thinking-banner h1 {
+        .dt-step:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.4);
+        }
+        
+        .dt-step-number {
+            background: var(--amarillo-oro);
+            color: var(--blanco);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--spacing-lg);
+            font-weight: bold;
+            font-size: 1.4em;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+
+        .dt-step:hover .dt-step-number {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .dt-step h3 {
+            font-family: 'Zilla Slab', serif;
+            margin-bottom: var(--spacing-md);
+            font-size: 1.4em;
+            font-weight: 600;
+        }
+        
+        .dt-step p {
+            line-height: 1.6;
+            opacity: 0.95;
+            text-align: center;
+        }
+        
+        /* === BENEFICIOS === */
+        .dt-benefits {
+            background: linear-gradient(135deg, var(--amarillo-oro) 0%, var(--amarillo-oro-80) 100%);
+            border-radius: var(--border-radius-xl);
+            padding: var(--spacing-xxl) var(--spacing-lg);
+            margin: var(--spacing-xxl) 0;
+            color: var(--blanco);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .dt-benefits::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            pointer-events: none;
+        }
+        
+        .dt-benefits h2 {
+            text-align: center;
+            font-family: 'Zilla Slab', serif;
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            font-weight: 600;
+            margin-bottom: var(--spacing-xl);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .dt-benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--spacing-lg);
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .dt-benefit {
+            background: rgba(255,255,255,0.15);
+            padding: var(--spacing-xl);
+            border-radius: var(--border-radius-lg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .dt-benefit:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.4);
+        }
+        
+        .dt-benefit h3 {
+            font-family: 'Zilla Slab', serif;
+            margin-bottom: var(--spacing-md);
+            font-size: 1.3em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .dt-benefit .material-symbols-rounded {
+            font-size: 1.8em !important;
+            color: var(--azul-claro);
+            background: rgba(255,255,255,0.2);
+            padding: 8px;
+            border-radius: 50%;
+        }
+        
+        .dt-benefit p {
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+        
+        /* === CALL TO ACTION === */
+        .dt-cta {
+            background: linear-gradient(135deg, var(--azul-novo) 0%, var(--azul-novo-80) 100%);
+            border-radius: var(--border-radius-xl);
+            padding: var(--spacing-xxl) var(--spacing-lg);
+            text-align: center;
+            color: var(--blanco);
+            margin: var(--spacing-xxl) 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .dt-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            pointer-events: none;
+        }
+        
+        .dt-cta h2 {
             font-family: 'Zilla Slab', serif;
             font-size: clamp(2rem, 5vw, 2.5rem);
             font-weight: 600;
@@ -70,245 +374,17 @@
             position: relative;
             z-index: 2;
         }
-
-        .design-thinking-banner p {
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
-            line-height: 1.6;
+        
+        .dt-cta p {
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            margin-bottom: var(--spacing-xl);
             max-width: 600px;
-            margin: 0 auto;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
             opacity: 0.95;
             position: relative;
             z-index: 2;
-        }
-        
-        /* === GRID DE 3 COLUMNAS PARA DESIGN THINKING === */
-        .dt-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--spacing-xl);
-            margin-top: var(--spacing-xxl);
-            margin-bottom: var(--spacing-xxl);
-            max-width: 1400px;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 0 var(--spacing-md);
-        }
-
-        /* CLAVE: Centrar elementos sobrantes cuando no son múltiplo de 3 */
-        .dt-grid .dt-card:last-child:nth-child(3n+1) {
-            grid-column: 2 / 3;
-        }
-
-        .dt-grid .dt-card:nth-last-child(2):nth-child(3n+1) {
-            grid-column: 1 / 2;
-        }
-        .dt-grid .dt-card:last-child:nth-child(3n+2) {
-            grid-column: 3 / 4;
-        }
-
-        .dt-card {
-            border-radius: var(--border-radius-xl);
-            padding: var(--spacing-xl);
-            color: var(--blanco);
-            box-shadow: var(--shadow-lg);
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            min-height: 340px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .dt-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .dt-card > div:last-child {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        
-        /* === RESPONSIVE === */
-        @media (max-width: 1024px) {
-            .dt-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: var(--spacing-lg);
-            }
-            
-            .dt-grid .dt-card:last-child:nth-child(2n+1) {
-                grid-column: 1 / 2;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .dt-grid {
-                grid-template-columns: 1fr;
-                gap: var(--spacing-md);
-                padding: 0 var(--spacing-sm);
-            }
-            
-            .dt-card {
-                min-height: 280px;
-                padding: var(--spacing-lg);
-            }
-            
-            .design-thinking-banner { 
-                padding: var(--spacing-xl); 
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .accessibility-toggle { 
-                top: 100px; 
-                right: 12px; 
-                width: 52px; 
-                height: 52px; 
-                font-size: 24px; 
-            }
-            
-            .header-placeholder { 
-                height: 65px; 
-                font-size: 13px; 
-            }
-            
-            .design-thinking-banner { 
-                padding: var(--spacing-lg); 
-            }
-        }
-        
-        /* === ESTILOS ESPECÍFICOS PARA DESIGN THINKING === */
-
-        
-        .dt-process {
-            background: linear-gradient(135deg, var(--verde-natura) 0%, var(--verde-natura-80) 100%);
-            padding: var(--spacing-xxl) var(--spacing-md);
-            margin: var(--spacing-xxl) 0;
-            color: var(--blanco);
-        }
-        
-        .dt-process h2 {
-            text-align: center;
-            font-family: 'Zilla Slab', serif;
-            font-size: 2.5em;
-            margin-bottom: var(--spacing-xl);
-        }
-        
-        .dt-steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--spacing-lg);
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .dt-step {
-            background: rgba(255,255,255,0.1);
-            padding: var(--spacing-lg);
-            border-radius: var(--border-radius-lg);
-            text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        
-        .dt-step-number {
-            background: var(--amarillo-oro);
-            color: var(--blanco);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto var(--spacing-md);
-            font-weight: bold;
-            font-size: 1.2em;
-        }
-        
-        .dt-step h3 {
-            font-family: 'Zilla Slab', serif;
-            margin-bottom: var(--spacing-md);
-            font-size: 1.3em;
-        }
-        
-        .dt-step p {
-            line-height: 1.5;
-            opacity: 0.9;
-        }
-        
-        .dt-benefits {
-            background: linear-gradient(135deg, var(--amarillo-oro) 0%, var(--amarillo-oro-80) 100%);
-            padding: var(--spacing-xxl) var(--spacing-md);
-            margin: var(--spacing-xxl) 0;
-            color: var(--blanco);
-        }
-        
-        .dt-benefits h2 {
-            text-align: center;
-            font-family: 'Zilla Slab', serif;
-            font-size: 2.5em;
-            margin-bottom: var(--spacing-xl);
-        }
-        
-        .dt-benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--spacing-lg);
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .dt-benefit {
-            background: rgba(255,255,255,0.1);
-            padding: var(--spacing-lg);
-            border-radius: var(--border-radius-lg);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        
-        .dt-benefit h3 {
-            font-family: 'Zilla Slab', serif;
-            margin-bottom: var(--spacing-md);
-            font-size: 1.2em;
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-        }
-        
-        .dt-benefit .material-symbols-rounded {
-            font-size: 1.5em;
-            color: var(--azul-claro);
-        }
-        
-        .dt-benefit p {
-            line-height: 1.5;
-            opacity: 0.9;
-        }
-        
-        .dt-cta {
-            background: linear-gradient(135deg, var(--azul-oscuro) 0%, var(--azul-oscuro-80) 100%);
-            padding: var(--spacing-xxl) var(--spacing-md);
-            text-align: center;
-            color: var(--blanco);
-            margin-top: var(--spacing-xxl);
-        }
-        
-        .dt-cta h2 {
-            font-family: 'Zilla Slab', serif;
-            font-size: 2.5em;
-            margin-bottom: var(--spacing-lg);
-        }
-        
-        .dt-cta p {
-            font-size: 1.2em;
-            margin-bottom: var(--spacing-xl);
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
         }
         
         .dt-cta-button {
@@ -316,66 +392,138 @@
             color: var(--blanco);
             padding: var(--spacing-lg) var(--spacing-xl);
             border: none;
-            border-radius: var(--border-radius-lg);
+            border-radius: var(--border-radius-xl);
             font-family: 'Work Sans', sans-serif;
             font-weight: 600;
-            font-size: 1.1em;
+            font-size: 1.2em;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            z-index: 2;
         }
         
         .dt-cta-button:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.02);
             box-shadow: var(--shadow-xl);
+            background: linear-gradient(135deg, var(--amarillo-oro-80) 0%, var(--amarillo-oro-60) 100%);
+        }
+
+        .dt-cta-button:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            .accessibility-toggle { top: 120px; right: 16px; width: 56px; height: 56px; font-size: 26px; }
+            .header-placeholder { height: 70px; font-size: 14px; }
+            
+            .content-section {
+                padding: 0 var(--spacing-md);
+            }
+            
+            .methodology-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+                padding: 0 var(--spacing-md);
+            }
+            
+            .dt-process,
+            .dt-benefits,
+            .dt-cta {
+                padding: var(--spacing-xl) var(--spacing-md);
+                margin: var(--spacing-xl) var(--spacing-md);
+            }
+            
+            .dt-steps {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-md);
+            }
+            
+            .dt-benefits-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-md);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .accessibility-toggle { top: 100px; right: 12px; width: 52px; height: 52px; font-size: 24px; }
+            .header-placeholder { height: 65px; font-size: 13px; }
+            
+            .content-section {
+                padding: 0 var(--spacing-sm);
+            }
+            
+            .methodology-grid {
+                padding: 0 var(--spacing-sm);
+            }
+            
+            .dt-process,
+            .dt-benefits,
+            .dt-cta {
+                padding: var(--spacing-lg) var(--spacing-sm);
+                margin: var(--spacing-lg) var(--spacing-sm);
+            }
+            
+            .dt-step,
+            .dt-benefit {
+                padding: var(--spacing-lg);
+            }
+            
+            .dt-step-number {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2em;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Placeholder header para evitar FOUC -->
+    <!-- Placeholder temporal para header -->
     <div class="header-placeholder">
-        <span class="material-symbols-rounded">design_services</span>
-        Design Thinking
+        🚀 Cargando Alico...
     </div>
 
-    <!-- Botón de accesibilidad -->
-    <button id="accessibilityToggle" class="accessibility-toggle" aria-label="Abrir panel de accesibilidad">
-        <span class="material-symbols-rounded">accessibility</span>
-    </button>
+    <!-- Los componentes se cargarán automáticamente aquí -->
 
-    <!-- Header -->
-    <div id="header"></div>
+    <!-- Contenido principal -->
+    <main id="main-content">
+        <!-- Breadcrumb actualizado -->
+        <nav class="breadcrumb" aria-label="Navegación de ruta">
+            <div class="breadcrumb-nav">
+                <a href="iniciativas.html" class="breadcrumb-link">
+                    <span class="material-symbols-rounded">lightbulb</span>
+                    Iniciativas
+                </a>
+                <span class="breadcrumb-separator">›</span>
+                <span class="breadcrumb-current" aria-current="page">Design Thinking</span>
+            </div>
+        </nav>
 
-    <!-- Breadcrumb -->
-    <nav class="breadcrumb">
-        <a href="../index.html" class="breadcrumb-link">
-            <span class="material-symbols-rounded">home</span>
-            Inicio
-        </a>
-        <span class="breadcrumb-separator">/</span>
-        <a href="iniciativas.html" class="breadcrumb-link">Iniciativas</a>
-        <span class="breadcrumb-separator">/</span>
-        <span class="breadcrumb-current">Design Thinking</span>
-    </nav>
+        <!-- Banner principal -->
+        <section class="banner-section">
+            <div class="banner-content banner-recursos">
+                DESIGN THINKING
+            </div>
+        </section>
 
-    <!-- Banner principal -->
-    <section class="design-thinking-banner">
-        <div class="material-symbols-rounded" style="font-size: 60px; margin-bottom: var(--spacing-lg); opacity: 0.9;">psychology</div>
-        <h1>Design Thinking</h1>
-        <p>Metodología centrada en el usuario para resolver problemas complejos de manera creativa e innovadora. En Alico, utilizamos este enfoque para crear soluciones que generen un impacto positivo en la vida de las personas.</p>
-    </section>
+        <!-- Descripción principal -->
+        <section class="model-card">
+            <h2>Metodología Centrada en el Usuario</h2>
+            <p>Design Thinking es una metodología de innovación que se centra en las personas para resolver problemas complejos de manera creativa e innovadora. En Alico, utilizamos este enfoque para crear soluciones que no solo sean funcionales, sino que también generen un impacto positivo en la vida de las personas.</p>
+            <p>Esta metodología nos permite explorar múltiples perspectivas, experimentar con diferentes soluciones y iterar constantemente hasta encontrar la mejor respuesta a los desafíos que enfrentamos en el mundo del empaque sostenible.</p>
+        </section>
 
-    <!-- Main Content -->
-    <main class="main-content">
         <!-- Introducción -->
         <section class="content-section">
-            <div class="container">
-                <h2>¿Qué es Design Thinking?</h2>
-                <p>Design Thinking es una metodología de innovación que se centra en las personas para resolver problemas complejos. En Alico, utilizamos este enfoque para crear soluciones que no solo sean funcionales, sino que también generen un impacto positivo en la vida de las personas.</p>
-                
-                <p>Esta metodología nos permite explorar múltiples perspectivas, experimentar con diferentes soluciones y iterar constantemente hasta encontrar la mejor respuesta a los desafíos que enfrentamos.</p>
-            </div>
+            <h2>¿Qué es Design Thinking?</h2>
+            <p>Design Thinking es una metodología de innovación que se centra en las personas para resolver problemas complejos. En Alico, utilizamos este enfoque para crear soluciones que no solo sean funcionales, sino que también generen un impacto positivo en la vida de las personas.</p>
+            
+            <p>Esta metodología nos permite explorar múltiples perspectivas, experimentar con diferentes soluciones y iterar constantemente hasta encontrar la mejor respuesta a los desafíos que enfrentamos.</p>
         </section>
 
         <!-- Proceso de Design Thinking -->
@@ -476,57 +624,53 @@
 
         <!-- Casos de Uso -->
         <section class="content-section">
-            <div class="container">
-                <h2>Casos de Uso en Alico</h2>
-                <p>Hemos aplicado Design Thinking en diversos proyectos para resolver desafíos complejos:</p>
-                
-                <div class="highlight-box">
-                    <h3>Diseño de Experiencias de Usuario</h3>
-                    <p>Utilizamos Design Thinking para crear interfaces intuitivas y experiencias memorables que conecten emocionalmente con nuestros usuarios.</p>
-                </div>
-                
-                <div class="highlight-box">
-                    <h3>Innovación en Productos</h3>
-                    <p>Aplicamos esta metodología para desarrollar nuevos productos y servicios que resuelvan problemas reales de manera innovadora.</p>
-                </div>
-                
-                <div class="highlight-box">
-                    <h3>Optimización de Procesos</h3>
-                    <p>Rediseñamos procesos internos y externos para mejorar la eficiencia y la satisfacción de todos los involucrados.</p>
-                </div>
+            <h2>Casos de Uso en Alico</h2>
+            <p>Hemos aplicado Design Thinking en diversos proyectos para resolver desafíos complejos:</p>
+            
+            <div class="highlight-box">
+                <h3>Diseño de Experiencias de Usuario</h3>
+                <p>Utilizamos Design Thinking para crear interfaces intuitivas y experiencias memorables que conecten emocionalmente con nuestros usuarios.</p>
+            </div>
+            
+            <div class="highlight-box">
+                <h3>Innovación en Productos</h3>
+                <p>Aplicamos esta metodología para desarrollar nuevos productos y servicios que resuelvan problemas reales de manera innovadora.</p>
+            </div>
+            
+            <div class="highlight-box">
+                <h3>Optimización de Procesos</h3>
+                <p>Rediseñamos procesos internos y externos para mejorar la eficiencia y la satisfacción de todos los involucrados.</p>
             </div>
         </section>
 
         <!-- Metodologías Complementarias -->
         <section class="content-section">
-            <div class="container">
-                <h2>Metodologías Complementarias</h2>
-                <p>Design Thinking se integra perfectamente con otras metodologías que utilizamos en Alico:</p>
+            <h2>Metodologías Complementarias</h2>
+            <p>Design Thinking se integra perfectamente con otras metodologías que utilizamos en Alico:</p>
+            
+            <div class="methodology-grid">
+                <div class="methodology-card">
+                    <div class="methodology-icon">
+                        <span class="material-symbols-rounded">scatter_plot</span>
+                    </div>
+                    <h3>Lean Startup</h3>
+                    <p>Para validar rápidamente hipótesis de negocio y minimizar el desperdicio de recursos.</p>
+                </div>
                 
-                <div class="methodology-grid">
-                    <div class="methodology-card">
-                        <div class="methodology-icon">
-                            <span class="material-symbols-rounded">scatter_plot</span>
-                        </div>
-                        <h3>Lean Startup</h3>
-                        <p>Para validar rápidamente hipótesis de negocio y minimizar el desperdicio de recursos.</p>
+                <div class="methodology-card">
+                    <div class="methodology-icon">
+                        <span class="material-symbols-rounded">view_timeline</span>
                     </div>
-                    
-                    <div class="methodology-card">
-                        <div class="methodology-icon">
-                            <span class="material-symbols-rounded">view_timeline</span>
-                        </div>
-                        <h3>Agile</h3>
-                        <p>Para desarrollar soluciones de manera iterativa y responder rápidamente a los cambios.</p>
+                    <h3>Agile</h3>
+                    <p>Para desarrollar soluciones de manera iterativa y responder rápidamente a los cambios.</p>
+                </div>
+                
+                <div class="methodology-card">
+                    <div class="methodology-icon">
+                        <span class="material-symbols-rounded">analytics</span>
                     </div>
-                    
-                    <div class="methodology-card">
-                        <div class="methodology-icon">
-                            <span class="material-symbols-rounded">analytics</span>
-                        </div>
-                        <h3>Data-Driven Design</h3>
-                        <p>Para tomar decisiones informadas basadas en datos y comportamiento del usuario.</p>
-                    </div>
+                    <h3>Data-Driven Design</h3>
+                    <p>Para tomar decisiones informadas basadas en datos y comportamiento del usuario.</p>
                 </div>
             </div>
         </section>
@@ -537,83 +681,105 @@
             <p>Descubre cómo Design Thinking puede transformar tu proyecto y crear soluciones que marquen la diferencia.</p>
             <a href="iniciativas.html" class="dt-cta-button">
                 <span class="material-symbols-rounded">rocket_launch</span>
-                Explorar Nuestros Proyectos
+                Explorar Más Iniciativas
             </a>
         </section>
     </main>
 
-    <!-- Footer -->
-    <div id="footer"></div>
-
-    <!-- Overlay de accesibilidad -->
-    <div id="accessibilityOverlay" class="accessibility-overlay"></div>
-
-    <!-- Panel de accesibilidad -->
-    <div id="accessibilityPanel" class="accessibility-panel" aria-hidden="true">
-        <div class="accessibility-header">
-            <h3>
-                <span class="material-symbols-rounded">accessibility</span>
-                Accesibilidad
-            </h3>
-            <button class="accessibility-close" onclick="toggleAccessibilityPanel()" aria-label="Cerrar panel de accesibilidad">
-                <span class="material-symbols-rounded">close</span>
-            </button>
-        </div>
-        
-        <div class="accessibility-options">
-            <div class="accessibility-group">
-                <h4>
-                    <span class="material-symbols-rounded">text_fields</span>
-                    Tamaño de Fuente
-                </h4>
-                <div class="font-size-controls">
-                    <button onclick="adjustFontSize('decrease')" aria-label="Disminuir tamaño de fuente">A-</button>
-                    <button onclick="adjustFontSize('reset')" aria-label="Tamaño de fuente normal">A</button>
-                    <button onclick="adjustFontSize('increase')" aria-label="Aumentar tamaño de fuente">A+</button>
-                </div>
-                <p>Tamaño actual: <span id="fontSizeDisplay">100%</span></p>
-            </div>
-            
-            <div class="accessibility-group">
-                <h4>
-                    <span class="material-symbols-rounded">dark_mode</span>
-                    Apariencia
-                </h4>
-                <div class="accessibility-toggles">
-                    <label class="accessibility-toggle-item">
-                        <input type="checkbox" id="darkMode" onchange="toggleDarkMode()">
-                        <span class="toggle-slider"></span>
-                        <span class="toggle-label">Modo Oscuro</span>
-                    </label>
-                </div>
-            </div>
-            
-            <div class="accessibility-group">
-                <h4>
-                    <span class="material-symbols-rounded">volume_up</span>
-                    Lectura en Voz Alta
-                </h4>
-                <div class="accessibility-buttons">
-                    <button id="ttsButton" onclick="toggleTextToSpeech()">
-                        <span class="material-symbols-rounded">volume_up</span>
-                        Lectura de texto
-                    </button>
-                </div>
-                <p>Haz doble clic en cualquier texto para que se lea en voz alta</p>
-            </div>
-        </div>
-        
-        <div class="accessibility-reset">
-            <button class="reset-button" onclick="resetAllSettings()">
-                <span class="material-symbols-rounded">restart_alt</span>
-                Restablecer Configuración
-            </button>
-        </div>
-    </div>
-
-    <!-- Scripts -->
+    <!-- Scripts esenciales -->
+    <script src="../assets/js/scripts.js"></script>
     <script src="../assets/js/component-loader.js"></script>
     <script src="../assets/js/accessibility.js"></script>
-    <script src="../assets/js/scripts.js"></script>
+    
+    <!-- JavaScript específico para design thinking -->
+    <script>
+        // Inicialización de la página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar breadcrumb
+            const breadcrumb = document.querySelector('.breadcrumb');
+            if (breadcrumb) {
+                console.log('✅ Breadcrumb encontrado y visible');
+                console.log('📍 Ruta del breadcrumb:', breadcrumb.textContent.trim());
+            } else {
+                console.warn('⚠️ Breadcrumb no encontrado');
+            }
+            
+            // Marcar componentes como cargados
+            setTimeout(() => {
+                document.body.classList.add('components-loaded');
+                console.log('✅ Página Design Thinking inicializada como página hija');
+            }, 800);
+
+            // Animaciones para elementos
+            const animatedElements = document.querySelectorAll('.dt-step, .dt-benefit, .methodology-card, .highlight-box');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            animatedElements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+                observer.observe(element);
+            });
+
+            // Efectos de hover mejorados
+            const cards = document.querySelectorAll('.dt-step, .dt-benefit, .methodology-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Animación para el banner
+            const banner = document.querySelector('.banner-section');
+            if (banner) {
+                banner.style.opacity = '0';
+                banner.style.transform = 'translateY(20px)';
+                banner.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                
+                setTimeout(() => {
+                    banner.style.opacity = '1';
+                    banner.style.transform = 'translateY(0)';
+                }, 200);
+            }
+
+            // Smooth scroll para enlaces internos
+            const smoothScrollLinks = document.querySelectorAll('a[href^="#"]');
+            smoothScrollLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            console.log('🎨 Página Design Thinking como página hija cargada exitosamente');
+        });
+
+        // Listener para cuando los componentes estén cargados
+        window.addEventListener('components-loaded', function() {
+            console.log('🎉 Evento: Todos los componentes han sido cargados en Design Thinking');
+        });
+
+        // Función para navegación
+        function navigateToInitiatives() {
+            window.location.href = 'iniciativas.html';
+        }
+    </script>
 </body>
 </html>
