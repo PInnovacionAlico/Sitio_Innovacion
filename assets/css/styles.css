@@ -1302,8 +1302,8 @@ footer::before {
         url('../images/banners/ia.jpg');
 }
 
-/* Banner Proyectos */
-.banner-proyectos {
+/* Banner Iniciativas */
+.banner-iniciativas {
     background-image: 
         linear-gradient(rgba(0,61,166,0.6), rgba(0,61,166,0.6)),
         url('../images/banners/projects.png');
