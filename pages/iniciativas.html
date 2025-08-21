@@ -43,7 +43,18 @@
         }
         .accessibility-toggle:hover { transform: scale(1.1); }
         
+        /* === CORRECCIONES DE PADDING PARA INICIATIVAS === */
         
+        /* Estructura principal consistente */
+        main#main-content {
+            flex: 1;
+            padding: var(--spacing-xl) var(--spacing-lg);
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        /* Grid sin margin lateral extra */
         .initiatives-grid {
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -231,21 +242,66 @@
             transform: translateX(3px);
         }
 
-        /* === RESPONSIVE === */
+        /* === RESPONSIVE CORREGIDO === */
+        @media (min-width: 1024px) {
+            main#main-content {
+                padding: var(--spacing-xl) var(--spacing-lg);
+            }
+            
+            .initiatives-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: var(--spacing-xl);
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1023px) {
+            main#main-content {
+                padding: var(--spacing-xl) var(--spacing-lg);
+            }
+            
+            .initiatives-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--spacing-lg);
+            }
+        }
+
         @media (max-width: 768px) {
             .accessibility-toggle { top: 120px; right: 16px; width: 56px; height: 56px; font-size: 26px; }
             .header-placeholder { height: 70px; font-size: 14px; }
-            .initiatives-grid { grid-template-columns: 1fr; gap: var(--spacing-lg); }
-            .initiative-card { margin: 0 var(--spacing-md); }
-            .initiatives-banner { padding: var(--spacing-xl); }
+            
+            main#main-content {
+                padding: var(--spacing-lg) var(--spacing-md);
+            }
+            
+            .initiatives-grid { 
+                grid-template-columns: 1fr; 
+                gap: var(--spacing-lg);
+            }
         }
+        
         @media (max-width: 480px) {
             .accessibility-toggle { top: 100px; right: 12px; width: 52px; height: 52px; font-size: 24px; }
             .header-placeholder { height: 65px; font-size: 13px; }
-            .initiatives-banner { padding: var(--spacing-lg); }
-            .initiative-content { padding: var(--spacing-lg); }
-            .initiative-image { height: 180px; }
-            .initiative-icon { font-size: 60px !important; }
+            
+            main#main-content {
+                padding: var(--spacing-md) var(--spacing-sm);
+            }
+            
+            .initiatives-grid {
+                gap: var(--spacing-md);
+            }
+            
+            .initiative-content { 
+                padding: var(--spacing-lg); 
+            }
+            
+            .initiative-image { 
+                height: 180px; 
+            }
+            
+            .initiative-icon { 
+                font-size: 60px !important; 
+            }
         }
 
         /* === ANIMACIONES === */
@@ -278,7 +334,9 @@
 
     <!-- Los componentes se cargarán automáticamente aquí -->
 
-    <!-- Banner principal de la página -->
+    <!-- Contenido principal -->
+    <main id="main-content">
+        <!-- Banner principal de la página -->
         <section class="banner-section">
             <div class="banner-content banner-iniciativas">
                 INICIATIVAS
@@ -364,7 +422,7 @@
             </article>
 
             <!-- Design Thinking -->
-            <article class="initiative-card initiative-design internal" onclick="navigateToInternal('iniciativas/design-thinking.html')" tabindex="0" role="button" aria-label="Conocer Design Thinking">
+            <article class="initiative-card initiative-design internal" onclick="navigateToInternal('design-thinking.html')" tabindex="0" role="button" aria-label="Conocer Design Thinking">
                 <div class="initiative-image">
                     <div class="material-symbols-rounded initiative-icon">psychology</div>
                 </div>
@@ -451,7 +509,7 @@
             // Marcar componentes como cargados
             setTimeout(() => {
                 document.body.classList.add('components-loaded');
-                console.log('✅ Página Iniciativas inicializada');
+                console.log('✅ Página Iniciativas inicializada con padding corregido');
             }, 800);
 
             // Animaciones para las tarjetas
@@ -491,20 +549,7 @@
                 });
             });
 
-            // Animación para el banner
-            const banner = document.querySelector('.initiatives-banner');
-            if (banner) {
-                banner.style.opacity = '0';
-                banner.style.transform = 'translateY(20px)';
-                banner.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                
-                setTimeout(() => {
-                    banner.style.opacity = '1';
-                    banner.style.transform = 'translateY(0)';
-                }, 200);
-            }
-
-            console.log('🎨 Página Iniciativas cargada exitosamente');
+            console.log('🎨 Página Iniciativas con padding corregido cargada exitosamente');
         });
 
         // Listener para cuando los componentes estén cargados
