@@ -1,4 +1,4 @@
-<!-- Footer -->
+<!-- Footer - Solo se carga una vez por el component-loader -->
 <footer id="footer">
     <div class="footer-logo-container">
         <img src="assets/images/logo-blanco.png" 
@@ -8,3 +8,18 @@
         <div class="footer-logo-fallback">alico</div>
     </div>
 </footer>
+
+<!-- Script para prevenir duplicados -->
+<script>
+(function() {
+    // Verificar si ya existe un footer para prevenir duplicados
+    const existingFooters = document.querySelectorAll('#footer');
+    if (existingFooters.length > 1) {
+        console.warn('⚠️ Footer duplicado detectado, removiendo...');
+        // Remover todos excepto el primero
+        for (let i = 1; i < existingFooters.length; i++) {
+            existingFooters[i].remove();
+        }
+    }
+})();
+</script>
