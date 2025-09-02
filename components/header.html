@@ -1,4 +1,4 @@
-<!-- Header fijo con navegación y dropdowns - Rutas dinámicas -->
+<!-- Header fijo con navegación y dropdowns -->
 <header class="header">
     <!-- Botón de menú móvil -->
     <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menú de navegación">
@@ -8,11 +8,10 @@
     </button>
     
     <!-- Logo de Alico -->
-    <a href="#" class="logo" id="logoLink" aria-label="Ir a página principal de Alico">
-        <img src="#" 
+    <a href="index.html" class="logo" aria-label="Ir a página principal de Alico">
+        <img src="assets/images/Ali_head.png" 
              alt="Ali Head Logo" 
              class="logo-image"
-             id="logoImage"
              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
         <span class="logo-text-fallback">a</span>
     </a>
@@ -21,34 +20,34 @@
     <nav class="desktop-nav" aria-label="Navegación principal">
         <div class="nav-links">
             <!-- Generalidades SGI - Sin dropdown -->
-            <a href="#" class="nav-link" id="sgiLink">
+            <a href="pages/generalidades-sgi.html" class="nav-link">
                 <span class="material-symbols-rounded nav-link-icon">analytics</span>
                 <span>SGI</span>
             </a>
 
             <!-- Inteligencias Artificiales - Sin dropdown -->
-            <a href="#" class="nav-link" id="iaLink">
+            <a href="pages/inteligencias-artificiales.html" class="nav-link">
                 <span class="material-symbols-rounded nav-link-icon">psychology</span>
                 <span>IA</span>
             </a>
 
             <!-- Recursos Audiovisuales - Con dropdown -->
             <div class="nav-dropdown" onmouseenter="showDropdown(this)" onmouseleave="hideDropdown(this)">
-                <a href="#" class="nav-link nav-link-dropdown" id="recursosLink">
+                <a href="pages/recursos-audiovisuales.html" class="nav-link nav-link-dropdown">
                     <span class="material-symbols-rounded nav-link-icon">video_library</span>
                     <span>Recursos</span>
                     <span class="material-symbols-rounded dropdown-arrow">keyboard_arrow_down</span>
                 </a>
                 <div class="dropdown-menu" role="menu">
-                    <a href="#" class="dropdown-item" role="menuitem" id="videosFotosLink">
+                    <a href="pages/videos-fotos.html" class="dropdown-item" role="menuitem">
                         <span class="material-symbols-rounded dropdown-icon">photo_library</span>
                         <span>Videos y fotos</span>
                     </a>
-                    <a href="#" class="dropdown-item" role="menuitem" id="embajadorLink">
+                    <a href="pages/embajador-ali.html" class="dropdown-item" role="menuitem">
                         <span class="material-symbols-rounded dropdown-icon">support_agent</span>
                         <span>Embajador Ali</span>
                     </a>
-                    <a href="#" class="dropdown-item" role="menuitem" id="podcastLink">
+                    <a href="pages/recursos-audiovisuales/podcast.html" class="dropdown-item" role="menuitem">
                         <span class="material-symbols-rounded dropdown-icon">podcasts</span>
                         <span>Podcast</span>
                     </a>
@@ -63,7 +62,7 @@
 
             <!-- Iniciativas - Con dropdown -->
             <div class="nav-dropdown" onmouseenter="showDropdown(this)" onmouseleave="hideDropdown(this)">
-                <a href="#" class="nav-link nav-link-dropdown" id="iniciativasLink">
+                <a href="pages/iniciativas.html" class="nav-link nav-link-dropdown">
                     <span class="material-symbols-rounded nav-link-icon">lightbulb</span>
                     <span>Iniciativas</span>
                     <span class="material-symbols-rounded dropdown-arrow">keyboard_arrow_down</span>
@@ -80,19 +79,19 @@
                         <span>Banco de iniciativas</span>
                         <span class="material-symbols-rounded external-link">open_in_new</span>
                     </a>
-                    <a href="https://pinnovacion4.wixsite.com/alico---innovacion" target="_blank" rel="noopener noreferrer" class="dropdown-item" role="menuitem">
+                    <a href="https://pinnovacion4.wixsite.com/alico---innovacion"  target="_blank" rel="noopener noreferrer" class="dropdown-item" role="menuitem">
                         <span class="material-symbols-rounded dropdown-icon">article</span>
                         <span>Noticias</span>
                     </a>
-                    <a href="#" class="dropdown-item" role="menuitem" id="designThinkingLink">
+                    <a href="pages/design-thinking.html" class="dropdown-item" role="menuitem">
                         <span class="material-symbols-rounded dropdown-icon">psychology</span>
                         <span>Design Thinking</span>
                     </a>
                 </div>
             </div>
 
-            <!-- Blog -->
-            <a href="https://pinnovacion4.wixsite.com/alico---innovacion" 
+            <!-- Blog - corregido -->
+            <a href="https://pinnovacion4.wixsite.com/alico---innovacion"  
                target="_blank" rel="noopener noreferrer" class="nav-link">
                 <span class="material-symbols-rounded nav-link-icon">article</span>
                 <span>Blog</span>
@@ -113,13 +112,13 @@
 <nav class="mobile-nav-menu" id="mobileNavMenu" aria-label="Menú de navegación móvil">
     <div class="mobile-nav-grid">
         <!-- Generalidades SGI -->
-        <a href="#" class="mobile-nav-item" id="mobileSgiLink">
+        <a href="../pages/generalidades-sgi.html" class="mobile-nav-item">
             <div class="material-symbols-rounded mobile-nav-icon">analytics</div>
             <div class="mobile-nav-title">SGI</div>
         </a>
 
         <!-- Inteligencias Artificiales -->
-        <a href="#" class="mobile-nav-item" id="mobileIaLink">
+        <a href="pages/inteligencias-artificiales.html" class="mobile-nav-item">
             <div class="material-symbols-rounded mobile-nav-icon">psychology</div>
             <div class="mobile-nav-title">IA</div>
         </a>
@@ -132,15 +131,15 @@
                 <div class="material-symbols-rounded mobile-dropdown-arrow">keyboard_arrow_down</div>
             </div>
             <div class="mobile-dropdown-content">
-                <a href="#" class="mobile-dropdown-link" id="mobileVideosFotosLink">
+                <a href="pages/videos-fotos.html" class="mobile-dropdown-link">
                     <span class="material-symbols-rounded">photo_library</span>
                     <span>Videos y fotos</span>
                 </a>
-                <a href="#" class="mobile-dropdown-link" id="mobileEmbajadorLink">
+                <a href="pages/embajador-ali.html" class="mobile-dropdown-link">
                     <span class="material-symbols-rounded">support_agent</span>
                     <span>Embajador Ali</span>
                 </a>
-                <a href="#" class="mobile-dropdown-link" id="mobilePodcastLink">
+                <a href="pages/recursos-audiovisuales/podcast.html" class="mobile-dropdown-link">
                     <span class="material-symbols-rounded">podcasts</span>
                     <span>Podcast</span>
                 </a>
@@ -172,109 +171,21 @@
                     <span>Banco de iniciativas</span>
                     <span class="mobile-nav-external">↗</span>
                 </a>
-                <a href="https://pinnovacion4.wixsite.com/alico---innovacion" target="_blank" rel="noopener noreferrer" class="mobile-dropdown-link">
+                <a href="https://pinnovacion4.wixsite.com/alico---innovacion"  target="_blank" rel="noopener noreferrer" class="mobile-dropdown-link">
                     <span class="material-symbols-rounded">article</span>
                     <span>Noticias</span>
                 </a>
-                <a href="#" class="mobile-dropdown-link" id="mobileDesignThinkingLink">
+                <a href="pages/design-thinking.html" class="mobile-dropdown-link">
                     <span class="material-symbols-rounded">psychology</span>
                     <span>Design Thinking</span>
                 </a>
             </div>
         </div>
 
-        <!-- Blog -->
+        <!-- Blog - corregido -->
         <a href="https://pinnovacion4.wixsite.com/alico---innovacion" target="_blank" rel="noopener noreferrer" class="mobile-nav-item">
             <div class="material-symbols-rounded mobile-nav-icon">article</div>
             <div class="mobile-nav-title">Blog</div>
         </a>
     </div>
 </nav>
-
-<!-- Script para configurar rutas dinámicamente -->
-<script>
-(function() {
-    'use strict';
-    
-    // Detectar si estamos en una subcarpeta
-    const currentPath = window.location.pathname;
-    const isInPagesFolder = currentPath.includes('/pages/');
-    const isInSubfolder = currentPath.split('/').length > 3; // Para subcarpetas como recursos-audiovisuales
-    
-    // Definir el prefijo de ruta base
-    let basePath = '';
-    if (isInSubfolder) {
-        basePath = '../../'; // Para páginas en subcarpetas como resources-audiovisuales/
-    } else if (isInPagesFolder) {
-        basePath = '../'; // Para páginas directamente en /pages/
-    }
-    
-    console.log('🔗 Configurando rutas del header...');
-    console.log('📁 Ruta actual:', currentPath);
-    console.log('📁 Está en pages:', isInPagesFolder);
-    console.log('📁 Está en subcarpeta:', isInSubfolder);
-    console.log('📁 Base path:', basePath || 'raíz');
-    
-    // Configurar rutas dinámicamente
-    function setupDynamicPaths() {
-        // Logo y enlace principal
-        const logoLink = document.getElementById('logoLink');
-        const logoImage = document.getElementById('logoImage');
-        if (logoLink) logoLink.href = basePath + 'index.html';
-        if (logoImage) logoImage.src = basePath + 'assets/images/Ali_head.png';
-        
-        // Enlaces principales del desktop nav
-        const sgiLink = document.getElementById('sgiLink');
-        const iaLink = document.getElementById('iaLink');
-        const recursosLink = document.getElementById('recursosLink');
-        const iniciativasLink = document.getElementById('iniciativasLink');
-        
-        if (sgiLink) sgiLink.href = basePath + 'pages/generalidades-sgi.html';
-        if (iaLink) iaLink.href = basePath + 'pages/inteligencias-artificiales.html';
-        if (recursosLink) recursosLink.href = basePath + 'pages/recursos-audiovisuales.html';
-        if (iniciativasLink) iniciativasLink.href = basePath + 'pages/iniciativas.html';
-        
-        // Enlaces del dropdown de recursos
-        const videosFotosLink = document.getElementById('videosFotosLink');
-        const embajadorLink = document.getElementById('embajadorLink');
-        const podcastLink = document.getElementById('podcastLink');
-        
-        if (videosFotosLink) videosFotosLink.href = basePath + 'pages/videos-fotos.html';
-        if (embajadorLink) embajadorLink.href = basePath + 'pages/embajador-ali.html';
-        if (podcastLink) podcastLink.href = basePath + 'pages/recursos-audiovisuales/podcast.html';
-        
-        // Enlace de Design Thinking en dropdown de iniciativas
-        const designThinkingLink = document.getElementById('designThinkingLink');
-        if (designThinkingLink) designThinkingLink.href = basePath + 'pages/design-thinking.html';
-        
-        // Enlaces del menú móvil
-        const mobileSgiLink = document.getElementById('mobileSgiLink');
-        const mobileIaLink = document.getElementById('mobileIaLink');
-        const mobileVideosFotosLink = document.getElementById('mobileVideosFotosLink');
-        const mobileEmbajadorLink = document.getElementById('mobileEmbajadorLink');
-        const mobilePodcastLink = document.getElementById('mobilePodcastLink');
-        const mobileDesignThinkingLink = document.getElementById('mobileDesignThinkingLink');
-        
-        if (mobileSgiLink) mobileSgiLink.href = basePath + 'pages/generalidades-sgi.html';
-        if (mobileIaLink) mobileIaLink.href = basePath + 'pages/inteligencias-artificiales.html';
-        if (mobileVideosFotosLink) mobileVideosFotosLink.href = basePath + 'pages/videos-fotos.html';
-        if (mobileEmbajadorLink) mobileEmbajadorLink.href = basePath + 'pages/embajador-ali.html';
-        if (mobilePodcastLink) mobilePodcastLink.href = basePath + 'pages/recursos-audiovisuales/podcast.html';
-        if (mobileDesignThinkingLink) mobileDesignThinkingLink.href = basePath + 'pages/design-thinking.html';
-        
-        console.log('✅ Rutas del header configuradas correctamente');
-    }
-    
-    // Ejecutar configuración cuando el DOM esté listo
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', setupDynamicPaths);
-    } else {
-        setupDynamicPaths();
-    }
-    
-    // También ejecutar cuando los componentes se carguen
-    window.addEventListener('components-loaded', function() {
-        setTimeout(setupDynamicPaths, 100); // Pequeño delay para asegurar que los elementos existan
-    });
-})();
-</script>
