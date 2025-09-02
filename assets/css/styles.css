@@ -1278,49 +1278,49 @@ footer::before {
 .banner-sgi {
     background-image: 
         linear-gradient(rgba(0,61,166,0.6), rgba(0,61,166,0.6)),
-        url('images/banners/sgi.jpeg');
+        url('assets/images/banners/sgi.jpeg');
 }
 
 /* Banner Recursos*/
 .banner-recursos {
     background-image: 
         linear-gradient(rgba(0,61,166,0.6), rgba(0,61,166,0.6)),
-        url('images/banners/recursos.jpg');
+        url('assets/images/banners/recursos.jpg');
 }
 
 /* Banner Embajador Ali */
 .banner-ali {
     background-image: 
         linear-gradient(rgba(0,61,166,0.6), rgba(0,61,166,0.6)),
-        url('images/banners/embajadorali.png');
+        url('assets/images/banners/embajadorali.png');
 }
 
 /* Banner Inteligencias Artificiales */
 .banner-ia {
     background-image: 
         linear-gradient(rgba(0,61,166,0.6), rgba(0,61,166,0.6)),
-        url('images/banners/ias.jpg');
+        url('assets/images/banners/ias.jpg');
 }
 
 /* Banner Iniciativas */
 .banner-iniciativas {
     background-image: 
         linear-gradient(rgba(0,61,166,0.6), rgba(0,61,166,0.6)),
-        url('images/banners/projects.png');
+        url('assets/images/banners/projects.png');
 }
 
 /* Banner Design Thinking */
 .banner-dt {
     background-image: 
         linear-gradient(rgba(0,61,166,0.6), rgba(0,61,166,0.6)),
-        url('images/banners/design-thinking.JPG');
+        url('assets/images/banners/design-thinking.JPG');
 }
 
 /* Banner Audiovisual */
 .banner-audiovisual {
     background-image: 
         linear-gradient(rgba(0,61,166,0.6), rgba(0,61,166,0.6)),
-        url('images/banners/audiovisual.JPG');
+        url('assets/images/banners/audiovisual.JPG');
 }
 
 /* ==================================================
