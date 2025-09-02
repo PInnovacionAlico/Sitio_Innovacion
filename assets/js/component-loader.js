@@ -45,7 +45,7 @@
             name: 'footer', 
             file: 'footer.html', 
             target: 'beforeend',
-            position: 'main'
+            position: 'main' // Solo se carga si existe main
         }
     ];
     
@@ -55,6 +55,25 @@
     // Función para cargar un componente
     async function loadComponent(component) {
         try {
+            // SOLUCIÓN 1: Verificar si el elemento objetivo existe antes de cargar
+            let targetElement;
+            
+            if (component.position === 'body') {
+                targetElement = document.body;
+            } else {
+                targetElement = document.querySelector(component.position);
+                
+                // Si no existe el elemento objetivo (ej: no hay <main>), skip este componente
+                if (!targetElement) {
+                    console.warn(`⚠️ Elemento objetivo '${component.position}' no encontrado para ${component.name}, saltando...`);
+                    loadedComponents++;
+                    if (loadedComponents === totalComponents) {
+                        onAllComponentsLoaded();
+                    }
+                    return;
+                }
+            }
+            
             const response = await fetch(componentsPath + component.file);
             
             if (!response.ok) {
@@ -63,15 +82,15 @@
             
             const html = await response.text();
             
-            // Buscar el elemento objetivo
-            const targetElement = component.position === 'body' 
-                ? document.body 
-                : document.querySelector(component.position) || document.body;
-            
             // Insertar el HTML
             targetElement.insertAdjacentHTML(component.target, html);
             
             console.log(`✅ Componente ${component.name} cargado exitosamente`);
+            
+            // SOLUCIÓN 2: Configurar eventos específicos inmediatamente después de cargar cada componente
+            if (component.name === 'header') {
+                setupHeaderEvents();
+            }
             
             // Incrementar contador
             loadedComponents++;
@@ -95,6 +114,73 @@
                 onAllComponentsLoaded();
             }
         }
+    }
+    
+    // SOLUCIÓN 3: Configurar eventos del header inmediatamente
+    function setupHeaderEvents() {
+        console.log('⚙️ Configurando eventos del header...');
+        
+        // Definir función toggleMenu globalmente
+        window.toggleMenu = function() {
+            const mobileMenu = document.getElementById('mobileNavMenu');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (mobileMenu && menuToggle) {
+                const isOpen = mobileMenu.classList.contains('active');
+                
+                if (isOpen) {
+                    mobileMenu.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                } else {
+                    mobileMenu.classList.add('active');
+                    menuToggle.classList.add('active');
+                    document.body.classList.add('menu-open');
+                }
+                
+                console.log(`📱 Menú móvil ${isOpen ? 'cerrado' : 'abierto'}`);
+            } else {
+                console.error('❌ Elementos del menú móvil no encontrados');
+            }
+        };
+        
+        // Definir otras funciones del header
+        window.showDropdown = function(element) {
+            const dropdown = element.querySelector('.dropdown-menu');
+            if (dropdown) {
+                dropdown.style.opacity = '1';
+                dropdown.style.visibility = 'visible';
+                dropdown.style.transform = 'translateY(0)';
+            }
+        };
+        
+        window.hideDropdown = function(element) {
+            const dropdown = element.querySelector('.dropdown-menu');
+            if (dropdown) {
+                dropdown.style.opacity = '0';
+                dropdown.style.visibility = 'hidden';
+                dropdown.style.transform = 'translateY(-10px)';
+            }
+        };
+        
+        window.toggleMobileDropdown = function(element) {
+            const content = element.querySelector('.mobile-dropdown-content');
+            const arrow = element.querySelector('.mobile-dropdown-arrow');
+            
+            if (content && arrow) {
+                const isOpen = content.style.display === 'block';
+                
+                if (isOpen) {
+                    content.style.display = 'none';
+                    arrow.style.transform = 'rotate(0deg)';
+                } else {
+                    content.style.display = 'block';
+                    arrow.style.transform = 'rotate(180deg)';
+                }
+            }
+        };
+        
+        console.log('✅ Eventos del header configurados');
     }
     
     // Crear un header de respaldo si falla la carga
@@ -146,10 +232,7 @@
             initializeBackToTop();
         }
         
-        // Configurar menú móvil si existe la función
-        if (typeof setupMobileMenu === 'function') {
-            setupMobileMenu();
-        }
+        // La función setupMobileMenu ya no es necesaria porque setupHeaderEvents se encarga
         
         console.log('✅ Eventos de componentes configurados');
     }
