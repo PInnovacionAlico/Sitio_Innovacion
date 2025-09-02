@@ -1292,14 +1292,14 @@ footer::before {
 .banner-ali {
     background-image: 
         linear-gradient(rgba(0,61,166,0.6), rgba(0,61,166,0.6)),
-        url('../images/banners/embajador-ali.png');
+        url('../images/banners/embajadorali.png');
 }
 
 /* Banner Inteligencias Artificiales */
 .banner-ia {
     background-image: 
         linear-gradient(rgba(0,61,166,0.6), rgba(0,61,166,0.6)),
-        url('../images/banners/ia.jpg');
+        url('../images/banners/ias.jpg');
 }
 
 /* Banner Iniciativas */
