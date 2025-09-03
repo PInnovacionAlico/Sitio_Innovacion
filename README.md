@@ -18,8 +18,7 @@ Si sabes lo básico de HTML, CSS y JavaScript, podrás trabajar con este sitio s
 5. [🛠️ Mantenimiento y actualizaciones](#️-mantenimiento-y-actualizaciones)  
 6. [📌 Ejemplo: Crear una nueva página](#-ejemplo-crear-una-nueva-página)  
 7. [🌐 Publicación en GitHub Pages](#-publicación-en-github-pages)  
-8. [✅ Buenas prácticas](#-buenas-prácticas)  
-9. [📞 Contacto](#-contacto)  
+8. [✅ Buenas prácticas](#-buenas-prácticas)
 
 ---
 
